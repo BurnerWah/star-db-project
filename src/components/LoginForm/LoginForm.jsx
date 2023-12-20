@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const errors = useSelector(store => store.errors);
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const errors = useSelector((store) => store.errors)
+  const dispatch = useDispatch()
 
   const login = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (username && password) {
       dispatch({
@@ -18,11 +18,11 @@ function LoginForm() {
           username: username,
           password: password,
         },
-      });
+      })
     } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      dispatch({ type: 'LOGIN_INPUT_ERROR' })
     }
-  }; // end login
+  } // end login
 
   return (
     <form className="formPanel" onSubmit={login}>
@@ -60,7 +60,7 @@ function LoginForm() {
         <input className="btn" type="submit" name="submit" value="Log In" />
       </div>
     </form>
-  );
+  )
 }
 
-export default LoginForm;
+export default LoginForm

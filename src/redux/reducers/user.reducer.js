@@ -1,14 +1,14 @@
 const userReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_USER':
-      return action.payload;
+      return action.payload
     case 'UNSET_USER':
-      return {};
+      return {}
     default:
-      return state;
+      return state
   }
-};
+}
 
 // user will be on the redux state at:
 // state.user
-export default userReducer;
+export default userReducer

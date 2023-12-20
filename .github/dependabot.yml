@@ -1,22 +1,21 @@
 version: 2
 updates:
   # Maintain dependencies for npm
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'monthly'
     commit-message:
       # Prefix all commit messages
-      prefix: "[Dependabot] npm"
+      prefix: '[Dependabot] npm'
     labels:
       # Add these labels to the Generated PR
-      - "npm"
-      - "dependencies"
-      - "update"
+      - 'npm'
+      - 'dependencies'
+      - 'update'
     allow:
       # Allow specific libraries to be updated
       # By default, it would check everything, even in the lock
-      - "react*"
-      - "redux*"
-      - 
-    
+      - 'react*'
+      - 'redux*'
+      -

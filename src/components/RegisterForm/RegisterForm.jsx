@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 function RegisterForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const errors = useSelector((store) => store.errors);
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const errors = useSelector((store) => store.errors)
+  const dispatch = useDispatch()
 
   const registerUser = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     dispatch({
       type: 'REGISTER',
@@ -16,8 +16,8 @@ function RegisterForm() {
         username: username,
         password: password,
       },
-    });
-  }; // end registerUser
+    })
+  } // end registerUser
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
@@ -55,7 +55,7 @@ function RegisterForm() {
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
     </form>
-  );
+  )
 }
 
-export default RegisterForm;
+export default RegisterForm

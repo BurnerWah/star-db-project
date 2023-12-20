@@ -1,8 +1,8 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react'
+import { useDispatch } from 'react-redux'
 
 function LogOutButton(props) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   return (
     <button
       // This button shows up in multiple locations and is styled differently
@@ -13,7 +13,7 @@ function LogOutButton(props) {
     >
       Log Out
     </button>
-  );
+  )
 }
 
-export default LogOutButton;
+export default LogOutButton

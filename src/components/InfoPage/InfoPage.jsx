@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -10,7 +10,7 @@ function InfoPage() {
     <div className="container">
       <p>Info Page</p>
     </div>
-  );
+  )
 }
 
-export default InfoPage;
+export default InfoPage

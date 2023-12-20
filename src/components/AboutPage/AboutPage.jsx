@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -12,7 +12,7 @@ function AboutPage() {
         <p>This about page is for anyone to read!</p>
       </div>
     </div>
-  );
+  )
 }
 
-export default AboutPage;
+export default AboutPage
