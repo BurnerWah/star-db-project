@@ -46,7 +46,8 @@
     "@types/react": "^18.2.45",
     "@types/react-router-dom": "^5.3.3",
     "@types/redux-logger": "^3.0.12",
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "prettier": "^3.1.1"
   },
   "browserslist": {
     "production": [
