@@ -1,0 +1,7 @@
+{
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "references": [
+    { "path": "./tsconfig.server.json" },
+    { "path": "./tsconfig.client.json" }
+  ]
+}
