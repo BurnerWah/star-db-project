@@ -21,7 +21,7 @@ app.use(passport.session())
 app.use('/api/user', userRouter)
 
 // Serve static files
-app.use(express.static('dist'))
+app.use(express.static('dist/client'))
 
 // App Set //
 const PORT = process.env['PORT'] ?? 5001
