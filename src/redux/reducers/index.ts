@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import errors from './errors.js'
-import user from './user.js'
+import errors from './errors.ts'
+import user from './user.ts'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.

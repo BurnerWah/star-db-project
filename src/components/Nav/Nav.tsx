@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import LogOutButton from '../LogOutButton/LogOutButton.jsx'
+import LogOutButton from '../LogOutButton/LogOutButton.tsx'
 import './Nav.css'
 
 function Nav() {
