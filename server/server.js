@@ -1,18 +1,15 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-require('dotenv').config()
+// import { urlencoded } from 'body-parser'
+import 'dotenv/config'
+import express from 'express'
+import sessionMiddleware from './modules/session-middleware.js'
+import userRouter from './routes/user.router.js'
+import passport from './strategies/user.strategy.js'
 
 const app = express()
 
-const sessionMiddleware = require('./modules/session-middleware')
-const passport = require('./strategies/user.strategy')
-
-// Route includes
-const userRouter = require('./routes/user.router')
-
 // Body parser middleware
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json())
+// app.use(urlencoded({ extended: true }))
 
 // Passport Session Configuration //
 app.use(sessionMiddleware)
@@ -28,7 +25,7 @@ app.use('/api/user', userRouter)
 app.use(express.static('build'))
 
 // App Set //
-const PORT = process.env.PORT || 5000
+const PORT = process.env['PORT'] || 5001
 
 /** Listen * */
 app.listen(PORT, () => {

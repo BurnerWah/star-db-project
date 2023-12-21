@@ -1,7 +1,7 @@
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
-const encryptLib = require('../modules/encryption')
-const pool = require('../modules/pool')
+import passport from 'passport'
+import { Strategy as LocalStrategy } from 'passport-local'
+import { comparePassword } from '../modules/encryption.js'
+import pool from '../modules/pool.js'
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
@@ -12,7 +12,7 @@ passport.deserializeUser((id, done) => {
     .query('SELECT * FROM "user" WHERE id = $1', [id])
     .then((result) => {
       // Handle Errors
-      const user = result && result.rows && result.rows[0]
+      const user = result?.rows && result?.rows?.[0]
 
       if (user) {
         // user found
@@ -41,8 +41,8 @@ passport.use(
     pool
       .query('SELECT * FROM "user" WHERE username = $1', [username])
       .then((result) => {
-        const user = result && result.rows && result.rows[0]
-        if (user && encryptLib.comparePassword(password, user.password)) {
+        const user = result?.rows && result?.rows?.[0]
+        if (user && comparePassword(password, user.password)) {
           // All good! Passwords match!
           // done takes an error (null in this case) and a user
           done(null, user)
@@ -62,4 +62,4 @@ passport.use(
   }),
 )
 
-module.exports = passport
+export default passport
