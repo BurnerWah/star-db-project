@@ -1,8 +1,8 @@
 import 'dotenv/config'
 import express from 'express'
-import sessionMiddleware from './modules/session-middleware.js'
-import userRouter from './routes/user.router.js'
-import passport from './strategies/user.strategy.js'
+import sessionMiddleware from './modules/session-middleware.ts'
+import userRouter from './routes/user.router.ts'
+import passport from './strategies/user.strategy.ts'
 
 const app = express()
 

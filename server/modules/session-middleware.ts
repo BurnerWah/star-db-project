@@ -1,5 +1,5 @@
 import cookieSession from 'cookie-session'
-import { badSecret, exampleBadSecret } from '../constants/warnings.js'
+import { badSecret, exampleBadSecret } from '../constants/warnings.ts'
 
 /*
   The cookie session makes it so a user can enters their username and password one time,
@@ -26,7 +26,6 @@ function serverSessionSecret() {
 
 const middleware = cookieSession({
   secret: serverSessionSecret() || 'secret', // please set this in your .env file
-  // @ts-ignore
   key: 'user', // this is the name of the req.variable. 'user' is convention, but not required
   resave: 'false',
   saveUninitialized: false,

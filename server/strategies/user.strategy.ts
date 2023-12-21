@@ -1,7 +1,7 @@
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
-import { comparePassword } from '../modules/encryption.js'
-import pool from '../modules/pool.js'
+import { comparePassword } from '../modules/encryption.ts'
+import pool from '../modules/pool.ts'
 
 passport.serializeUser((user, done) => {
   done(null, user.id)

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Route } from 'react-router-dom'
-import LoginPage from '../LoginPage/LoginPage.jsx'
+import LoginPage from '../LoginPage/LoginPage.tsx'
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
