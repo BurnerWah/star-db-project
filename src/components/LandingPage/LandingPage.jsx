@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import './LandingPage.css'
-
-// CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm'
+import './LandingPage.css'
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome')

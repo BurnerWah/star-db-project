@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react'
-import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
-
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import Nav from '../Nav/Nav'
-import Footer from '../Footer/Footer'
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
+import { Redirect, Route, HashRouter as Router, Switch } from 'react-router-dom'
 import AboutPage from '../AboutPage/AboutPage'
-import UserPage from '../UserPage/UserPage'
+import Footer from '../Footer/Footer'
 import InfoPage from '../InfoPage/InfoPage'
 import LandingPage from '../LandingPage/LandingPage'
 import LoginPage from '../LoginPage/LoginPage'
+import Nav from '../Nav/Nav'
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import RegisterPage from '../RegisterPage/RegisterPage'
+import UserPage from '../UserPage/UserPage'
 
 import './App.css'
 
