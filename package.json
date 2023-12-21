@@ -9,9 +9,10 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "client": "node scripts/start.js",
+    "client": "vite",
     "server": "nodemon --watch server server/server.js",
-    "build": "node scripts/build.js"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.6.2",
@@ -35,6 +36,7 @@
     "@tsconfig/create-react-app": "^2.0.1",
     "@tsconfig/node20": "^20.1.2",
     "@tsconfig/strictest": "^2.0.2",
+    "@tsconfig/vite-react": "^3.0.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie-session": "^2.0.48",
     "@types/express": "^4.17.21",
@@ -47,10 +49,18 @@
     "@types/react-dom": "^18.2.18",
     "@types/react-router-dom": "^5.3.3",
     "@types/redux-logger": "^3.0.12",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
     "browserslist": "^4.22.2",
     "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
     "nodemon": "^3.0.2",
-    "prettier": "^3.1.1"
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
   },
   "browserslist": {
     "production": [

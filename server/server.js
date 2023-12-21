@@ -1,4 +1,3 @@
-// import { urlencoded } from 'body-parser'
 import 'dotenv/config'
 import express from 'express'
 import sessionMiddleware from './modules/session-middleware.js'
@@ -9,7 +8,7 @@ const app = express()
 
 // Body parser middleware
 app.use(express.json())
-// app.use(urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
 
 // Passport Session Configuration //
 app.use(sessionMiddleware)
@@ -22,7 +21,7 @@ app.use(passport.session())
 app.use('/api/user', userRouter)
 
 // Serve static files
-app.use(express.static('build'))
+app.use(express.static('dist'))
 
 // App Set //
 const PORT = process.env['PORT'] || 5001

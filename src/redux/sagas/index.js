@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects'
-import loginSaga from './login'
-import registrationSaga from './registration'
-import userSaga from './user'
+import loginSaga from './login.js'
+import registrationSaga from './registration.js'
+import userSaga from './user.js'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
