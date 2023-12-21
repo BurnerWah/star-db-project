@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import RegisterForm from '../RegisterForm/RegisterForm'
+import RegisterForm from '../RegisterForm/RegisterForm.jsx'
 import './LandingPage.css'
 
 function LandingPage() {
