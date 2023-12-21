@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server/server.js",
     "client": "vite",
-    "server": "nodemon --watch server server/server.js",
+    "server": "tsx watch server/server.js",
     "build": "vite build",
     "preview": "vite preview"
   },

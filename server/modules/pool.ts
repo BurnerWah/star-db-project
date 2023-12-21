@@ -1,6 +1,5 @@
 import pg from 'pg'
-/** @type {pg.Pool} */
-let pool
+let pool: pg.Pool
 
 // When our app is deployed to the internet
 // we'll use the DATABASE_URL environment variable
