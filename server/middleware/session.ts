@@ -1,5 +1,5 @@
 import cookieSession from 'cookie-session'
-import { badSecret, exampleBadSecret } from '../constants/warnings.ts'
+import { badSecret, exampleBadSecret } from '../constants/warnings'
 
 /*
   The cookie session makes it so a user can enters their username and password one time,

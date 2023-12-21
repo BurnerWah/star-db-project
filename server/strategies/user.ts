@@ -1,14 +1,14 @@
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
-import { comparePassword } from '../modules/encryption.ts'
-import pool from '../modules/pool.ts'
+import oldPool from '../db/pool.js'
+import { comparePassword } from '../lib/encryption.js'
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
 })
 
 passport.deserializeUser((id, done) => {
-  pool
+  oldPool
     .query('SELECT * FROM "user" WHERE id = $1', [id])
     .then((result) => {
       // Handle Errors
@@ -38,7 +38,7 @@ passport.deserializeUser((id, done) => {
 passport.use(
   'local',
   new LocalStrategy((username, password, done) => {
-    pool
+    oldPool
       .query('SELECT * FROM "user" WHERE username = $1', [username])
       .then((result) => {
         const user = result?.rows && result?.rows?.[0]

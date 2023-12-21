@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { rejectUnauthenticated } from '../modules/authentication-middleware.ts'
-import { encryptPassword } from '../modules/encryption.ts'
-import pool from '../modules/pool.ts'
-import userStrategy from '../strategies/user.strategy.js'
+import oldPool from '../db/pool'
+import { encryptPassword } from '../lib/encryption'
+import { rejectUnauthenticated } from '../middleware/authentication'
+import userStrategy from '../strategies/user'
 
 const router = Router()
 
@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // is that the password gets encrypted before being inserted
 router.post('/register', async (req, res, next) => {
   try {
-    await pool.query(
+    await oldPool.query(
       /*sql*/ `
         INSERT INTO "user" (
           username,
