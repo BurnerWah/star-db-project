@@ -3,7 +3,11 @@
   "compilerOptions": {
     "composite": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@typings/*": ["./types/*"]
+    }
   },
-  "include": ["server"]
+  "include": ["server", "types"]
 }
