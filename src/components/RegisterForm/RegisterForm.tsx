@@ -2,25 +2,28 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 function RegisterForm() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const errors = useSelector((store) => store.errors)
   const dispatch = useDispatch()
 
-  const registerUser = (event) => {
-    event.preventDefault()
+  const errors = useSelector((store) => store.errors)
 
-    dispatch({
-      type: 'REGISTER',
-      payload: {
-        username: username,
-        password: password,
-      },
-    })
-  } // end registerUser
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
+    <form
+      className="formPanel"
+      onSubmit={(e) => {
+        e.preventDefault()
+
+        dispatch({
+          type: 'REGISTER',
+          payload: {
+            username: username,
+            password: password,
+          },
+        })
+      }}
+    >
       <h2>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
@@ -29,25 +32,25 @@ function RegisterForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
+          Username:{' '}
           <input
             type="text"
             name="username"
             value={username}
             required
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </label>
       </div>
       <div>
         <label htmlFor="password">
-          Password:
+          Password:{' '}
           <input
             type="password"
             name="password"
             value={password}
             required
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </label>
       </div>
