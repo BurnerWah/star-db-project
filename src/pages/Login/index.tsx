@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-import LoginForm from '../LoginForm/LoginForm.tsx'
+import LoginForm from '../../components/LoginForm/LoginForm.tsx'
 
 function LoginPage() {
   const history = useHistory()

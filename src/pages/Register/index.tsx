@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-import RegisterForm from '../RegisterForm/RegisterForm.tsx'
+import RegisterForm from '../../components/RegisterForm/RegisterForm.tsx'
 
 function RegisterPage() {
   const history = useHistory()
