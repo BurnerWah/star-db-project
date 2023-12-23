@@ -1,0 +1,14 @@
+{
+  "[sql]": {
+    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
+  },
+  "Prettier-SQL.SQLFlavourOverride": "postgresql",
+  "sqltools.connections": [
+    {
+      "connectString": "postgresql://localhost/starforge",
+      "driver": "PostgreSQL",
+      "name": "Starforge (local)",
+      "previewLimit": 50
+    }
+  ]
+}

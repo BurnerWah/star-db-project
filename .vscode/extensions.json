@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "inferrinizzard.prettier-sql-vscode",
+    "mtxr.sqltools-driver-pg",
+    "mtxr.sqltools"
+  ]
+}
