@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import oldPool from '../db/pool'
-import { encryptPassword } from '../lib/encryption'
-import { rejectUnauthenticated } from '../middleware/authentication'
-import userStrategy from '../strategies/user'
+import oldPool from '../db/pool.ts'
+import { encryptPassword } from '../lib/encryption.ts'
+import { rejectUnauthenticated } from '../middleware/authentication.ts'
+import userStrategy from '../strategies/user.ts'
 
 const router = Router()
 
