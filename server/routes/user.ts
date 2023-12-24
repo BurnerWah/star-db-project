@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { pbkdf2, randomBytes } from 'node:crypto'
+import { PBKDF2_CONFIG } from 'server/constants/security.ts'
 import { RegisterBody } from '~typings/requests.ts'
 import { DBUser } from '~typings/tables.ts'
 import pool from '../db/pool.ts'
@@ -25,12 +26,18 @@ router.post<'/register', never, unknown, RegisterBody>(
   async (req, res, next) => {
     const { username, password } = req.body
     try {
-      const salt = randomBytes(16)
-      pbkdf2(password, salt, 1000, 32, 'sha512', async (err, hashedword) => {
-        if (err) return next(err)
-        try {
-          const result = await pool.query<DBUser>(
-            /*sql*/ `
+      const salt = randomBytes(PBKDF2_CONFIG.saltlength)
+      pbkdf2(
+        password,
+        salt,
+        PBKDF2_CONFIG.iterations,
+        PBKDF2_CONFIG.keylen,
+        PBKDF2_CONFIG.digest,
+        async (err, hashedPassword) => {
+          if (err) return next(err)
+          try {
+            const result = await pool.query<DBUser>(
+              /*sql*/ `
               INSERT INTO "users" (
                 username,
                 password_hash,
@@ -39,18 +46,19 @@ router.post<'/register', never, unknown, RegisterBody>(
               VALUES ($1, $2, $3)
               RETURNING *
             `,
-            [username, hashedword, salt],
-          )
-          res.sendStatus(201)
-          req.login(result.rows[0], (err) => {
-            if (err) return next(err)
-            res.redirect('/')
-          })
-        } catch (error) {
-          console.log('User registration failed: ', error)
-          res.sendStatus(500)
-        }
-      })
+              [username, hashedPassword, salt],
+            )
+            res.sendStatus(201)
+            req.login(result.rows[0], (err) => {
+              if (err) return next(err)
+              res.redirect('/')
+            })
+          } catch (error) {
+            console.log('User registration failed: ', error)
+            res.sendStatus(500)
+          }
+        },
+      )
     } catch (error) {
       console.log('User registration failed: ', error)
       res.sendStatus(500)

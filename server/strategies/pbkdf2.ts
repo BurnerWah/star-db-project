@@ -1,6 +1,7 @@
 import { pbkdf2 } from 'node:crypto'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
+import { PBKDF2_CONFIG } from 'server/constants/security.ts'
 import { DBUser } from '~typings/tables.ts'
 import pool from '../db/pool.ts'
 
@@ -20,17 +21,24 @@ passport.use(
       if (user) {
         const hash = user.password_hash
         const salt = user.password_salt
-        pbkdf2(password, salt, 1000, 32, 'sha512', (err, hashedPassword) => {
-          if (err) {
-            return callback(err)
-          }
-          if (hashedPassword.equals(hash)) {
-            return callback(null, user)
-          }
-          return callback(null, false, {
-            message: 'Incorrect username or password.',
-          })
-        })
+        pbkdf2(
+          password,
+          salt,
+          PBKDF2_CONFIG.iterations,
+          PBKDF2_CONFIG.keylen,
+          PBKDF2_CONFIG.digest,
+          (err, hashedPassword) => {
+            if (err) {
+              return callback(err)
+            }
+            if (hashedPassword.equals(hash)) {
+              return callback(null, user)
+            }
+            return callback(null, false, {
+              message: 'Incorrect username or password.',
+            })
+          },
+        )
       } else {
         return callback(null, false, {
           message: 'Incorrect username or password.',
