@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { AppDispatch } from '@typings/actions'
+import { FormEventHandler, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 function LoginForm() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const errors = useSelector((store) => store.errors)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
-  const login = (event) => {
+  const login: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
 
     if (username && password) {
@@ -33,25 +34,25 @@ function LoginForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
+          Username:{' '}
           <input
             type="text"
             name="username"
             required
             value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </label>
       </div>
       <div>
         <label htmlFor="password">
-          Password:
+          Password:{' '}
           <input
             type="password"
             name="password"
             required
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </label>
       </div>

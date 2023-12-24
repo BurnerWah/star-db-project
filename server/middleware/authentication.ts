@@ -1,4 +1,6 @@
-export function rejectUnauthenticated(req, res, next) {
+import { RequestHandler } from 'express'
+
+export const rejectUnauthenticated: RequestHandler = (req, res, next) => {
   // check if logged in
   if (req.isAuthenticated()) {
     // They were authenticated! User may do the next thing

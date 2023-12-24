@@ -1,9 +1,9 @@
-import { Action } from 'redux'
-import { User } from './tables'
+import { Action, Dispatch } from 'redux'
+import { DBUser } from './tables'
 
 export type UnsetUser = Action<'UNSET_USER'>
 export interface SetUser extends Action<'SET_USER'> {
-  payload: User
+  payload: DBUser
 }
 
 export type ClearLoginError = Action<'CLEAR_LOGIN_ERROR'>
@@ -26,3 +26,5 @@ type Actions =
   | RegistrationFailed
 
 export default Actions
+
+export type AppDispatch = Dispatch<Actions>
