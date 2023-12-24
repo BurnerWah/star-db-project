@@ -1,8 +1,8 @@
 import { pbkdf2 } from 'node:crypto'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
-import { PBKDF2_CONFIG } from 'server/constants/security.ts'
 import { DBUser } from '~typings/tables.ts'
+import { PBKDF2_CONFIG } from '../constants/security.ts'
 import pool from '../db/pool.ts'
 
 // Based on https://github.com/passport/todos-express-password/blob/master/routes/auth.js
