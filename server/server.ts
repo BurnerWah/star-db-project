@@ -1,8 +1,9 @@
 import 'dotenv/config'
 import express from 'express'
-import sessionMiddleware from './middleware/session.ts'
-import userRouter from './routes/user.ts'
-import passport from './strategies/user.ts'
+import morgan from 'morgan'
+import session from './middleware/session.ts'
+import user from './routes/user.ts'
+import passport from './strategies/pbkdf2.ts'
 
 const app = express()
 
@@ -10,20 +11,23 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// Passport Session Configuration //
-app.use(sessionMiddleware)
+// This is such a funny name for a logger I love it
+app.use(morgan('dev'))
+
+// Passport Session Configuration
+app.use(session)
 
 // start up passport sessions
 app.use(passport.initialize())
 app.use(passport.session())
 
-/* Routes */
-app.use('/api/user', userRouter)
+// Routes
+app.use('/api/user', user)
 
 // Serve static files
 app.use(express.static('dist/client'))
 
-// App Set //
+// App Set
 const PORT = process.env['PORT'] ?? 5001
 
 /** Listen * */

@@ -1,8 +1,8 @@
 import { SetUser, UnsetUser } from '@typings/actions'
-import { User } from '@typings/tables'
+import { DBUser } from '@typings/tables'
 import { Reducer } from 'redux'
 
-const user: Reducer<User | Record<string, never>, SetUser | UnsetUser> = (
+const user: Reducer<DBUser | Record<string, never>, SetUser | UnsetUser> = (
   state = {},
   action,
 ) => {
