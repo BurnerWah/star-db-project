@@ -2,8 +2,7 @@ CREATE TABLE IF NOT EXISTS
     users (
         id serial PRIMARY KEY,
         username varchar(64) UNIQUE NOT NULL,
-        password_hash bytea NOT NULL,
-        password_salt bytea NOT NULL,
+        argon2id_hash varchar(1024) NOT NULL,
         created_at timestamp NOT NULL DEFAULT NOW(),
         administrator boolean NOT NULL DEFAULT FALSE
     );
