@@ -3,7 +3,7 @@ import express from 'express'
 import morgan from 'morgan'
 import session from './middleware/session.ts'
 import user from './routes/user.ts'
-import passport from './strategies/pbkdf2.ts'
+import passport from './strategies/argon2id.ts'
 
 const app = express()
 

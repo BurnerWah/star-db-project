@@ -1,8 +1,7 @@
 export interface DBUser {
   id: number
   username: string
-  password_hash: Buffer
-  password_salt: Buffer
+  argon2id_hash: string
   created_at: Date
   admin: boolean
 }
