@@ -48,7 +48,7 @@ router.post<'/register', never, unknown, RegisterBody>(
             `,
               [username, hashedPassword, salt],
             )
-            res.sendStatus(201)
+            // res.sendStatus(201)
             req.login(result.rows[0], (err) => {
               if (err) return next(err)
               res.redirect('/')
