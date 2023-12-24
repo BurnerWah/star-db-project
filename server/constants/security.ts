@@ -13,6 +13,8 @@ export const PBKDF2_CONFIG = {
  * @see {@link https://github.com/napi-rs/node-rs/tree/main/packages/argon2#api Argon2 API}
  */
 export const ARGON2_OPTIONS: Argon2Options = {
-  memoryCost: 1024 * 1024 * 64,
+  // This is measured in KiB, not bytes
+  // Multiplying it by another 1024 makes it use 64GiB of memory
+  memoryCost: 1024 * 64,
   algorithm: Algorithm.Argon2id,
 }
