@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { SagaIterator } from 'redux-saga'
-import { StrictEffect, takeLatest } from 'redux-saga/effects'
+import { call, takeLatest } from 'redux-saga/effects'
 import { UserResponse } from '~typings/requests'
 import { put } from '../../hooks/redux'
 
@@ -11,10 +11,14 @@ function* fetchUser(): SagaIterator {
     // allow the server session to recognize the user
     // If a user is logged in, this will return their information
     // from the server session (req.user)
-    const response: AxiosResponse<UserResponse> = yield axios.get('/api/user', {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    }) as unknown as StrictEffect<AxiosResponse<UserResponse>>
+    const response: AxiosResponse<UserResponse> = yield call(
+      axios.get,
+      '/api/user',
+      {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      },
+    )
 
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let

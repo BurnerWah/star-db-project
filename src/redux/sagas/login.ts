@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { SagaIterator } from 'redux-saga'
-import { StrictEffect, takeLatest } from 'redux-saga/effects'
+import { StrictEffect, call, takeLatest } from 'redux-saga/effects'
 import { LoginSaga } from '~typings/actions'
 import { put } from '../../hooks/redux'
 
@@ -13,10 +13,10 @@ function* loginUser({ payload }: LoginSaga): SagaIterator {
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
-    yield axios.post('/api/user/login', payload, {
+    yield call(axios.post, '/api/user/login', payload, {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
-    }) as unknown as StrictEffect<AxiosResponse>
+    })
 
     // after the user has logged in
     // get the user information from the server
