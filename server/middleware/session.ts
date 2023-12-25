@@ -1,6 +1,6 @@
 import connectPgSimple from 'connect-pg-simple'
 import session from 'express-session'
-import { badSecret, exampleBadSecret } from '../constants/warnings.js'
+import { badSecret, exampleBadSecret } from '../constants/warnings.ts'
 import pool from '../db/pool.ts'
 
 const PGStore = connectPgSimple(session)
