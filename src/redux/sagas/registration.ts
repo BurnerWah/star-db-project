@@ -1,20 +1,27 @@
-import { put, takeLatest } from 'redux-saga/effects'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
+import { SagaIterator } from 'redux-saga'
+import { StrictEffect, takeLatest } from 'redux-saga/effects'
+import { RegisterSaga } from '~typings/actions'
+import { put } from '../../hooks/redux'
 
 // worker Saga: will be fired on "REGISTER" actions
-function* registerUser(action) {
+function* registerUser(action: RegisterSaga): SagaIterator {
   try {
     // clear any existing error on the registration page
     yield put({ type: 'CLEAR_REGISTRATION_ERROR' })
 
     // passes the username and password from the payload to the server
-    yield axios.post('/api/user/register', action.payload)
+    yield axios.post(
+      '/api/user/register',
+      action.payload,
+    ) as unknown as StrictEffect<AxiosResponse>
 
     // automatically log a user in after registration
     yield put({ type: 'LOGIN', payload: action.payload })
 
     // set to 'login' mode so they see the login screen
     // after registration or after they log out
+    // btw this never existed in the first place
     yield put({ type: 'SET_TO_LOGIN_MODE' })
   } catch (error) {
     console.log('Error with user registration:', error)

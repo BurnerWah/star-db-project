@@ -4,12 +4,9 @@ import RegisterForm from '../../components/RegisterForm/RegisterForm.tsx'
 import './LandingPage.css'
 
 function LandingPage() {
-  const [heading, setHeading] = useState('Welcome')
   const history = useHistory()
 
-  const onLogin = (event) => {
-    history.push('/login')
-  }
+  const [heading, setHeading] = useState('Welcome')
 
   return (
     <div className="container">
@@ -54,7 +51,12 @@ function LandingPage() {
 
           <center>
             <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
+            <button
+              className="btn btn_sizeSm"
+              onClick={() => {
+                history.push('/login')
+              }}
+            >
               Login
             </button>
           </center>

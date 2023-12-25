@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux'
+import type { FC, JSX } from 'react'
 import { Route } from 'react-router-dom'
+import { useAppSelector } from '../../hooks/redux.ts'
 import LoginPage from '../../pages/Login'
 
 // A Custom Wrapper Component -- This will keep our code DRY.
@@ -12,8 +13,17 @@ import LoginPage from '../../pages/Login'
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-function ProtectedRoute({ component, children, ...props }) {
-  const user = useSelector((store) => store.user)
+function ProtectedRoute({
+  component,
+  children,
+  ...props
+}: Readonly<{
+  // I don't know if these types are quite correct
+  component?: FC
+  children?: JSX.Element
+  [key: string]: unknown
+}>) {
+  const user = useAppSelector((store) => store.user)
 
   // Component may be passed in as a "component" prop,
   // or as a child component.

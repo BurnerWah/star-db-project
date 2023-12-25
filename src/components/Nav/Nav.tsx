@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useAppSelector } from '../../hooks/redux.ts'
 import LogOutButton from '../LogOutButton/LogOutButton.tsx'
 import './Nav.css'
 
 function Nav() {
-  const user = useSelector((store) => store.user)
+  const user = useAppSelector((store) => store.user)
 
   return (
     <div className="nav">

@@ -1,9 +1,9 @@
 import { Action, Dispatch } from 'redux'
-import { DBUser } from './tables'
+import { LoginBody, RegisterBody, UserResponse } from './requests'
 
 export type UnsetUser = Action<'UNSET_USER'>
 export interface SetUser extends Action<'SET_USER'> {
-  payload: DBUser
+  payload: UserResponse
 }
 
 export type ClearLoginError = Action<'CLEAR_LOGIN_ERROR'>
@@ -14,7 +14,7 @@ export type ClearRegistrationError = Action<'CLEAR_REGISTRATION_ERROR'>
 export type RegistrationInputError = Action<'REGISTRATION_INPUT_ERROR'>
 export type RegistrationFailed = Action<'REGISTRATION_FAILED'>
 
-type Actions =
+export type ReduxActions =
   | UnsetUser
   | SetUser
   | ClearLoginError
@@ -24,6 +24,19 @@ type Actions =
   | ClearRegistrationError
   | RegistrationInputError
   | RegistrationFailed
+
+export interface LoginSaga extends Action<'LOGIN'> {
+  payload: LoginBody
+}
+export type LogoutSaga = Action<'LOGOUT'>
+export interface RegisterSaga extends Action<'REGISTER'> {
+  payload: RegisterBody
+}
+export type FetchUserSaga = Action<'FETCH_USER'>
+
+export type SagaActions = LoginSaga | LogoutSaga | RegisterSaga | FetchUserSaga
+
+type Actions = ReduxActions | SagaActions
 
 export default Actions
 

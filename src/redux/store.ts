@@ -1,8 +1,8 @@
 import { applyMiddleware, legacy_createStore as createStore } from 'redux'
 import logger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
-import rootReducer from './reducers' // imports ./redux/reducers/index.js
-import rootSaga from './sagas' // imports ./redux/sagas/index.js
+import rootReducer from './reducers'
+import rootSaga from './sagas'
 
 const saga = createSagaMiddleware()
 
@@ -25,3 +25,5 @@ const store = createStore(
 saga.run(rootSaga)
 
 export default store
+
+export type RootState = ReturnType<typeof store.getState>

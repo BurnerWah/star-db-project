@@ -1,8 +1,11 @@
-import axios from 'axios'
-import { put, takeLatest } from 'redux-saga/effects'
+import axios, { AxiosError, AxiosResponse } from 'axios'
+import { SagaIterator } from 'redux-saga'
+import { StrictEffect, takeLatest } from 'redux-saga/effects'
+import { LoginSaga } from '~typings/actions'
+import { put } from '../../hooks/redux'
 
 // worker Saga: will be fired on "LOGIN" actions
-function* loginUser(action) {
+function* loginUser({ payload }: LoginSaga): SagaIterator {
   try {
     // clear any existing error on the login page
     yield put({ type: 'CLEAR_LOGIN_ERROR' })
@@ -10,17 +13,17 @@ function* loginUser(action) {
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
-    yield axios.post('/api/user/login', action.payload, {
+    yield axios.post('/api/user/login', payload, {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
-    })
+    }) as unknown as StrictEffect<AxiosResponse>
 
     // after the user has logged in
     // get the user information from the server
     yield put({ type: 'FETCH_USER' })
-  } catch (error) {
+  } catch (error: AxiosError | unknown) {
     console.log('Error with user login:', error)
-    if (error.response.status === 401) {
+    if ((error as AxiosError)?.response?.status === 401) {
       // The 401 is the error status sent from passport
       // if user isn't in the database or
       // if the username and password don't match in the database
@@ -34,18 +37,16 @@ function* loginUser(action) {
 }
 
 // worker Saga: will be fired on "LOGOUT" actions
-function* logoutUser(action) {
+function* logoutUser(): SagaIterator {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    }
-
     // the config includes credentials which
     // allow the server session to recognize the user
     // when the server recognizes the user session
     // it will end the session
-    yield axios.post('/api/user/logout', config)
+    yield axios.post('/api/user/logout', {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    }) as unknown as StrictEffect<AxiosResponse>
 
     // now that the session has ended on the server
     // remove the client-side user object to let

@@ -1,12 +1,13 @@
-import { AppDispatch } from '@typings/actions'
 import { FormEventHandler, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux.ts'
 
 function LoginForm() {
+  const dispatch = useAppDispatch()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const errors = useSelector((store) => store.errors)
-  const dispatch = useDispatch<AppDispatch>()
+
+  const errors = useAppSelector((store) => store.errors)
 
   const login: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
@@ -22,7 +23,7 @@ function LoginForm() {
     } else {
       dispatch({ type: 'LOGIN_INPUT_ERROR' })
     }
-  } // end login
+  }
 
   return (
     <form className="formPanel" onSubmit={login}>

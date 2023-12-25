@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, Route, HashRouter as Router, Switch } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer/Footer.tsx'
 import Nav from './components/Nav/Nav.tsx'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.tsx'
+import { useAppDispatch, useAppSelector } from './hooks/redux.ts'
 import AboutPage from './pages/About'
 import InfoPage from './pages/Info'
 import LandingPage from './pages/Landing'
@@ -13,9 +13,9 @@ import RegisterPage from './pages/Register'
 import UserPage from './pages/User'
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const user = useSelector((store) => store.user)
+  const user = useAppSelector((store) => store.user)
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' })

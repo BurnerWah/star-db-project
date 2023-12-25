@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux'
 import LogOutButton from '../../components/LogOutButton/LogOutButton.tsx'
+import { useAppSelector } from '../../hooks/redux.ts'
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
-  const user = useSelector((store) => store.user)
+  const user = useAppSelector((store) => store.user)
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>

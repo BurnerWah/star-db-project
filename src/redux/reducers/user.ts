@@ -1,11 +1,11 @@
-import { SetUser, UnsetUser } from '@typings/actions'
-import { DBUser } from '@typings/tables'
 import { Reducer } from 'redux'
+import { SetUser, UnsetUser } from '~typings/actions'
+import { UserResponse } from '~typings/requests'
 
-const user: Reducer<DBUser | Record<string, never>, SetUser | UnsetUser> = (
-  state = {},
-  action,
-) => {
+const user: Reducer<
+  UserResponse | Record<string, never>,
+  SetUser | UnsetUser
+> = (state = {}, action) => {
   switch (action.type) {
     case 'SET_USER':
       return action.payload

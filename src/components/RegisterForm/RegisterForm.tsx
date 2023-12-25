@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux.ts'
 
 function RegisterForm() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const errors = useSelector((store) => store.errors)
+  const errors = useAppSelector((store) => store.errors)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
