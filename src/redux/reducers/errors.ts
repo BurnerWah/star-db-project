@@ -21,7 +21,7 @@ export enum LoginMessages {
  * holds the string that will display on the login screen if there's an error
  */
 const loginMessage: Reducer<
-  LoginMessages,
+  Readonly<LoginMessages>,
   ClearLoginError | LoginInputError | LoginFailed | LoginFailedNoCode
 > = (state = LoginMessages.NONE, action) => {
   switch (action.type) {

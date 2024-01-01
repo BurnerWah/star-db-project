@@ -3,7 +3,7 @@ import { SetUser, UnsetUser } from '~typings/actions'
 import { UserResponse } from '~typings/requests'
 
 const user: Reducer<
-  UserResponse | Record<string, never>,
+  Readonly<UserResponse | Record<string, never>>,
   SetUser | UnsetUser
 > = (state = {}, action) => {
   switch (action.type) {
