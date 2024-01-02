@@ -10,7 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
       "~typings/*": ["./types/*"]
     }
   },
