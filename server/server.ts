@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import morgan from 'morgan'
 import session from './middleware/session.ts'
+import items from './routes/items.ts'
 import user from './routes/user.ts'
 import passport from './strategies/argon2id.ts'
 
@@ -23,6 +24,7 @@ app.use(passport.session())
 
 // Routes
 app.use('/api/user', user)
+app.use('/api/items', items)
 
 // Serve static files
 app.use(express.static('dist/client'))
