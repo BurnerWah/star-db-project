@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Redirect, Route, HashRouter as Router, Switch } from 'react-router-dom'
+import { Redirect, Route, HashRouter as Router, Routes } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer/Footer.tsx'
 import Nav from './components/Nav/Nav.tsx'
@@ -25,16 +25,15 @@ function App() {
     <Router>
       <div>
         <Nav />
-        <Switch>
+        <Routes>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route path="/" render={() => <Redirect to="/home" />} />
 
-          {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
+          {/*
+            Visiting localhost:3000/about will show the about page.
+            shows AboutPage at all times (logged in or not)
+            */}
+          <Route path="about">
             <AboutPage />
           </Route>
 
@@ -43,8 +42,7 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           <Route
-            exact
-            path="/user"
+            path="user"
             render={() => (
               <RequireAuth>
                 <UserPage />
@@ -53,8 +51,7 @@ function App() {
           />
 
           <Route
-            exact
-            path="/info"
+            path="info"
             render={() => (
               <RequireAuth>
                 <InfoPage />
@@ -62,7 +59,7 @@ function App() {
             )}
           />
 
-          <Route exact path="/login">
+          <Route path="login">
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
@@ -73,7 +70,7 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/registration">
+          <Route path="registration">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
@@ -84,7 +81,7 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/home">
+          <Route path="home">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
@@ -99,7 +96,7 @@ function App() {
           <Route>
             <h1>404</h1>
           </Route>
-        </Switch>
+        </Routes>
         <Footer />
       </div>
     </Router>
