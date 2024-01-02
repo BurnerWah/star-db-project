@@ -1,4 +1,4 @@
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useAppSelector } from '../hooks/redux'
 
 export default function RequireAuth({
@@ -9,5 +9,5 @@ export default function RequireAuth({
   redirectTo?: string
 }>) {
   const user = useAppSelector((store) => store.user)
-  return user.id ? children : <Redirect to={redirectTo} />
+  return user.id ? children : <Navigate to={redirectTo} />
 }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Redirect, Route, HashRouter as Router, Routes } from 'react-router-dom'
+import { Navigate, Route, HashRouter as Router, Routes } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer/Footer.tsx'
 import Nav from './components/Nav/Nav.tsx'
@@ -27,7 +27,7 @@ function App() {
         <Nav />
         <Routes>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Route path="/" render={() => <Redirect to="/home" />} />
+          <Route path="/" element={<Navigate to="/home" />} />
 
           {/*
             Visiting localhost:3000/about will show the about page.
@@ -43,27 +43,27 @@ function App() {
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           <Route
             path="user"
-            render={() => (
+            element={
               <RequireAuth>
                 <UserPage />
               </RequireAuth>
-            )}
+            }
           />
 
           <Route
             path="info"
-            render={() => (
+            element={
               <RequireAuth>
                 <InfoPage />
               </RequireAuth>
-            )}
+            }
           />
 
           <Route path="login">
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Navigate to="/user" />
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -74,7 +74,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Navigate to="/user" />
             ) : (
               // Otherwise, show the registration page
               <RegisterPage />
@@ -85,7 +85,7 @@ function App() {
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Navigate to="/user" />
             ) : (
               // Otherwise, show the Landing page
               <LandingPage />
