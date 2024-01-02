@@ -16,7 +16,9 @@
     "build:server": "tsup",
     "preview": "vite preview",
     "lint": "run-s 'lint:*'",
-    "lint:eslint": "eslint ."
+    "lint:eslint": "eslint .",
+    "lint:prettier": "prettier --cache --check .",
+    "prettier": "prettier --cache"
   },
   "dependencies": {
     "@node-rs/argon2": "^1.5.2",
