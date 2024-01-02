@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@node-rs/argon2": "^1.6.0",
+    "@redux-devtools/extension": "^3.3.0",
     "axios": "^1.6.3",
     "bcryptjs": "^2.4.3",
     "connect-ensure-login": "^0.1.1",
