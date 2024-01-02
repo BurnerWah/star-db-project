@@ -1,7 +1,12 @@
 {
   "recommendations": [
+    "antfu.vite",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
     "inferrinizzard.prettier-sql-vscode",
     "mtxr.sqltools-driver-pg",
-    "mtxr.sqltools"
+    "mtxr.sqltools",
+    "qufiwefefwoyn.inline-sql-syntax",
+    "redhat.vscode-yaml"
   ]
 }

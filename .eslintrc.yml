@@ -1,17 +1,50 @@
 env:
-  browser: true
   es2021: true
   node: true
+
 extends:
   - eslint:recommended
-  - plugin:@typescript-eslint/recommended
-  - plugin:react/jsx-runtime
-  - plugin:react-hooks/recommended
-parser: '@typescript-eslint/parser'
+  - plugin:security/recommended-legacy
+  - prettier
+
 parserOptions:
   ecmaVersion: latest
   sourceType: module
-plugins:
-  - '@typescript-eslint'
-  - react
-rules: {}
+
+# I generally prefer rules and settings to be configured everywhere in case I
+# want to enable a plugin in another place
+rules:
+  react-refresh/only-export-components: 'warn'
+
+settings:
+  react:
+    version: detect
+
+# I prefer applying most configuration settings via overrides, unless they
+# really are generic settings that should apply to every file. It seems to make
+# ESLint work a bit better (ex. it picks up more files automatically), and it
+# avoids unnecessary rules in a lot of places (a lot of provided configs apply
+# to files they don't need to).
+overrides:
+  - files: ['*.ts', '*.tsx']
+    extends:
+      - plugin:@typescript-eslint/eslint-recommended
+      - plugin:@typescript-eslint/recommended
+    plugins:
+      - '@typescript-eslint'
+    parser: '@typescript-eslint/parser'
+  - files: ['src/**/*']
+    env:
+      browser: true
+    extends:
+      - plugin:react-hooks/recommended
+      - plugin:react/recommended
+      - plugin:react/jsx-runtime
+      - plugin:jsx-a11y/recommended
+    plugins:
+      - react-refresh
+      - react
+
+ignorePatterns:
+  - dist
+  - public
