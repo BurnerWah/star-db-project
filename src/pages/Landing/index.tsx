@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RegisterForm from '../../components/RegisterForm/RegisterForm.tsx'
 import './LandingPage.css'
@@ -6,11 +5,9 @@ import './LandingPage.css'
 function LandingPage() {
   const navigate = useNavigate()
 
-  const [heading, setHeading] = useState('Welcome')
-
   return (
     <div className="container">
-      <h2>{heading}</h2>
+      <h2>Welcome</h2>
 
       <div className="grid">
         <div className="grid-col grid-col_8">

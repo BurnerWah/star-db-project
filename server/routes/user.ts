@@ -38,10 +38,11 @@ router.post<'/register', never, unknown, RegisterBody>(
         `,
         [username, hashedPassword],
       )
-      req.login(result.rows[0], (err) => {
-        if (err) return next(err)
-        res.redirect('/')
-      })
+      result.rows[0] &&
+        req.login(result.rows[0], (err) => {
+          if (err) return next(err)
+          res.redirect('/')
+        })
     } catch (error) {
       console.log('User registration failed: ', error)
       res.sendStatus(500)
