@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import RegisterForm from '../../components/RegisterForm/RegisterForm.tsx'
 import './LandingPage.css'
 
 function LandingPage() {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const [heading, setHeading] = useState('Welcome')
 
@@ -54,7 +54,7 @@ function LandingPage() {
             <button
               className="btn btn_sizeSm"
               onClick={() => {
-                history.push('/login')
+                navigate('/login')
               }}
             >
               Login
