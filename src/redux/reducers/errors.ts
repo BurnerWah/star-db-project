@@ -49,7 +49,7 @@ export enum RegistrationMessages {
  * holds the string that will display on the registration screen if there's an error
  */
 const registrationMessage: Reducer<
-  RegistrationMessages,
+  Readonly<RegistrationMessages>,
   ClearRegistrationError | RegistrationInputError | RegistrationFailed
 > = (state = RegistrationMessages.NONE, action) => {
   switch (action.type) {
