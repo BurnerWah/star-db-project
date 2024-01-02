@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import axios, { AxiosError } from 'axios'
 import { SagaIterator } from 'redux-saga'
-import { StrictEffect, call, takeLatest } from 'redux-saga/effects'
+import { call, takeLatest } from 'redux-saga/effects'
 import { LoginSaga } from '~typings/actions'
 import { put } from '../../hooks/redux.ts'
 
@@ -43,10 +43,10 @@ function* logoutUser(): SagaIterator {
     // allow the server session to recognize the user
     // when the server recognizes the user session
     // it will end the session
-    yield axios.post('/api/user/logout', {
+    yield call(axios.post, '/api/user/logout', {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
-    }) as unknown as StrictEffect<AxiosResponse>
+    })
 
     // now that the session has ended on the server
     // remove the client-side user object to let
