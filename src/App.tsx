@@ -28,7 +28,6 @@ function App() {
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Route exact path="/" render={() => <Redirect to="/home" />} />
-          {/* <Redirect exact from="/" to="/home" /> */}
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -52,13 +51,6 @@ function App() {
               </RequireAuth>
             )}
           />
-          {/* <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
-            <UserPage />
-          </ProtectedRoute> */}
 
           <Route
             exact
@@ -69,13 +61,6 @@ function App() {
               </RequireAuth>
             )}
           />
-          {/* <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute> */}
 
           <Route exact path="/login">
             {user.id ? (
