@@ -1,13 +1,13 @@
 {
-  "extends": "@tsconfig/vite-react/tsconfig.json",
+  "extends": [
+    "@tsconfig/vite-react/tsconfig.json",
+    "@tsconfig/strictest/tsconfig.json"
+  ],
   "compilerOptions": {
     "composite": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
       "~typings/*": ["./types/*"]

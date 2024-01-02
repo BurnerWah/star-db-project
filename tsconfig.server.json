@@ -1,8 +1,12 @@
 {
-  "extends": "@tsconfig/node20/tsconfig.json",
+  "extends": [
+    "@tsconfig/node20/tsconfig.json",
+    "@tsconfig/strictest/tsconfig.json"
+  ],
   "compilerOptions": {
     "composite": true,
     "allowImportingTsExtensions": true,
+    "isolatedModules": false,
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
