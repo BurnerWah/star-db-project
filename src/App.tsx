@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Navigate, Route, HashRouter as Router, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer/Footer.tsx'
 import Nav from './components/Nav/Nav.tsx'
@@ -22,7 +22,7 @@ function App() {
   }, [dispatch])
 
   return (
-    <Router>
+    <BrowserRouter>
       <div>
         <Nav />
         <Routes>
@@ -77,7 +77,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   )
 }
 
