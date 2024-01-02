@@ -1,8 +1,8 @@
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import LoginForm from '../../components/LoginForm/LoginForm.tsx'
 
 function LoginPage() {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -13,7 +13,7 @@ function LoginPage() {
           type="button"
           className="btn btn_asLink"
           onClick={() => {
-            history.push('/registration')
+            navigate('/registration')
           }}
         >
           Register

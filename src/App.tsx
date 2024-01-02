@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import { Redirect, Route, HashRouter as Router, Switch } from 'react-router-dom'
+import { Navigate, Route, HashRouter as Router, Routes } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer/Footer.tsx'
 import Nav from './components/Nav/Nav.tsx'
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.tsx'
+import RequireAuth from './components/RequireAuth.tsx'
 import { useAppDispatch, useAppSelector } from './hooks/redux.ts'
 import AboutPage from './pages/About'
 import InfoPage from './pages/Info'
@@ -25,77 +25,56 @@ function App() {
     <Router>
       <div>
         <Nav />
-        <Switch>
+        <Routes>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Route path="/" element={<Navigate to="/home" />} />
 
-          {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
-            <AboutPage />
-          </Route>
+          {/*
+            Visiting localhost:3000/about will show the about page.
+            shows AboutPage at all times (logged in or not)
+            */}
+          <Route path="about" element={<AboutPage />} />
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
-            <UserPage />
-          </ProtectedRoute>
+          <Route
+            path="user"
+            element={
+              <RequireAuth>
+                <UserPage />
+              </RequireAuth>
+            }
+          />
 
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute>
+          <Route
+            path="info"
+            element={
+              <RequireAuth>
+                <InfoPage />
+              </RequireAuth>
+            }
+          />
 
-          <Route exact path="/login">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the login page
-              <LoginPage />
-            )}
-          </Route>
+          <Route
+            path="login"
+            element={user.id ? <Navigate to="/user" /> : <LoginPage />}
+          />
 
-          <Route exact path="/registration">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the registration page
-              <RegisterPage />
-            )}
-          </Route>
+          <Route
+            path="registration"
+            element={user.id ? <Navigate to="/user" /> : <RegisterPage />}
+          />
 
-          <Route exact path="/home">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the Landing page
-              <LandingPage />
-            )}
-          </Route>
+          <Route
+            path="home"
+            element={user.id ? <Navigate to="/user" /> : <LandingPage />}
+          />
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            <h1>404</h1>
-          </Route>
-        </Switch>
+          <Route element={<h1>404</h1>} />
+        </Routes>
         <Footer />
       </div>
     </Router>
