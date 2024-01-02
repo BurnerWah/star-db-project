@@ -36,3 +36,14 @@ CREATE TABLE IF NOT EXISTS
         object_id integer REFERENCES objects (id),
         PRIMARY KEY (user_id, object_id)
     );
+
+-- Enum-like data
+INSERT INTO
+    object_types (name)
+VALUES
+    ('Star'),
+    ('Planet'),
+    ('Galaxy'),
+    ('Nebula'),
+    ('Cluster'),
+    ('Black Hole');
