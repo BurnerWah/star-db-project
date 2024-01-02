@@ -22,7 +22,7 @@
     "prettier": "prettier --cache"
   },
   "dependencies": {
-    "@node-rs/argon2": "^1.5.2",
+    "@node-rs/argon2": "^1.6.0",
     "axios": "^1.6.3",
     "bcryptjs": "^2.4.3",
     "connect-ensure-login": "^0.1.1",
