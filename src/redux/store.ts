@@ -1,3 +1,4 @@
+import { composeWithDevTools } from '@redux-devtools/extension'
 import { applyMiddleware, legacy_createStore as createStore } from 'redux'
 import logger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
@@ -6,19 +7,19 @@ import rootSaga from './sagas'
 
 const saga = createSagaMiddleware()
 
-// this line creates an array of all of redux middleware you want to use
-// we don't want a whole ton of console logs in our production code
-// logger will only be added to your project if your in development mode
-// const middlewareList =
-//   process.env.NODE_ENV === 'development' ? [saga, logger] : [saga]
+// Check if we're in development, and if not, don't include the redux dev tools
+// A lot of sites include it in production (which is *extremely* funny), but
+// it's definitely not necessary.
+// Info on the dev tools: https://github.com/reduxjs/redux-devtools
+const nodeenv = process.env['NODE_ENV'] || 'development'
+const enhancers =
+  nodeenv === 'development'
+    ? composeWithDevTools(applyMiddleware(saga, logger))
+    : applyMiddleware(saga)
 
-const store = createStore(
-  // tells the saga middleware to use the rootReducer
-  // rootSaga contains all of our other reducers
-  rootReducer,
-  // adds all middleware to our project including saga and logger
-  applyMiddleware(saga, logger),
-)
+// Creates a redux store with our reducers, middleware, and if in development,
+// the redux dev tools.
+const store = createStore(rootReducer, enhancers)
 
 // tells the saga middleware to use the rootSaga
 // rootSaga contains all of our other sagas
