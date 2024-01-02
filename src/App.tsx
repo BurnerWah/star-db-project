@@ -33,9 +33,7 @@ function App() {
             Visiting localhost:3000/about will show the about page.
             shows AboutPage at all times (logged in or not)
             */}
-          <Route path="about">
-            <AboutPage />
-          </Route>
+          <Route path="about" element={<AboutPage />} />
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -59,43 +57,23 @@ function App() {
             }
           />
 
-          <Route path="login">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect to the /user page
-              <Navigate to="/user" />
-            ) : (
-              // Otherwise, show the login page
-              <LoginPage />
-            )}
-          </Route>
+          <Route
+            path="login"
+            element={user.id ? <Navigate to="/user" /> : <LoginPage />}
+          />
 
-          <Route path="registration">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Navigate to="/user" />
-            ) : (
-              // Otherwise, show the registration page
-              <RegisterPage />
-            )}
-          </Route>
+          <Route
+            path="registration"
+            element={user.id ? <Navigate to="/user" /> : <RegisterPage />}
+          />
 
-          <Route path="home">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Navigate to="/user" />
-            ) : (
-              // Otherwise, show the Landing page
-              <LandingPage />
-            )}
-          </Route>
+          <Route
+            path="home"
+            element={user.id ? <Navigate to="/user" /> : <LandingPage />}
+          />
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            <h1>404</h1>
-          </Route>
+          <Route element={<h1>404</h1>} />
         </Routes>
         <Footer />
       </div>
