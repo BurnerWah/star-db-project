@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { ItemDetails } from '~typings/requests.ts'
 import { ParsedItem } from '~typings/structs.ts'
 import { DBObject, DBObjectType } from '~typings/tables.ts'
 import { parseDeclination } from '../db/normalizers.ts'
@@ -70,6 +71,70 @@ items.get('/', async (req, res) => {
     res.send(items)
   } catch (error) {
     console.log('Error getting items: ', error)
+    res.sendStatus(500)
+  }
+})
+
+items.get('/:id', async (req, res) => {
+  try {
+    // In stretch goals, this would also left join some other tables to get more specialized data
+    const result = await pool.query<
+      Omit<DBObject, 'created_by' | 'created_at' | 'type_id'> & {
+        [Column in keyof DBObjectType as `type_${Column}`]: DBObjectType[Column]
+      }
+    >(
+      /*sql*/ `
+        SELECT
+          o.id,
+          o.name,
+          t.id AS type_id,
+          t.name AS type_name,
+          o.right_ascension,
+          o.declination,
+          o.distance,
+          o.distance_error,
+          o.apparent_magnitude,
+          o.absolute_magnitude,
+          o.mass,
+          o.redshift,
+          o.nasa_image_id
+        FROM objects AS o
+        INNER JOIN object_types AS t ON o.type_id = t.id
+        WHERE o.id = $1;
+      `,
+      [req.params.id],
+    )
+    const row = result.rows[0]
+    if (!row) {
+      res.sendStatus(404)
+      return
+    }
+    res.send({
+      id: row.id,
+      name: row.name,
+      type: {
+        id: row.type_id,
+        name: row.type_name,
+      },
+      right_ascension: row.right_ascension as unknown as string,
+      declination: row.declination
+        ? parseDeclination(row.declination)
+        : undefined,
+      distance:
+        row.distance && row.distance_error
+          ? {
+              value: row.distance,
+              error: row.distance_error,
+            }
+          : undefined,
+      apparent_magnitude: row.apparent_magnitude,
+      absolute_magnitude: row.absolute_magnitude,
+      mass: row.mass,
+      redshift: row.redshift,
+      nasa_image_id: row.nasa_image_id,
+    } as ItemDetails)
+  } catch (error) {
+    console.log('Error getting item: ', error)
     res.sendStatus(500)
   }
 })
