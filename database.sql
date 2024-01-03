@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS
         type_id integer NOT NULL REFERENCES object_types (id),
         right_ascension time,
         declination float,
-        distance numrange,
+        distance float,
+        distance_error float,
         apparent_magnitude float,
         absolute_magnitude float,
         mass float,
@@ -36,3 +37,14 @@ CREATE TABLE IF NOT EXISTS
         object_id integer REFERENCES objects (id),
         PRIMARY KEY (user_id, object_id)
     );
+
+-- Enum-like data
+INSERT INTO
+    object_types (name)
+VALUES
+    ('Star'),
+    ('Planet'),
+    ('Galaxy'),
+    ('Nebula'),
+    ('Cluster'),
+    ('Black Hole');
