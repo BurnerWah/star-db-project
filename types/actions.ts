@@ -1,5 +1,11 @@
 import { Action, Dispatch } from 'redux'
-import { ListItem, LoginBody, RegisterBody, UserResponse } from './requests'
+import {
+  ItemDetails,
+  ListItem,
+  LoginBody,
+  RegisterBody,
+  UserResponse,
+} from './requests'
 
 export type UnsetUser = Action<'UNSET_USER'>
 export interface SetUser extends Action<'SET_USER'> {
@@ -19,6 +25,11 @@ export interface SetListItems extends Action<'LIST_ITEMS::SET'> {
 }
 export type UnsetListItems = Action<'LIST_ITEMS::UNSET'>
 
+export interface SetItemDetails extends Action<'itemDetails/set'> {
+  payload: ItemDetails
+}
+export type UnsetItemDetails = Action<'itemDetails/unset'>
+
 export type ReduxActions =
   | UnsetUser
   | SetUser
@@ -31,6 +42,8 @@ export type ReduxActions =
   | RegistrationFailed
   | SetListItems
   | UnsetListItems
+  | SetItemDetails
+  | UnsetItemDetails
 
 export interface LoginSaga extends Action<'LOGIN'> {
   payload: LoginBody
