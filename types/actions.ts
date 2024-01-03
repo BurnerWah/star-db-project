@@ -1,6 +1,5 @@
 import { Action, Dispatch } from 'redux'
-import { LoginBody, RegisterBody, UserResponse } from './requests'
-import { ParsedItem } from './structs'
+import { ListItem, LoginBody, RegisterBody, UserResponse } from './requests'
 
 export type UnsetUser = Action<'UNSET_USER'>
 export interface SetUser extends Action<'SET_USER'> {
@@ -16,7 +15,7 @@ export type RegistrationInputError = Action<'REGISTRATION_INPUT_ERROR'>
 export type RegistrationFailed = Action<'REGISTRATION_FAILED'>
 
 export interface SetListItems extends Action<'LIST_ITEMS::SET'> {
-  payload: ParsedItem[]
+  payload: ListItem[]
 }
 export type UnsetListItems = Action<'LIST_ITEMS::UNSET'>
 

@@ -1,9 +1,9 @@
 import { Reducer } from 'redux'
 import { SetListItems, UnsetListItems } from '~typings/actions'
-import { ParsedItem } from '~typings/structs'
+import { ListItem } from '~typings/requests'
 
 const listItems: Reducer<
-  ReadonlyArray<ParsedItem>,
+  ReadonlyArray<ListItem>,
   SetListItems | UnsetListItems
 > = (state = [], action) => {
   switch (action.type) {

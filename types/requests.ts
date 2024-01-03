@@ -10,4 +10,8 @@ export type LoginBody = RegisterBody
 
 export type UserResponse = Pick<DBUser, 'id' | 'username' | 'admin'>
 
-export type ListItemsBody = ParsedItem[]
+export interface ListItem extends Omit<ParsedItem, 'right_ascension'> {
+  right_ascension?: string
+}
+
+export type ListItemsBody = ListItem[]
