@@ -33,11 +33,15 @@ passport.use(
   }),
 )
 
-type SerializedUser = Pick<DBUser, 'id' | 'username' | 'admin'>
+type SerializedUser = Pick<DBUser, 'id' | 'username' | 'administrator'>
 
 passport.serializeUser<SerializedUser>((user, done) => {
   process.nextTick(() => {
-    done(null, { id: user.id, username: user.username, admin: user.admin })
+    done(null, {
+      id: user.id,
+      username: user.username,
+      administrator: user.administrator,
+    })
   })
 })
 

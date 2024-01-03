@@ -8,7 +8,7 @@ export interface RegisterBody {
 
 export type LoginBody = RegisterBody
 
-export type UserResponse = Pick<DBUser, 'id' | 'username' | 'admin'>
+export type UserResponse = Pick<DBUser, 'id' | 'username' | 'administrator'>
 
 export interface ListItem extends Omit<ParsedItem, 'right_ascension'> {
   right_ascension?: string

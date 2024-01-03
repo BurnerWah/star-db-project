@@ -13,7 +13,7 @@ export const rejectUnauthenticated: RequestHandler = (req, res, next) => {
 }
 
 export const rejectNonAdmin: RequestHandler = (req, res, next) => {
-  if (req.isAuthenticated() && req.user.admin) {
+  if (req.isAuthenticated() && req.user.administrator) {
     next()
   } else {
     res.sendStatus(403)
