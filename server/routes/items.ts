@@ -74,4 +74,22 @@ items.get('/', async (req, res) => {
   }
 })
 
+items.get('/:id', async (req, res) => {
+  try {
+    const result = await pool.query(
+      /*sql*/ `
+        SELECT *
+        FROM objects
+        WHERE id = $1;
+      `,
+      [req.params.id],
+    )
+    const item = result.rows[0]
+    res.send(item)
+  } catch (error) {
+    console.log('Error getting item: ', error)
+    res.sendStatus(500)
+  }
+})
+
 export default items
