@@ -8,7 +8,6 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": false,
     "noEmit": true,
-    "baseUrl": ".",
     "paths": {
       "~typings/*": ["./types/*"]
     }
