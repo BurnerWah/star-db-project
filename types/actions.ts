@@ -60,6 +60,10 @@ export interface FetchItemDetailsSaga extends Action<'itemDetails/fetch'> {
   payload: number | string
 }
 
+export interface SaveItemSaga extends Action<'api/saveItem'> {
+  payload: number | string
+}
+
 export type SagaActions =
   | LoginSaga
   | LogoutSaga
@@ -67,6 +71,7 @@ export type SagaActions =
   | FetchUserSaga
   | FetchListItemsSaga
   | FetchItemDetailsSaga
+  | SaveItemSaga
 
 type Actions = ReduxActions | SagaActions
 
