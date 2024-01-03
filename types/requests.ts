@@ -1,5 +1,5 @@
-import { ParsedItem } from './structs'
-import { DBUser } from './tables'
+import { Declination, MeasurementWithUncertainty, ParsedItem } from './structs'
+import { DBObject, DBObjectType, DBUser } from './tables'
 
 export interface RegisterBody {
   username: string
@@ -15,3 +15,20 @@ export interface ListItem extends Omit<ParsedItem, 'right_ascension'> {
 }
 
 export type ListItemsBody = ListItem[]
+
+export interface ItemDetails
+  extends Omit<
+    DBObject,
+    | 'type'
+    | 'created_by'
+    | 'created_at'
+    | 'right_ascension'
+    | 'declination'
+    | 'distance'
+    | 'distance_error'
+  > {
+  type: DBObjectType
+  right_ascension?: string | null
+  declination?: Declination
+  distance?: MeasurementWithUncertainty
+}
