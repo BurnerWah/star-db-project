@@ -31,6 +31,18 @@ export default function Details() {
           Save
         </button>
       )}
+      {user.administrator && (
+        <button
+          onClick={() =>
+            dispatch({
+              type: 'api/admin/deleteItem',
+              payload: { id: itemDetails.id },
+            })
+          }
+        >
+          Delete
+        </button>
+      )}
     </div>
   )
 }
