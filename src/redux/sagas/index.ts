@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects'
+import adminSaga from './admin.ts'
 import itemDetailsSaga from './itemDetails.ts'
 import listItemsSaga from './listItems.ts'
 import loginSaga from './login.ts'
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     listItemsSaga(),
     itemDetailsSaga(),
     savedItemsSaga(),
+    adminSaga(),
   ])
 }
