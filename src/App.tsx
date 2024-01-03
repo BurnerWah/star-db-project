@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from './hooks/redux.ts'
 import AboutPage from './pages/About'
 import InfoPage from './pages/Info'
 import LandingPage from './pages/Landing'
+import Listing from './pages/Listing/index.tsx'
 import LoginPage from './pages/Login'
 import RegisterPage from './pages/Register'
 import UserPage from './pages/User'
@@ -71,6 +72,8 @@ function App() {
             path="home"
             element={user.id ? <Navigate to="/user" /> : <LandingPage />}
           />
+
+          <Route path="list" element={<Listing />} />
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route element={<h1>404</h1>} />
