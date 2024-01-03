@@ -3,6 +3,7 @@ import express from 'express'
 import morgan from 'morgan'
 import session from './middleware/session.ts'
 import items from './routes/items.ts'
+import saved from './routes/saved.ts'
 import user from './routes/user.ts'
 import passport from './strategies/argon2id.ts'
 
@@ -25,6 +26,7 @@ app.use(passport.session())
 // Routes
 app.use('/api/user', user)
 app.use('/api/items', items)
+app.use('/api/saved', saved)
 
 // Serve static files
 app.use(express.static('dist/client'))
