@@ -5,7 +5,7 @@ import { SaveItemSaga } from '~typings/actions'
 
 function* saveItem({ payload }: SaveItemSaga): SagaIterator {
   try {
-    yield call(axios.put, `/api/items/${payload}/save`, null, {
+    yield call(axios.put, `/api/items/${payload}/save`, undefined, {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     })
