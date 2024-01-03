@@ -1,3 +1,4 @@
+import { ParsedItem } from './structs'
 import { DBUser } from './tables'
 
 export interface RegisterBody {
@@ -8,3 +9,5 @@ export interface RegisterBody {
 export type LoginBody = RegisterBody
 
 export type UserResponse = Pick<DBUser, 'id' | 'username' | 'admin'>
+
+export type ListItemsBody = ParsedItem[]
