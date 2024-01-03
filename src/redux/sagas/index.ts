@@ -3,6 +3,7 @@ import itemDetailsSaga from './itemDetails.ts'
 import listItemsSaga from './listItems.ts'
 import loginSaga from './login.ts'
 import registrationSaga from './registration.ts'
+import savedItemsSaga from './savedItems.ts'
 import userSaga from './user.ts'
 
 // rootSaga is the primary saga.
@@ -19,5 +20,6 @@ export default function* rootSaga() {
     userSaga(),
     listItemsSaga(),
     itemDetailsSaga(),
+    savedItemsSaga(),
   ])
 }
