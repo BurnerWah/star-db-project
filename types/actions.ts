@@ -42,7 +42,14 @@ export interface RegisterSaga extends Action<'REGISTER'> {
 }
 export type FetchUserSaga = Action<'FETCH_USER'>
 
-export type SagaActions = LoginSaga | LogoutSaga | RegisterSaga | FetchUserSaga
+export type FetchListItemsSaga = Action<'LIST_ITEMS::FETCH'>
+
+export type SagaActions =
+  | LoginSaga
+  | LogoutSaga
+  | RegisterSaga
+  | FetchUserSaga
+  | FetchListItemsSaga
 
 type Actions = ReduxActions | SagaActions
 
