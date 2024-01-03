@@ -14,3 +14,6 @@ function AboutPage() {
 }
 
 export default AboutPage
+
+// For lazy-loading
+export const Component = AboutPage

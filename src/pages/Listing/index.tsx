@@ -55,3 +55,6 @@ export default function Listing() {
     </div>
   )
 }
+
+// For lazy-loading
+export const Component = Listing

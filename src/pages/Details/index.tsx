@@ -24,3 +24,6 @@ export default function Details() {
     </div>
   )
 }
+
+// For lazy-loading
+export const Component = Details
