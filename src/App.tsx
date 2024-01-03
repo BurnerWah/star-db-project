@@ -78,7 +78,7 @@ function App() {
           <Route path="details/:id" element={<Details />} />
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route element={<h1>404</h1>} />
+          <Route path="*" element={<h1>404</h1>} />
         </Routes>
         <Footer />
       </div>
