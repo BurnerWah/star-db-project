@@ -57,7 +57,7 @@ export type FetchUserSaga = Action<'FETCH_USER'>
 export type FetchListItemsSaga = Action<'LIST_ITEMS::FETCH'>
 
 export interface FetchItemDetailsSaga extends Action<'itemDetails/fetch'> {
-  payload: number
+  payload: number | string
 }
 
 export type SagaActions =
