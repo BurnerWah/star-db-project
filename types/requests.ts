@@ -1,5 +1,5 @@
 import { Declination, MeasurementWithUncertainty, ParsedItem } from './structs'
-import { DBObject, DBObjectType, DBUser } from './tables'
+import { DBObject, DBObjectType, DBUser, EDBObjectTypes } from './tables'
 
 export interface RegisterBody {
   username: string
@@ -31,4 +31,17 @@ export interface ItemDetails
   right_ascension?: string | null
   declination?: Declination
   distance?: MeasurementWithUncertainty
+}
+
+export interface ItemSubmission {
+  name: DBObject['name']
+  type: EDBObjectTypes
+  right_ascension?: string
+  declination?: Declination
+  distance?: MeasurementWithUncertainty
+  apparent_magnitude?: DBObject['apparent_magnitude']
+  absolute_magnitude?: DBObject['absolute_magnitude']
+  mass?: DBObject['mass']
+  redshift?: DBObject['redshift']
+  nasa_image_id?: DBObject['nasa_image_id']
 }

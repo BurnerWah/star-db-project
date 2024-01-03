@@ -13,3 +13,13 @@ export function parseDeclination(declination: number): Declination {
   const arcsec = Math.floor((Math.abs(declination) % 60) * 10000) / 10000
   return { sign, degrees, arcmin, arcsec }
 }
+
+/**
+ * Converts a Declination object into a number of arc seconds
+ * @param declination A declination object
+ * @returns A number of arcseconds
+ */
+export function unparseDeclination(declination: Declination): number {
+  const { sign, degrees, arcmin, arcsec } = declination
+  return sign * (degrees * 3600 + arcmin * 60 + arcsec)
+}
