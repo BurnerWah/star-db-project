@@ -1,5 +1,7 @@
 import { Router } from 'express'
+import { MeasurementWithUncertainty } from '~typings/structs.ts'
 import { DBObject, DBObjectType } from '~typings/tables.ts'
+import { parseDeclination } from '../db/normalizers.ts'
 import pool from '../db/pool.ts'
 
 const items = Router()
@@ -52,11 +54,16 @@ items.get('/', async (req, res) => {
         name: item.type_name,
       } as DBObjectType,
       right_ascension: item.right_ascension,
-      declination: item.declination,
-      distance: {
-        value: item.distance,
-        error: item.distance_error,
-      },
+      declination: item.declination
+        ? parseDeclination(item.declination)
+        : undefined,
+      distance:
+        item.distance && item.distance_error
+          ? ({
+              value: item.distance,
+              error: item.distance_error,
+            } as MeasurementWithUncertainty)
+          : undefined,
       apparent_magnitude: item.apparent_magnitude,
       absolute_magnitude: item.absolute_magnitude,
       mass: item.mass,
