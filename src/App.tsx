@@ -14,6 +14,7 @@ import InfoPage from './pages/Info'
 import LandingPage from './pages/Landing'
 import LoginPage from './pages/Login'
 import RegisterPage from './pages/Register'
+import Saved from './pages/Saved'
 import UserPage from './pages/User'
 
 function App() {
@@ -62,6 +63,14 @@ function App() {
           element={user.id ? <Navigate to="/user" /> : <LandingPage />}
         />
         <Route path="list" lazy={() => import('./pages/Listing')} />
+        <Route
+          path="saved"
+          element={
+            <RequireAuth>
+              <Saved />
+            </RequireAuth>
+          }
+        />
         <Route path="details/:id" lazy={() => import('./pages/Details')} />
         {/* If none of the other routes matched, we will show a 404. */}
         <Route path="*" element={<h1>404</h1>} />

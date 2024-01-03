@@ -64,6 +64,8 @@ export interface SaveItemSaga extends Action<'api/saveItem'> {
   payload: number | string
 }
 
+export type ListSavedItemsSaga = Action<'api/listSavedItems'>
+
 export type SagaActions =
   | LoginSaga
   | LogoutSaga
@@ -72,6 +74,7 @@ export type SagaActions =
   | FetchListItemsSaga
   | FetchItemDetailsSaga
   | SaveItemSaga
+  | ListSavedItemsSaga
 
 type Actions = ReduxActions | SagaActions
 
