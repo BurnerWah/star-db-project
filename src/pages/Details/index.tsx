@@ -11,6 +11,9 @@ export default function Details() {
     if (id) {
       dispatch({ type: 'itemDetails/fetch', payload: id })
     }
+    return () => {
+      dispatch({ type: 'itemDetails/unset' })
+    }
   }, [dispatch, id])
 
   return (
