@@ -6,6 +6,7 @@ import Nav from './components/Nav/Nav.tsx'
 import RequireAuth from './components/RequireAuth.tsx'
 import { useAppDispatch, useAppSelector } from './hooks/redux.ts'
 import AboutPage from './pages/About'
+import Details from './pages/Details/index.tsx'
 import InfoPage from './pages/Info'
 import LandingPage from './pages/Landing'
 import Listing from './pages/Listing/index.tsx'
@@ -74,6 +75,7 @@ function App() {
           />
 
           <Route path="list" element={<Listing />} />
+          <Route path="details/:id" element={<Details />} />
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route element={<h1>404</h1>} />

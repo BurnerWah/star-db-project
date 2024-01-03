@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 
 export default function Listing() {
   const dispatch = useAppDispatch()
   const listItems = useAppSelector((state) => state.listItems)
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch({ type: 'LIST_ITEMS::FETCH' })
@@ -28,7 +30,7 @@ export default function Listing() {
         </thead>
         <tbody>
           {listItems.map((item) => (
-            <tr key={item.id}>
+            <tr key={item.id} onClick={() => navigate(`/details/${item.id}`)}>
               <td>{item.name}</td>
               <td>{item.type.name}</td>
               <td>{item.right_ascension}</td>
