@@ -3,7 +3,7 @@ export interface DBUser {
   username: string
   argon2id_hash: string
   created_at: Date
-  admin: boolean
+  administrator: boolean
 }
 
 export enum EDBObjectTypes {
