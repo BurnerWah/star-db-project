@@ -39,7 +39,7 @@ items.get('/', async (req, res) => {
 	      o.apparent_magnitude,
 	      o.absolute_magnitude,
 	      o.mass,
-	      o.redshift,
+	      o.redshift
       FROM
 	      objects AS o
 	      INNER JOIN object_types AS t ON o.type_id = t.id;
