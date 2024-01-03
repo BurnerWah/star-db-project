@@ -28,7 +28,8 @@ export interface DBObject {
   type: DBObjectType['id']
   right_ascension?: Date
   declination?: number
-  distance?: unknown // This needs to be retyped on the DB to something else
+  distance?: number
+  distance_error?: number
   apparent_magnitude?: number
   absolute_magnitude?: number
   mass?: number
