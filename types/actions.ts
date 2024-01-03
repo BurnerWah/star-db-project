@@ -1,5 +1,5 @@
 import { Action, Dispatch } from 'redux'
-import { LoginBody, RegisterBody, UserResponse } from './requests'
+import { ListItem, LoginBody, RegisterBody, UserResponse } from './requests'
 
 export type UnsetUser = Action<'UNSET_USER'>
 export interface SetUser extends Action<'SET_USER'> {
@@ -14,6 +14,11 @@ export type ClearRegistrationError = Action<'CLEAR_REGISTRATION_ERROR'>
 export type RegistrationInputError = Action<'REGISTRATION_INPUT_ERROR'>
 export type RegistrationFailed = Action<'REGISTRATION_FAILED'>
 
+export interface SetListItems extends Action<'LIST_ITEMS::SET'> {
+  payload: ListItem[]
+}
+export type UnsetListItems = Action<'LIST_ITEMS::UNSET'>
+
 export type ReduxActions =
   | UnsetUser
   | SetUser
@@ -24,6 +29,8 @@ export type ReduxActions =
   | ClearRegistrationError
   | RegistrationInputError
   | RegistrationFailed
+  | SetListItems
+  | UnsetListItems
 
 export interface LoginSaga extends Action<'LOGIN'> {
   payload: LoginBody
@@ -34,7 +41,14 @@ export interface RegisterSaga extends Action<'REGISTER'> {
 }
 export type FetchUserSaga = Action<'FETCH_USER'>
 
-export type SagaActions = LoginSaga | LogoutSaga | RegisterSaga | FetchUserSaga
+export type FetchListItemsSaga = Action<'LIST_ITEMS::FETCH'>
+
+export type SagaActions =
+  | LoginSaga
+  | LogoutSaga
+  | RegisterSaga
+  | FetchUserSaga
+  | FetchListItemsSaga
 
 type Actions = ReduxActions | SagaActions
 

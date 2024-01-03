@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects'
+import listItemsSaga from './listItems.ts'
 import loginSaga from './login.ts'
 import registrationSaga from './registration.ts'
 import userSaga from './user.ts'
@@ -15,5 +16,6 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    listItemsSaga(),
   ])
 }

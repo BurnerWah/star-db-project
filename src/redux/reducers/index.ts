@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import errors from './errors.ts'
+import listItems from './listItems.ts'
 import user from './user.ts'
 
 // rootReducer is the primary reducer for our entire project
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   errors,
   // will have an id and username if someone is logged in
   user,
+  listItems,
 })
 
 export default rootReducer
