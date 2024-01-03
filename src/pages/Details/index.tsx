@@ -6,6 +6,7 @@ export default function Details() {
   const { id } = useParams()
   const dispatch = useAppDispatch()
   const itemDetails = useAppSelector((state) => state.itemDetails)
+  const user = useAppSelector((state) => state.user)
 
   useEffect(() => {
     if (id) {
@@ -21,6 +22,15 @@ export default function Details() {
       <h2>Details for item {id}</h2>
       {/* I don't wanna format this right now, I just want to validate that it works */}
       <pre>{JSON.stringify(itemDetails, null, 2)}</pre>
+      {user.id && (
+        <button
+          onClick={() =>
+            dispatch({ type: 'api/saveItem', payload: itemDetails.id })
+          }
+        >
+          Save
+        </button>
+      )}
     </div>
   )
 }
