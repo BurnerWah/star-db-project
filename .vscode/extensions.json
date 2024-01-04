@@ -2,8 +2,11 @@
   "recommendations": [
     "antfu.vite",
     "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
     "inferrinizzard.prettier-sql-vscode",
+    "luxass.tsup-problem-matchers",
+    "mikestead.dotenv",
     "mtxr.sqltools-driver-pg",
     "mtxr.sqltools",
     "qufiwefefwoyn.inline-sql-syntax",

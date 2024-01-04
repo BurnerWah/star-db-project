@@ -1,0 +1,69 @@
+{
+  "tasks": [
+    {
+      "detail": "tsup --watch ...",
+      "icon": {
+        "color": "terminal.ansiBlue",
+        "id": "server"
+      },
+      "isBackground": true,
+      "label": "npm: server",
+      "presentation": {
+        "clear": false,
+        "echo": true,
+        "focus": false,
+        "panel": "shared",
+        "reveal": "silent",
+        "showReuseMessage": true
+      },
+      "problemMatcher": ["$tsup-esm-watch"],
+      "script": "server",
+      "type": "npm"
+    },
+    {
+      "detail": "vite",
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "browser"
+      },
+      "label": "npm: client",
+      "problemMatcher": [],
+      "script": "client",
+      "type": "npm"
+    },
+    {
+      "detail": "run-s 'build:*'",
+      "group": "build",
+      "icon": {
+        "id": "tools"
+      },
+      "label": "npm: build",
+      "problemMatcher": ["$tsup-esm"],
+      "script": "build",
+      "type": "npm"
+    },
+    {
+      "detail": "tsup",
+      "group": "build",
+      "icon": {
+        "color": "terminal.ansiYellow"
+      },
+      "label": "npm: build:server",
+      "problemMatcher": ["$tsup-esm"],
+      "script": "build:server",
+      "type": "npm"
+    },
+    {
+      "detail": "vite build",
+      "group": "build",
+      "icon": {
+        "color": "terminal.ansiGreen"
+      },
+      "label": "npm: build:client",
+      "problemMatcher": [],
+      "script": "build:client",
+      "type": "npm"
+    }
+  ],
+  "version": "2.0.0"
+}

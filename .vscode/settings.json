@@ -49,6 +49,8 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
+  "npm-intellisense.importES6": true,
+  "npm-intellisense.importLinebreak": "",
   "Prettier-SQL.SQLFlavourOverride": "postgresql",
   "prettier.semi": false,
   "prettier.singleQuote": true,
