@@ -42,6 +42,17 @@ export default function AddItem() {
         nasa_image_id: nasaId,
       },
     })
+    // Cleanup
+    setName(undefined)
+    setType(EDBObjectTypes.Star)
+    setRightAscension({})
+    setDeclination({})
+    setDistance({})
+    setApparentMagnitude(undefined)
+    setAbsoluteMagnitude(undefined)
+    setMass(undefined)
+    setRedshift(undefined)
+    setNasaId(undefined)
   }
 
   return (
