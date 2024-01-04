@@ -3,6 +3,7 @@ import { SagaIterator } from 'redux-saga'
 import { call, takeEvery } from 'redux-saga/effects'
 import { AdminAddItemSaga, AdminDeleteItemSaga } from '~typings/actions'
 import { ItemSubmission } from '~typings/requests'
+import { withCredentials } from '../../constants/axios'
 import {
   prepareDeclination,
   prepareDistance,
@@ -12,10 +13,7 @@ import {
 function* deleteItem({ payload }: AdminDeleteItemSaga): SagaIterator {
   try {
     const { id } = payload
-    yield call(axios.delete, `/api/admin/delete/${id}`, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    })
+    yield call(axios.delete, `/api/admin/delete/${id}`, withCredentials)
   } catch (error) {
     console.log(error)
   }
@@ -35,10 +33,7 @@ function* addItem({ payload }: AdminAddItemSaga): SagaIterator {
       redshift: payload.redshift,
       nasa_image_id: payload.nasa_image_id,
     }
-    yield call(axios.post, '/api/admin/add', submission, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    })
+    yield call(axios.post, '/api/admin/add', submission, withCredentials)
   } catch (error) {
     console.log(error)
   }

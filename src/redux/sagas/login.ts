@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import { LoginSaga } from '~typings/actions'
+import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
 
 // worker Saga: will be fired on "LOGIN" actions
@@ -13,10 +14,7 @@ function* loginUser({ payload }: LoginSaga): SagaIterator {
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
-    yield call(axios.post, '/api/user/login', payload, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    })
+    yield call(axios.post, '/api/user/login', payload, withCredentials)
 
     // after the user has logged in
     // get the user information from the server
@@ -43,10 +41,7 @@ function* logoutUser(): SagaIterator {
     // allow the server session to recognize the user
     // when the server recognizes the user session
     // it will end the session
-    yield call(axios.post, '/api/user/logout', {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    })
+    yield call(axios.post, '/api/user/logout', withCredentials)
 
     // now that the session has ended on the server
     // remove the client-side user object to let

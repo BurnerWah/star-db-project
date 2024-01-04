@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import { UserResponse } from '~typings/requests'
+import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
 
 // worker Saga: will be fired on "FETCH_USER" actions
@@ -14,10 +15,7 @@ function* fetchUser(): SagaIterator {
     const response: AxiosResponse<UserResponse> = yield call(
       axios.get,
       '/api/user',
-      {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      },
+      withCredentials,
     )
 
     // now that the session has given us a user object
