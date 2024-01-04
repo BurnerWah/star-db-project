@@ -21,6 +21,8 @@ export default function AddItem() {
     value: 0,
     error: 0,
   })
+  const [apparentMagnitude, setApparentMagnitude] = useState(0)
+  const [absoluteMagnitude, setAbsoluteMagnitude] = useState(0)
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -146,7 +148,24 @@ export default function AddItem() {
           />
         </label>
         <br />
-
+        <label>
+          Apparent Magnitude:{' '}
+          <input
+            type="number"
+            name="apparentMagnitude"
+            value={apparentMagnitude}
+            onChange={(e) => setApparentMagnitude(e.target.valueAsNumber)}
+          />
+        </label>
+        <label>
+          Absolute Magnitude:{' '}
+          <input
+            type="number"
+            name="absoluteMagnitude"
+            value={absoluteMagnitude}
+            onChange={(e) => setAbsoluteMagnitude(e.target.valueAsNumber)}
+          />
+        </label>
         <br />
         <button type="submit">Submit</button>
       </form>
