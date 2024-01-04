@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '../../hooks/redux.ts'
+import { useAppSelector } from '../../hooks/redux'
 import LogOutButton from '../LogOutButton'
 import './Nav.css'
 

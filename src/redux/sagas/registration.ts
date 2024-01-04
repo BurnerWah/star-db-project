@@ -2,7 +2,7 @@ import axios from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import { RegisterSaga } from '~typings/actions'
-import { put } from '../../hooks/redux.ts'
+import { put } from '../../hooks/redux'
 
 // worker Saga: will be fired on "REGISTER" actions
 function* registerUser({ payload }: RegisterSaga): SagaIterator {

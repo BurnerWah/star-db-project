@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import { UserResponse } from '~typings/requests'
-import { put } from '../../hooks/redux.ts'
+import { put } from '../../hooks/redux'
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser(): SagaIterator {

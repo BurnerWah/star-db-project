@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import { LoginSaga } from '~typings/actions'
-import { put } from '../../hooks/redux.ts'
+import { put } from '../../hooks/redux'
 
 // worker Saga: will be fired on "LOGIN" actions
 function* loginUser({ payload }: LoginSaga): SagaIterator {
