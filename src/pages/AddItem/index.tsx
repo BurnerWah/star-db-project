@@ -1,30 +1,24 @@
 import { FormEventHandler, useState } from 'react'
-import { MeasurementWithUncertainty } from '~typings/structs'
+import {
+  DeclinationInput,
+  DistanceInput,
+  RightAscensionInput,
+} from '~typings/inputs'
+import { EDBObjectTypes } from '~typings/tables'
 
 export default function AddItem() {
-  const [name, setName] = useState('')
-  const [type, setType] = useState('1')
+  const [name, setName] = useState<string>()
+  const [type, setType] = useState<EDBObjectTypes>(EDBObjectTypes.Star)
   // I generally don't like multi-value states, but in this case it's a lot
   // easier than having 6 separate number states and setters. I might change it
   // to separate states later on though.
-  const [rightAscension, setRightAscension] = useState<{
-    hours?: number
-    min?: number
-    sec?: number
-  }>({})
-  const [declination, setDeclination] = useState<{
-    deg?: number
-    min?: number
-    sec?: number
-  }>({})
-  const [distance, setDistance] = useState<MeasurementWithUncertainty>({
-    value: 0,
-    error: 0,
-  })
-  const [apparentMagnitude, setApparentMagnitude] = useState(0)
-  const [absoluteMagnitude, setAbsoluteMagnitude] = useState(0)
-  const [mass, setMass] = useState(0)
-  const [redshift, setRedshift] = useState(0)
+  const [rightAscension, setRightAscension] = useState<RightAscensionInput>({})
+  const [declination, setDeclination] = useState<DeclinationInput>({})
+  const [distance, setDistance] = useState<DistanceInput>({})
+  const [apparentMagnitude, setApparentMagnitude] = useState<number>()
+  const [absoluteMagnitude, setAbsoluteMagnitude] = useState<number>()
+  const [mass, setMass] = useState<number>()
+  const [redshift, setRedshift] = useState<number>()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -52,15 +46,15 @@ export default function AddItem() {
             name="Type"
             required
             value={type}
-            onChange={(e) => setType(e.target.value)}
+            onChange={(e) => setType(parseInt(e.target.value))}
           >
             {/* This is hardcoded for now */}
-            <option value="1">Star</option>
-            <option value="2">Planet</option>
-            <option value="3">Galaxy</option>
-            <option value="4">Nebula</option>
-            <option value="5">Cluster</option>
-            <option value="6">Black Hole</option>
+            <option value={EDBObjectTypes.Star}>Star</option>
+            <option value={EDBObjectTypes.Planet}>Planet</option>
+            <option value={EDBObjectTypes.Galaxy}>Galaxy</option>
+            <option value={EDBObjectTypes.Nebula}>Nebula</option>
+            <option value={EDBObjectTypes.Cluster}>Cluster</option>
+            <option value={EDBObjectTypes['Black Hole']}>Black Hole</option>
           </select>
         </label>
         <br />
@@ -69,7 +63,7 @@ export default function AddItem() {
           <input
             type="number"
             name="hours"
-            value={rightAscension.hours ?? 0}
+            value={rightAscension.hours}
             onChange={(e) =>
               setRightAscension((r) => ({
                 ...r,
@@ -81,7 +75,7 @@ export default function AddItem() {
           <input
             type="number"
             name="minutes"
-            value={rightAscension.min ?? 0}
+            value={rightAscension.min}
             onChange={(e) =>
               setRightAscension((r) => ({ ...r, min: e.target.valueAsNumber }))
             }
@@ -90,7 +84,7 @@ export default function AddItem() {
           <input
             type="number"
             name="seconds"
-            value={rightAscension.sec ?? 0}
+            value={rightAscension.sec}
             onChange={(e) =>
               setRightAscension((r) => ({ ...r, sec: e.target.valueAsNumber }))
             }
@@ -103,27 +97,27 @@ export default function AddItem() {
           <input
             type="number"
             name="degrees"
-            value={declination.deg ?? 0}
+            value={declination.degrees}
             onChange={(e) =>
-              setDeclination((d) => ({ ...d, deg: e.target.valueAsNumber }))
+              setDeclination((d) => ({ ...d, degrees: e.target.valueAsNumber }))
             }
           />
           {'° '}
           <input
             type="number"
             name="arcmin"
-            value={declination.min ?? 0}
+            value={declination.arcmin}
             onChange={(e) =>
-              setDeclination((d) => ({ ...d, min: e.target.valueAsNumber }))
+              setDeclination((d) => ({ ...d, arcmin: e.target.valueAsNumber }))
             }
           />
           {"' "}
           <input
             type="number"
             name="arcsec"
-            value={declination.sec ?? 0}
+            value={declination.arcsec}
             onChange={(e) =>
-              setDeclination((d) => ({ ...d, sec: e.target.valueAsNumber }))
+              setDeclination((d) => ({ ...d, arcsec: e.target.valueAsNumber }))
             }
           />
           {'"'}
