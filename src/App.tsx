@@ -25,7 +25,7 @@ function App() {
   const user = useAppSelector((store) => store.user)
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' })
+    dispatch({ type: 'user/fetch' })
   }, [dispatch])
 
   // Some routes are lazy-loaded, some are not. Eventually I'd like all of them

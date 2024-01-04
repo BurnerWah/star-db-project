@@ -5,7 +5,7 @@ import { UserResponse } from '~typings/requests'
 import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
 
-// worker Saga: will be fired on "FETCH_USER" actions
+// worker Saga: will be fired on "user/fetch" actions
 function* fetchUser(): SagaIterator {
   try {
     // the config includes credentials which
@@ -28,7 +28,7 @@ function* fetchUser(): SagaIterator {
 }
 
 function* userSaga() {
-  yield takeLatest('FETCH_USER', fetchUser)
+  yield takeLatest('user/fetch', fetchUser)
 }
 
 export default userSaga

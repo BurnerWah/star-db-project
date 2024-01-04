@@ -18,7 +18,7 @@ function* loginUser({ payload }: LoginSaga): SagaIterator {
 
     // after the user has logged in
     // get the user information from the server
-    yield put({ type: 'FETCH_USER' })
+    yield put({ type: 'user/fetch' })
   } catch (error: AxiosError | unknown) {
     console.log('Error with user login:', error)
     if ((error as AxiosError)?.response?.status === 401) {

@@ -54,7 +54,7 @@ export type LogoutSaga = Action<'LOGOUT'>
 export interface RegisterSaga extends Action<'REGISTER'> {
   payload: RegisterBody
 }
-export type FetchUserSaga = Action<'FETCH_USER'>
+export type FetchUserSaga = Action<'user/fetch'>
 
 export type FetchListItemsSaga = Action<'listItems/fetch'>
 
