@@ -36,9 +36,9 @@ export interface ItemDetails
 export interface ItemSubmission {
   name: DBObject['name']
   type: EDBObjectTypes
-  right_ascension?: string
-  declination?: Declination
-  distance?: MeasurementWithUncertainty
+  right_ascension?: string | undefined
+  declination?: Declination | undefined
+  distance?: MeasurementWithUncertainty | undefined
   apparent_magnitude?: DBObject['apparent_magnitude']
   absolute_magnitude?: DBObject['absolute_magnitude']
   mass?: DBObject['mass']
