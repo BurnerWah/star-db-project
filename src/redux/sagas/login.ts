@@ -5,7 +5,7 @@ import { LoginSaga } from '~typings/actions'
 import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
 
-// worker Saga: will be fired on "LOGIN" actions
+// worker Saga: will be fired on "api/auth/login" actions
 function* loginUser({ payload }: LoginSaga): SagaIterator {
   try {
     // clear any existing error on the login page
@@ -34,7 +34,7 @@ function* loginUser({ payload }: LoginSaga): SagaIterator {
   }
 }
 
-// worker Saga: will be fired on "LOGOUT" actions
+// worker Saga: will be fired on "api/auth/logout" actions
 function* logoutUser(): SagaIterator {
   try {
     // the config includes credentials which
@@ -53,8 +53,8 @@ function* logoutUser(): SagaIterator {
 }
 
 function* loginSaga() {
-  yield takeLatest('LOGIN', loginUser)
-  yield takeLatest('LOGOUT', logoutUser)
+  yield takeLatest('api/auth/login', loginUser)
+  yield takeLatest('api/auth/logout', logoutUser)
 }
 
 export default loginSaga

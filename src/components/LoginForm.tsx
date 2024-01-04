@@ -14,7 +14,7 @@ function LoginForm() {
 
     if (username && password) {
       dispatch({
-        type: 'LOGIN',
+        type: 'api/auth/login',
         payload: {
           username: username,
           password: password,

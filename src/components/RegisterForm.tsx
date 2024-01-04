@@ -16,7 +16,7 @@ function RegisterForm() {
         e.preventDefault()
 
         dispatch({
-          type: 'REGISTER',
+          type: 'api/auth/register',
           payload: {
             username: username,
             password: password,

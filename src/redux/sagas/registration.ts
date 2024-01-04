@@ -4,7 +4,7 @@ import { call, takeLatest } from 'redux-saga/effects'
 import { RegisterSaga } from '~typings/actions'
 import { put } from '../../hooks/redux'
 
-// worker Saga: will be fired on "REGISTER" actions
+// worker Saga: will be fired on "api/auth/register" actions
 function* registerUser({ payload }: RegisterSaga): SagaIterator {
   try {
     // clear any existing error on the registration page
@@ -14,7 +14,7 @@ function* registerUser({ payload }: RegisterSaga): SagaIterator {
     yield call(axios.post, '/api/user/register', payload)
 
     // automatically log a user in after registration
-    yield put({ type: 'LOGIN', payload })
+    yield put({ type: 'api/auth/login', payload })
 
     // set to 'login' mode so they see the login screen
     // after registration or after they log out
@@ -27,7 +27,7 @@ function* registerUser({ payload }: RegisterSaga): SagaIterator {
 }
 
 function* registrationSaga() {
-  yield takeLatest('REGISTER', registerUser)
+  yield takeLatest('api/auth/register', registerUser)
 }
 
 export default registrationSaga

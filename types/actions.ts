@@ -47,11 +47,11 @@ export type ReduxActions =
   | SetItemDetails
   | UnsetItemDetails
 
-export interface LoginSaga extends Action<'LOGIN'> {
+export interface LoginSaga extends Action<'api/auth/login'> {
   payload: LoginBody
 }
-export type LogoutSaga = Action<'LOGOUT'>
-export interface RegisterSaga extends Action<'REGISTER'> {
+export type LogoutSaga = Action<'api/auth/logout'>
+export interface RegisterSaga extends Action<'api/auth/register'> {
   payload: RegisterBody
 }
 export type FetchUserSaga = Action<'user/fetch'>
