@@ -7,8 +7,16 @@ export default function AddItem() {
   // I generally don't like multi-value states, but in this case it's a lot
   // easier than having 6 separate number states and setters. I might change it
   // to separate states later on though.
-  const [ra, setRa] = useState({ hours: 0, min: 0, sec: 0 })
-  const [declination, setDeclination] = useState({ deg: 0, min: 0, sec: 0 })
+  const [rightAscension, setRightAscension] = useState<{
+    hours?: number
+    min?: number
+    sec?: number
+  }>({})
+  const [declination, setDeclination] = useState<{
+    deg?: number
+    min?: number
+    sec?: number
+  }>({})
   const [distance, setDistance] = useState<MeasurementWithUncertainty>({
     value: 0,
     error: 0,
@@ -16,6 +24,8 @@ export default function AddItem() {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
+    console.log('rightAscension', rightAscension)
+    console.log('declination', declination)
   }
 
   return (
@@ -55,27 +65,30 @@ export default function AddItem() {
           <input
             type="number"
             name="hours"
-            value={ra.hours}
+            value={rightAscension.hours ?? 0}
             onChange={(e) =>
-              setRa((r) => ({ ...r, hours: e.target.valueAsNumber }))
+              setRightAscension((r) => ({
+                ...r,
+                hours: e.target.valueAsNumber,
+              }))
             }
           />
           h{' '}
           <input
             type="number"
             name="minutes"
-            value={ra.min}
+            value={rightAscension.min ?? 0}
             onChange={(e) =>
-              setRa((r) => ({ ...r, min: e.target.valueAsNumber }))
+              setRightAscension((r) => ({ ...r, min: e.target.valueAsNumber }))
             }
           />
           m{' '}
           <input
             type="number"
             name="seconds"
-            value={ra.sec}
+            value={rightAscension.sec ?? 0}
             onChange={(e) =>
-              setRa((r) => ({ ...r, sec: e.target.valueAsNumber }))
+              setRightAscension((r) => ({ ...r, sec: e.target.valueAsNumber }))
             }
           />
           {'s'}
@@ -86,7 +99,7 @@ export default function AddItem() {
           <input
             type="number"
             name="degrees"
-            value={declination.deg}
+            value={declination.deg ?? 0}
             onChange={(e) =>
               setDeclination((d) => ({ ...d, deg: e.target.valueAsNumber }))
             }
@@ -95,7 +108,7 @@ export default function AddItem() {
           <input
             type="number"
             name="arcmin"
-            value={declination.min}
+            value={declination.min ?? 0}
             onChange={(e) =>
               setDeclination((d) => ({ ...d, min: e.target.valueAsNumber }))
             }
@@ -104,7 +117,7 @@ export default function AddItem() {
           <input
             type="number"
             name="arcsec"
-            value={declination.sec}
+            value={declination.sec ?? 0}
             onChange={(e) =>
               setDeclination((d) => ({ ...d, sec: e.target.valueAsNumber }))
             }
