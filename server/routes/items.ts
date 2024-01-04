@@ -4,7 +4,6 @@ import { ParsedItem } from '~typings/structs.ts'
 import { DBObject, DBObjectType } from '~typings/tables.ts'
 import { parseDeclination } from '../db/normalizers.ts'
 import pool from '../db/pool.ts'
-import { rejectUnauthenticated } from '../middleware/authentication.ts'
 
 const items = Router()
 
@@ -136,32 +135,6 @@ items.get('/:id', async (req, res) => {
     } as ItemDetails)
   } catch (error) {
     console.log('Error getting item: ', error)
-    res.sendStatus(500)
-  }
-})
-
-items.put('/:id/save', rejectUnauthenticated, async (req, res) => {
-  if (!req.user) {
-    res.sendStatus(401)
-    return
-  }
-  if (!req.params['id']) {
-    res.sendStatus(400)
-    return
-  }
-  console.log(`User with id ${req.user?.id} is saving item ${req.params['id']}`)
-  try {
-    const result = await pool.query(
-      /*sql*/ `
-        INSERT INTO users_objects (user_id, object_id)
-        VALUES ($1, $2);
-      `,
-      [req.user.id, req.params['id']],
-    )
-    console.log(result)
-    res.sendStatus(201)
-  } catch (error) {
-    console.log('Error saving item: ', error)
     res.sendStatus(500)
   }
 })

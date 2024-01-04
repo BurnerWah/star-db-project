@@ -63,7 +63,7 @@ export interface FetchItemDetailsSaga extends Action<'itemDetails/fetch'> {
 }
 
 export interface SaveItemSaga extends Action<'api/saveItem'> {
-  payload: number | string
+  payload: number
 }
 
 export type ListSavedItemsSaga = Action<'api/listSavedItems'>

@@ -1,4 +1,5 @@
-import { Router } from 'express'
+import { Request, Router } from 'express'
+import { ItemSaveBody } from '~typings/requests.ts'
 import { ParsedItem } from '~typings/structs.ts'
 import { DBObject, DBObjectType } from '~typings/tables.ts'
 import { parseDeclination } from '../db/normalizers.ts'
@@ -6,6 +7,8 @@ import pool from '../db/pool.ts'
 import { rejectUnauthenticated } from '../middleware/authentication.ts'
 
 const saved = Router()
+
+saved.use(rejectUnauthenticated)
 
 saved.get('/', rejectUnauthenticated, async (req, res) => {
   if (!req.user) {
@@ -61,6 +64,34 @@ saved.get('/', rejectUnauthenticated, async (req, res) => {
     res.send(savedItems)
   } catch (error) {
     console.error(error)
+    res.sendStatus(500)
+  }
+})
+
+saved.put('/add', async (req: Request<never, unknown, ItemSaveBody>, res) => {
+  if (!req.user) {
+    res.sendStatus(401)
+    return
+  }
+  if (!req.body.id) {
+    res.sendStatus(400)
+    return
+  }
+  console.log(`User with id ${req.user.id} is saving item ${req.body.id}`)
+  try {
+    const result = await pool.query(
+      /*sql*/ `
+        INSERT INTO users_objects (
+          user_id,
+          object_id
+        ) VALUES ($1, $2);
+      `,
+      [req.user.id, req.body.id],
+    )
+    console.log(result)
+    res.sendStatus(201)
+  } catch (error) {
+    console.log('Error saving item: ', error)
     res.sendStatus(500)
   }
 })

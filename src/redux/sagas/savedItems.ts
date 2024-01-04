@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import { SaveItemSaga } from '~typings/actions'
-import { ListItemsBody } from '~typings/requests'
+import { ItemSaveBody, ListItemsBody } from '~typings/requests'
 import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
 
@@ -10,8 +10,8 @@ function* saveItem({ payload }: SaveItemSaga): SagaIterator {
   try {
     yield call(
       axios.put,
-      `/api/items/${payload}/save`,
-      undefined,
+      `/api/saved/add`,
+      { id: payload } as ItemSaveBody,
       withCredentials,
     )
   } catch (error) {
