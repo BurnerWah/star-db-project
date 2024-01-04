@@ -8,8 +8,10 @@ import {
 } from 'react-router-dom'
 import './App.css'
 import Layout from './components/Layout.tsx'
+import RequireAdmin from './components/RequireAdmin.tsx'
 import RequireAuth from './components/RequireAuth.tsx'
 import { useAppDispatch, useAppSelector } from './hooks/redux.ts'
+import AddItem from './pages/AddItem/index.tsx'
 import InfoPage from './pages/Info'
 import LandingPage from './pages/Landing'
 import LoginPage from './pages/Login'
@@ -72,6 +74,14 @@ function App() {
           }
         />
         <Route path="details/:id" lazy={() => import('./pages/Details')} />
+        <Route
+          path="add"
+          element={
+            <RequireAdmin>
+              <AddItem />
+            </RequireAdmin>
+          }
+        />
         {/* If none of the other routes matched, we will show a 404. */}
         <Route path="*" element={<h1>404</h1>} />
       </Route>,

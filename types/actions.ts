@@ -1,4 +1,5 @@
 import { Action, Dispatch } from 'redux'
+import { DeclinationInput, DistanceInput, RightAscensionInput } from './inputs'
 import {
   ItemDetails,
   ListItem,
@@ -6,6 +7,7 @@ import {
   RegisterBody,
   UserResponse,
 } from './requests'
+import { EDBObjectTypes } from './tables'
 
 export type UnsetUser = Action<'UNSET_USER'>
 export interface SetUser extends Action<'SET_USER'> {
@@ -72,6 +74,21 @@ export interface AdminDeleteItemSaga extends Action<'api/admin/deleteItem'> {
   }
 }
 
+export interface AdminAddItemSaga extends Action<'api/admin/addItem'> {
+  payload: {
+    name: string
+    type: EDBObjectTypes
+    right_ascension?: RightAscensionInput
+    declination?: DeclinationInput
+    distance?: DistanceInput
+    apparent_magnitude?: number
+    absolute_magnitude?: number
+    mass?: number
+    redshift?: number
+    nasa_image_id?: string
+  }
+}
+
 export type SagaActions =
   | LoginSaga
   | LogoutSaga
@@ -82,6 +99,7 @@ export type SagaActions =
   | SaveItemSaga
   | ListSavedItemsSaga
   | AdminDeleteItemSaga
+  | AdminAddItemSaga
 
 type Actions = ReduxActions | SagaActions
 
