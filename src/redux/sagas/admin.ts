@@ -3,7 +3,7 @@ import { SagaIterator } from 'redux-saga'
 import { call, takeEvery } from 'redux-saga/effects'
 import { AdminAddItemSaga, AdminDeleteItemSaga } from '~typings/actions'
 import { ItemSubmission } from '~typings/requests'
-import { prepareDeclination } from '../../lib/formats'
+import { prepareDeclination, prepareRightAscension } from '../../lib/formats'
 
 function* deleteItem({ payload }: AdminDeleteItemSaga): SagaIterator {
   try {
@@ -23,6 +23,7 @@ function* addItem({ payload }: AdminAddItemSaga): SagaIterator {
       name: payload.name,
       type: payload.type,
       declination: prepareDeclination(payload.declination),
+      right_ascension: prepareRightAscension(payload.right_ascension),
       apparent_magnitude: payload.apparent_magnitude,
       absolute_magnitude: payload.absolute_magnitude,
       mass: payload.mass,
