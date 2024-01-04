@@ -7,9 +7,9 @@ const user: Reducer<
   SetUser | UnsetUser
 > = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_USER':
+    case 'user/set':
       return action.payload
-    case 'UNSET_USER':
+    case 'user/unset':
       return {}
     default:
       return state

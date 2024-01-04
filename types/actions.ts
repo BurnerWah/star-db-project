@@ -9,8 +9,8 @@ import {
 } from './requests'
 import { EDBObjectTypes } from './tables'
 
-export type UnsetUser = Action<'UNSET_USER'>
-export interface SetUser extends Action<'SET_USER'> {
+export type UnsetUser = Action<'user/unset'>
+export interface SetUser extends Action<'user/set'> {
   payload: UserResponse
 }
 
