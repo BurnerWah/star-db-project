@@ -23,7 +23,7 @@ function* saveItem({ payload }: SaveItemSaga): SagaIterator {
  */
 function* listSavedItems(): SagaIterator {
   try {
-    yield put({ type: 'LIST_ITEMS::UNSET' })
+    yield put({ type: 'listItems/unset' })
     const response: AxiosResponse<ListItemsBody> = yield call(
       axios.get,
       '/api/saved',
@@ -32,7 +32,7 @@ function* listSavedItems(): SagaIterator {
         withCredentials: true,
       },
     )
-    yield put({ type: 'LIST_ITEMS::SET', payload: response.data })
+    yield put({ type: 'listItems/set', payload: response.data })
   } catch (error) {
     console.log('Error listing saved items: ', error)
   }

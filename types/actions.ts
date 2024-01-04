@@ -22,10 +22,10 @@ export type ClearRegistrationError = Action<'CLEAR_REGISTRATION_ERROR'>
 export type RegistrationInputError = Action<'REGISTRATION_INPUT_ERROR'>
 export type RegistrationFailed = Action<'REGISTRATION_FAILED'>
 
-export interface SetListItems extends Action<'LIST_ITEMS::SET'> {
+export interface SetListItems extends Action<'listItems/set'> {
   payload: ListItem[]
 }
-export type UnsetListItems = Action<'LIST_ITEMS::UNSET'>
+export type UnsetListItems = Action<'listItems/unset'>
 
 export interface SetItemDetails extends Action<'itemDetails/set'> {
   payload: ItemDetails

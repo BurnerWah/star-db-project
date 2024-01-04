@@ -10,7 +10,7 @@ function* fetchListItems(): SagaIterator {
       axios.get,
       '/api/items',
     )
-    yield put({ type: 'LIST_ITEMS::SET', payload: response.data })
+    yield put({ type: 'listItems/set', payload: response.data })
   } catch (error) {
     console.log('List items get request failed', error)
   }
