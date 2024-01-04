@@ -1,5 +1,9 @@
-import { DeclinationInput, RightAscensionInput } from '~typings/inputs'
-import { Declination } from '~typings/structs'
+import {
+  DeclinationInput,
+  DistanceInput,
+  RightAscensionInput,
+} from '~typings/inputs'
+import { Declination, MeasurementWithUncertainty } from '~typings/structs'
 
 export function prepareDeclination(
   input?: DeclinationInput,
@@ -37,4 +41,14 @@ export function prepareRightAscension(
   // TODO: Add support for decimal seconds (input can't handle it yet)
   const sec = `${input.sec ?? 0}`.padStart(2, '0')
   return `${hours}:${min}:${sec}`
+}
+
+export function prepareDistance(
+  input?: DistanceInput,
+): MeasurementWithUncertainty | undefined {
+  // Just a type guard
+  if (!input || !input.value || !input.error) {
+    return undefined
+  }
+  return input as MeasurementWithUncertainty
 }
