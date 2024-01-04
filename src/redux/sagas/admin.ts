@@ -2,6 +2,7 @@ import axios from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeEvery } from 'redux-saga/effects'
 import { AdminAddItemSaga, AdminDeleteItemSaga } from '~typings/actions'
+import { ItemSubmission } from '~typings/requests'
 
 function* deleteItem({ payload }: AdminDeleteItemSaga): SagaIterator {
   try {
@@ -17,19 +18,18 @@ function* deleteItem({ payload }: AdminDeleteItemSaga): SagaIterator {
 
 function* addItem({ payload }: AdminAddItemSaga): SagaIterator {
   try {
-    yield call(
-      axios.post,
-      '/api/admin/add',
-      {
-        name: payload.name,
-        type: payload.type,
-        // TODO: add the rest of the fields
-      },
-      {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      },
-    )
+    const submission: ItemSubmission = {
+      name: payload.name,
+      type: payload.type,
+      apparent_magnitude: payload.apparent_magnitude,
+      absolute_magnitude: payload.absolute_magnitude,
+      mass: payload.mass,
+      redshift: payload.redshift,
+    }
+    yield call(axios.post, '/api/admin/add', submission, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    })
   } catch (error) {
     console.log(error)
   }
