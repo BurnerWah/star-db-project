@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEventHandler, useState } from 'react'
 import { MeasurementWithUncertainty } from '~typings/structs'
 
 export default function AddItem() {
@@ -14,10 +14,14 @@ export default function AddItem() {
     error: 0,
   })
 
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+  }
+
   return (
     <div className="container">
       <h2>Add Item</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Name:{' '}
           <input
@@ -128,6 +132,8 @@ export default function AddItem() {
             }
           />
         </label>
+        <br />
+        <button type="submit">Submit</button>
       </form>
     </div>
   )
