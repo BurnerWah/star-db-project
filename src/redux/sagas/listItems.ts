@@ -17,5 +17,5 @@ function* fetchListItems(): SagaIterator {
 }
 
 export default function* listItemsSaga() {
-  yield takeLatest('LIST_ITEMS::FETCH', fetchListItems)
+  yield takeLatest('listItems/fetch', fetchListItems)
 }

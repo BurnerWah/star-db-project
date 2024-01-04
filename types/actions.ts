@@ -56,7 +56,7 @@ export interface RegisterSaga extends Action<'REGISTER'> {
 }
 export type FetchUserSaga = Action<'FETCH_USER'>
 
-export type FetchListItemsSaga = Action<'LIST_ITEMS::FETCH'>
+export type FetchListItemsSaga = Action<'listItems/fetch'>
 
 export interface FetchItemDetailsSaga extends Action<'itemDetails/fetch'> {
   payload: number | string
