@@ -5,8 +5,11 @@ import {
   RightAscensionInput,
 } from '~typings/inputs'
 import { EDBObjectTypes } from '~typings/tables'
+import { useAppDispatch } from '../../hooks/redux'
 
 export default function AddItem() {
+  const dispatch = useAppDispatch()
+
   const [name, setName] = useState<string>()
   const [type, setType] = useState<EDBObjectTypes>(EDBObjectTypes.Star)
   // I generally don't like multi-value states, but in this case it's a lot
@@ -23,8 +26,22 @@ export default function AddItem() {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    console.log('rightAscension', rightAscension)
-    console.log('declination', declination)
+    if (!name) return
+    dispatch({
+      type: 'api/admin/addItem',
+      payload: {
+        name,
+        type,
+        right_ascension: rightAscension,
+        declination,
+        distance,
+        apparent_magnitude: apparentMagnitude,
+        absolute_magnitude: absoluteMagnitude,
+        mass,
+        redshift,
+        nasa_image_id: nasaId,
+      },
+    })
   }
 
   return (
