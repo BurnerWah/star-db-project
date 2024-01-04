@@ -39,6 +39,12 @@ function Nav() {
           </>
         )}
 
+        {user.administrator && (
+          <Link className="navLink" to="/add">
+            Add Item
+          </Link>
+        )}
+
         <Link className="navLink" to="/about">
           About
         </Link>
