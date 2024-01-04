@@ -27,6 +27,14 @@
         "id": "browser"
       },
       "label": "npm: client",
+      "presentation": {
+        "clear": false,
+        "echo": true,
+        "focus": false,
+        "panel": "shared",
+        "reveal": "silent",
+        "showReuseMessage": true
+      },
       "problemMatcher": [],
       "script": "client",
       "type": "npm"
