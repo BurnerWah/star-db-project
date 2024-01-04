@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../../hooks/redux.ts'
+import { useAppDispatch } from '../hooks/redux'
 
 function LogOutButton({ className }: Readonly<{ className?: string }>) {
   const dispatch = useAppDispatch()

@@ -1,4 +1,4 @@
-import LogOutButton from '../../components/LogOutButton/LogOutButton.tsx'
+import LogOutButton from '../../components/LogOutButton'
 import { useAppSelector } from '../../hooks/redux.ts'
 
 function UserPage() {
