@@ -43,7 +43,7 @@ export default function AddItem() {
       },
     })
     // Cleanup
-    setName(undefined)
+    setName('')
     setType(EDBObjectTypes.Star)
     setRightAscension({})
     setDeclination({})
