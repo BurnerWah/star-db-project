@@ -7,17 +7,17 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom'
 import './App.css'
-import Layout from './components/Layout.tsx'
-import RequireAdmin from './components/RequireAdmin.tsx'
-import RequireAuth from './components/RequireAuth.tsx'
-import { useAppDispatch, useAppSelector } from './hooks/redux.ts'
-import AddItem from './pages/AddItem/index.tsx'
-import InfoPage from './pages/Info'
-import LandingPage from './pages/Landing'
-import LoginPage from './pages/Login'
-import RegisterPage from './pages/Register'
+import Layout from './components/Layout'
+import RequireAdmin from './components/RequireAdmin'
+import RequireAuth from './components/RequireAuth'
+import { useAppDispatch, useAppSelector } from './hooks/redux'
+import AddItem from './pages/AddItem'
+import Info from './pages/Info'
+import Landing from './pages/Landing'
+import Login from './pages/Login'
+import Register from './pages/Register'
 import Saved from './pages/Saved'
-import UserPage from './pages/User'
+import User from './pages/User'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -25,7 +25,7 @@ function App() {
   const user = useAppSelector((store) => store.user)
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' })
+    dispatch({ type: 'user/fetch' })
   }, [dispatch])
 
   // Some routes are lazy-loaded, some are not. Eventually I'd like all of them
@@ -40,7 +40,7 @@ function App() {
           path="user"
           element={
             <RequireAuth>
-              <UserPage />
+              <User />
             </RequireAuth>
           }
         />
@@ -48,21 +48,21 @@ function App() {
           path="info"
           element={
             <RequireAuth>
-              <InfoPage />
+              <Info />
             </RequireAuth>
           }
         />
         <Route
           path="login"
-          element={user.id ? <Navigate to="/user" /> : <LoginPage />}
+          element={user.id ? <Navigate to="/user" /> : <Login />}
         />
         <Route
           path="registration"
-          element={user.id ? <Navigate to="/user" /> : <RegisterPage />}
+          element={user.id ? <Navigate to="/user" /> : <Register />}
         />
         <Route
           path="home"
-          element={user.id ? <Navigate to="/user" /> : <LandingPage />}
+          element={user.id ? <Navigate to="/user" /> : <Landing />}
         />
         <Route path="list" lazy={() => import('./pages/Listing')} />
         <Route

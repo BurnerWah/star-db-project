@@ -7,9 +7,9 @@ const listItems: Reducer<
   SetListItems | UnsetListItems
 > = (state = [], action) => {
   switch (action.type) {
-    case 'LIST_ITEMS::SET':
+    case 'listItems/set':
       return action.payload
-    case 'LIST_ITEMS::UNSET':
+    case 'listItems/unset':
       return []
     default:
       return state

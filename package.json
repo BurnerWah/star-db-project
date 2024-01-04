@@ -2,7 +2,6 @@
   "name": "prime-solo-project",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5001",
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -22,13 +21,11 @@
     "prettier": "prettier --cache"
   },
   "dependencies": {
-    "@node-rs/argon2": "^1.6.0",
+    "@node-rs/argon2": "^1.6.1",
     "@redux-devtools/extension": "^3.3.0",
-    "axios": "^1.6.3",
-    "bcryptjs": "^2.4.3",
+    "axios": "^1.6.4",
     "connect-ensure-login": "^0.1.1",
     "connect-pg-simple": "^9.0.1",
-    "cookie-session": "^2.0.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
@@ -36,24 +33,19 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pg": "^8.11.3",
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.1",
     "redux": "^5.0.1",
-    "redux-logger": "^3.0.6",
     "redux-saga": "^1.3.0"
   },
   "devDependencies": {
-    "@tsconfig/create-react-app": "^2.0.1",
     "@tsconfig/node20": "^20.1.2",
     "@tsconfig/strictest": "^2.0.2",
     "@tsconfig/vite-react": "^3.0.0",
-    "@types/bcryptjs": "^2.4.6",
     "@types/connect-ensure-login": "^0.1.9",
     "@types/connect-pg-simple": "^7.0.3",
-    "@types/cookie-session": "^2.0.48",
     "@types/express": "^4.17.21",
     "@types/express-session": "^1.17.10",
     "@types/morgan": "^1.9.9",
@@ -61,15 +53,12 @@
     "@types/passport": "^1.0.16",
     "@types/passport-local": "^1.0.38",
     "@types/pg": "^8.10.9",
-    "@types/prop-types": "^15.7.11",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
     "@types/react-router-dom": "^5.3.3",
-    "@types/redux-logger": "^3.0.12",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "browserslist": "^4.22.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
@@ -77,25 +66,12 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-security": "^2.1.0",
-    "nodemon": "^3.0.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.1.1",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vite-tsconfig-paths": "^4.2.3"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not ie <= 11",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "heroku-run-build-script": true
 }

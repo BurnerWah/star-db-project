@@ -1,10 +1,10 @@
-import ItemList from '../../components/ItemList'
+import ItemList from '../components/ItemList'
 
 export default function Listing() {
   return (
     <div className="container">
       <h2>Listing</h2>
-      <ItemList action={{ type: 'LIST_ITEMS::FETCH' }} />
+      <ItemList action={{ type: 'listItems/fetch' }} />
     </div>
   )
 }

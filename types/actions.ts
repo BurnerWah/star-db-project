@@ -9,23 +9,23 @@ import {
 } from './requests'
 import { EDBObjectTypes } from './tables'
 
-export type UnsetUser = Action<'UNSET_USER'>
-export interface SetUser extends Action<'SET_USER'> {
+export type UnsetUser = Action<'user/unset'>
+export interface SetUser extends Action<'user/set'> {
   payload: UserResponse
 }
 
-export type ClearLoginError = Action<'CLEAR_LOGIN_ERROR'>
-export type LoginInputError = Action<'LOGIN_INPUT_ERROR'>
-export type LoginFailed = Action<'LOGIN_FAILED'>
-export type LoginFailedNoCode = Action<'LOGIN_FAILED_NO_CODE'>
-export type ClearRegistrationError = Action<'CLEAR_REGISTRATION_ERROR'>
-export type RegistrationInputError = Action<'REGISTRATION_INPUT_ERROR'>
-export type RegistrationFailed = Action<'REGISTRATION_FAILED'>
+export type ClearLoginError = Action<'errors/login/clear'>
+export type LoginInputError = Action<'errors/login/input'>
+export type LoginFailed = Action<'errors/login/fail'>
+export type LoginFailedNoCode = Action<'errors/login/failNoCode'>
+export type ClearRegistrationError = Action<'errors/registration/clear'>
+export type RegistrationInputError = Action<'errors/registration/input'>
+export type RegistrationFailed = Action<'errors/registration/fail'>
 
-export interface SetListItems extends Action<'LIST_ITEMS::SET'> {
+export interface SetListItems extends Action<'listItems/set'> {
   payload: ListItem[]
 }
-export type UnsetListItems = Action<'LIST_ITEMS::UNSET'>
+export type UnsetListItems = Action<'listItems/unset'>
 
 export interface SetItemDetails extends Action<'itemDetails/set'> {
   payload: ItemDetails
@@ -47,16 +47,16 @@ export type ReduxActions =
   | SetItemDetails
   | UnsetItemDetails
 
-export interface LoginSaga extends Action<'LOGIN'> {
+export interface LoginSaga extends Action<'api/auth/login'> {
   payload: LoginBody
 }
-export type LogoutSaga = Action<'LOGOUT'>
-export interface RegisterSaga extends Action<'REGISTER'> {
+export type LogoutSaga = Action<'api/auth/logout'>
+export interface RegisterSaga extends Action<'api/auth/register'> {
   payload: RegisterBody
 }
-export type FetchUserSaga = Action<'FETCH_USER'>
+export type FetchUserSaga = Action<'user/fetch'>
 
-export type FetchListItemsSaga = Action<'LIST_ITEMS::FETCH'>
+export type FetchListItemsSaga = Action<'listItems/fetch'>
 
 export interface FetchItemDetailsSaga extends Action<'itemDetails/fetch'> {
   payload: number | string

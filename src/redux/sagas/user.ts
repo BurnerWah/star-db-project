@@ -2,9 +2,10 @@ import axios, { AxiosResponse } from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import { UserResponse } from '~typings/requests'
-import { put } from '../../hooks/redux.ts'
+import { withCredentials } from '../../constants/axios'
+import { put } from '../../hooks/redux'
 
-// worker Saga: will be fired on "FETCH_USER" actions
+// worker Saga: will be fired on "user/fetch" actions
 function* fetchUser(): SagaIterator {
   try {
     // the config includes credentials which
@@ -14,23 +15,20 @@ function* fetchUser(): SagaIterator {
     const response: AxiosResponse<UserResponse> = yield call(
       axios.get,
       '/api/user',
-      {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      },
+      withCredentials,
     )
 
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
-    yield put({ type: 'SET_USER', payload: response.data })
+    yield put({ type: 'user/set', payload: response.data })
   } catch (error) {
     console.log('User get request failed', error)
   }
 }
 
 function* userSaga() {
-  yield takeLatest('FETCH_USER', fetchUser)
+  yield takeLatest('user/fetch', fetchUser)
 }
 
 export default userSaga

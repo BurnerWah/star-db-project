@@ -1,7 +1,7 @@
-import LogOutButton from '../../components/LogOutButton/LogOutButton.tsx'
-import { useAppSelector } from '../../hooks/redux.ts'
+import LogOutButton from '../components/LogOutButton'
+import { useAppSelector } from '../hooks/redux'
 
-function UserPage() {
+export default function User() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useAppSelector((store) => store.user)
   return (
@@ -12,6 +12,3 @@ function UserPage() {
     </div>
   )
 }
-
-// this allows us to use <App /> in index.js
-export default UserPage

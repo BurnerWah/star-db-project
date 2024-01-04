@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import RegisterForm from '../../components/RegisterForm/RegisterForm.tsx'
+import RegisterForm from '../../components/RegisterForm'
 import './LandingPage.css'
 
-function LandingPage() {
+export default function Landing() {
   const navigate = useNavigate()
 
   return (
@@ -62,5 +62,3 @@ function LandingPage() {
     </div>
   )
 }
-
-export default LandingPage

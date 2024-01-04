@@ -3,14 +3,17 @@ import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import { SaveItemSaga } from '~typings/actions'
 import { ListItemsBody } from '~typings/requests'
+import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
 
 function* saveItem({ payload }: SaveItemSaga): SagaIterator {
   try {
-    yield call(axios.put, `/api/items/${payload}/save`, undefined, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    })
+    yield call(
+      axios.put,
+      `/api/items/${payload}/save`,
+      undefined,
+      withCredentials,
+    )
   } catch (error) {
     console.log('Error saving item: ', error)
   }
@@ -23,16 +26,13 @@ function* saveItem({ payload }: SaveItemSaga): SagaIterator {
  */
 function* listSavedItems(): SagaIterator {
   try {
-    yield put({ type: 'LIST_ITEMS::UNSET' })
+    yield put({ type: 'listItems/unset' })
     const response: AxiosResponse<ListItemsBody> = yield call(
       axios.get,
       '/api/saved',
-      {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      },
+      withCredentials,
     )
-    yield put({ type: 'LIST_ITEMS::SET', payload: response.data })
+    yield put({ type: 'listItems/set', payload: response.data })
   } catch (error) {
     console.log('Error listing saved items: ', error)
   }

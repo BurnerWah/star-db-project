@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import errors from './errors.ts'
-import itemDetails from './itemDetails.ts'
-import listItems from './listItems.ts'
-import user from './user.ts'
+import errors from './errors'
+import itemDetails from './itemDetails'
+import listItems from './listItems'
+import user from './user'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.

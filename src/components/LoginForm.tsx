@@ -1,5 +1,5 @@
 import { FormEventHandler, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux.ts'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
 function LoginForm() {
   const dispatch = useAppDispatch()
@@ -14,14 +14,14 @@ function LoginForm() {
 
     if (username && password) {
       dispatch({
-        type: 'LOGIN',
+        type: 'api/auth/login',
         payload: {
           username: username,
           password: password,
         },
       })
     } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' })
+      dispatch({ type: 'errors/login/input' })
     }
   }
 

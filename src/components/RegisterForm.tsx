@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux.ts'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
 function RegisterForm() {
   const dispatch = useAppDispatch()
@@ -16,7 +16,7 @@ function RegisterForm() {
         e.preventDefault()
 
         dispatch({
-          type: 'REGISTER',
+          type: 'api/auth/register',
           payload: {
             username: username,
             password: password,

@@ -1,12 +1,5 @@
 import { Algorithm, Options as Argon2Options } from '@node-rs/argon2'
 
-export const PBKDF2_CONFIG = {
-  iterations: 210000,
-  keylen: 32,
-  digest: 'sha512',
-  saltlength: 16,
-}
-
 /**
  * Argon2 options
  * @see {@link https://soatok.blog/2022/12/29/what-we-do-in-the-etc-shadow-cryptography-with-passwords/ What We Do in the /etc/shadow - Cryptography with Passwords}

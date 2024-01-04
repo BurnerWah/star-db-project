@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import { ListItemsBody } from '~typings/requests'
-import { put } from '../../hooks/redux.ts'
+import { put } from '../../hooks/redux'
 
 function* fetchListItems(): SagaIterator {
   try {
@@ -10,12 +10,12 @@ function* fetchListItems(): SagaIterator {
       axios.get,
       '/api/items',
     )
-    yield put({ type: 'LIST_ITEMS::SET', payload: response.data })
+    yield put({ type: 'listItems/set', payload: response.data })
   } catch (error) {
     console.log('List items get request failed', error)
   }
 }
 
 export default function* listItemsSaga() {
-  yield takeLatest('LIST_ITEMS::FETCH', fetchListItems)
+  yield takeLatest('listItems/fetch', fetchListItems)
 }

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import LoginForm from '../../components/LoginForm/LoginForm.tsx'
+import LoginForm from '../components/LoginForm'
 
-function LoginPage() {
+export default function Login() {
   const navigate = useNavigate()
 
   return (
@@ -22,5 +22,3 @@ function LoginPage() {
     </div>
   )
 }
-
-export default LoginPage
