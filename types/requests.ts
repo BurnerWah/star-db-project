@@ -45,3 +45,7 @@ export interface ItemSubmission {
   redshift?: DBObject['redshift']
   nasa_image_id?: DBObject['nasa_image_id']
 }
+
+export interface ItemSaveBody {
+  id: DBObject['id']
+}
