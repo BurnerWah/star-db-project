@@ -33,6 +33,7 @@ function* addItem({ payload }: AdminAddItemSaga): SagaIterator {
       absolute_magnitude: payload.absolute_magnitude,
       mass: payload.mass,
       redshift: payload.redshift,
+      nasa_image_id: payload.nasa_image_id,
     }
     yield call(axios.post, '/api/admin/add', submission, {
       headers: { 'Content-Type': 'application/json' },

@@ -85,6 +85,7 @@ export interface AdminAddItemSaga extends Action<'api/admin/addItem'> {
     absolute_magnitude?: number
     mass?: number
     redshift?: number
+    nasa_image_id?: string
   }
 }
 
