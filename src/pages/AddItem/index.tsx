@@ -69,7 +69,7 @@ export default function AddItem() {
               setRa((r) => ({ ...r, sec: e.target.valueAsNumber }))
             }
           />
-          s
+          {'s'}
         </label>
         <br />
         <label>
