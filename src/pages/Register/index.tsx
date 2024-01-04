@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import RegisterForm from '../../components/RegisterForm'
 
-function RegisterPage() {
+export default function Register() {
   const navigate = useNavigate()
 
   return (
@@ -22,5 +22,3 @@ function RegisterPage() {
     </div>
   )
 }
-
-export default RegisterPage
