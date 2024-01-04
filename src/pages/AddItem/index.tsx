@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MeasurementWithUncertainty } from '~typings/structs'
 
 export default function AddItem() {
   const [name, setName] = useState('')
@@ -8,6 +9,10 @@ export default function AddItem() {
   // to separate states later on though.
   const [ra, setRa] = useState({ hours: 0, min: 0, sec: 0 })
   const [declination, setDeclination] = useState({ deg: 0, min: 0, sec: 0 })
+  const [distance, setDistance] = useState<MeasurementWithUncertainty>({
+    value: 0,
+    error: 0,
+  })
 
   return (
     <div className="container">
@@ -101,6 +106,27 @@ export default function AddItem() {
             }
           />
           {'"'}
+        </label>
+        <br />
+        <label>
+          Distance:{' '}
+          <input
+            type="number"
+            name="distance"
+            value={distance.value}
+            onChange={(e) =>
+              setDistance((d) => ({ ...d, value: e.target.valueAsNumber }))
+            }
+          />
+          {'±'}
+          <input
+            type="number"
+            name="error"
+            value={distance.error}
+            onChange={(e) =>
+              setDistance((d) => ({ ...d, error: e.target.valueAsNumber }))
+            }
+          />
         </label>
       </form>
     </div>
