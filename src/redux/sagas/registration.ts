@@ -8,7 +8,7 @@ import { put } from '../../hooks/redux'
 function* registerUser({ payload }: RegisterSaga): SagaIterator {
   try {
     // clear any existing error on the registration page
-    yield put({ type: 'CLEAR_REGISTRATION_ERROR' })
+    yield put({ type: 'errors/registration/clear' })
 
     // passes the username and password from the payload to the server
     yield call(axios.post, '/api/user/register', payload)
@@ -22,7 +22,7 @@ function* registerUser({ payload }: RegisterSaga): SagaIterator {
     yield put({ type: 'SET_TO_LOGIN_MODE' })
   } catch (error) {
     console.log('Error with user registration:', error)
-    yield put({ type: 'REGISTRATION_FAILED' })
+    yield put({ type: 'errors/registration/fail' })
   }
 }
 

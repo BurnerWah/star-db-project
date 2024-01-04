@@ -25,13 +25,13 @@ const loginMessage: Reducer<
   ClearLoginError | LoginInputError | LoginFailed | LoginFailedNoCode
 > = (state = LoginMessages.NONE, action) => {
   switch (action.type) {
-    case 'CLEAR_LOGIN_ERROR':
+    case 'errors/login/clear':
       return LoginMessages.NONE
-    case 'LOGIN_INPUT_ERROR':
+    case 'errors/login/input':
       return LoginMessages.INPUT_ERROR
-    case 'LOGIN_FAILED':
+    case 'errors/login/fail':
       return LoginMessages.FAILED
-    case 'LOGIN_FAILED_NO_CODE':
+    case 'errors/login/failNoCode':
       return LoginMessages.FAILED_NO_CODE
     default:
       return state
@@ -53,11 +53,11 @@ const registrationMessage: Reducer<
   ClearRegistrationError | RegistrationInputError | RegistrationFailed
 > = (state = RegistrationMessages.NONE, action) => {
   switch (action.type) {
-    case 'CLEAR_REGISTRATION_ERROR':
+    case 'errors/registration/clear':
       return RegistrationMessages.NONE
-    case 'REGISTRATION_INPUT_ERROR':
+    case 'errors/registration/input':
       return RegistrationMessages.INPUT_ERROR
-    case 'REGISTRATION_FAILED':
+    case 'errors/registration/fail':
       return RegistrationMessages.FAILED
     default:
       return state

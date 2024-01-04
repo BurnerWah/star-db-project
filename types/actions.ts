@@ -14,13 +14,13 @@ export interface SetUser extends Action<'user/set'> {
   payload: UserResponse
 }
 
-export type ClearLoginError = Action<'CLEAR_LOGIN_ERROR'>
-export type LoginInputError = Action<'LOGIN_INPUT_ERROR'>
-export type LoginFailed = Action<'LOGIN_FAILED'>
-export type LoginFailedNoCode = Action<'LOGIN_FAILED_NO_CODE'>
-export type ClearRegistrationError = Action<'CLEAR_REGISTRATION_ERROR'>
-export type RegistrationInputError = Action<'REGISTRATION_INPUT_ERROR'>
-export type RegistrationFailed = Action<'REGISTRATION_FAILED'>
+export type ClearLoginError = Action<'errors/login/clear'>
+export type LoginInputError = Action<'errors/login/input'>
+export type LoginFailed = Action<'errors/login/fail'>
+export type LoginFailedNoCode = Action<'errors/login/failNoCode'>
+export type ClearRegistrationError = Action<'errors/registration/clear'>
+export type RegistrationInputError = Action<'errors/registration/input'>
+export type RegistrationFailed = Action<'errors/registration/fail'>
 
 export interface SetListItems extends Action<'listItems/set'> {
   payload: ListItem[]
