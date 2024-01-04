@@ -19,6 +19,7 @@ export default function AddItem() {
   const [absoluteMagnitude, setAbsoluteMagnitude] = useState<number>()
   const [mass, setMass] = useState<number>()
   const [redshift, setRedshift] = useState<number>()
+  const [nasaId, setNasaId] = useState<string>()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -180,6 +181,16 @@ export default function AddItem() {
             name="redshift"
             value={redshift}
             onChange={(e) => setRedshift(e.target.valueAsNumber)}
+          />
+        </label>
+        <br />
+        <label>
+          NASA ID:{' '}
+          <input
+            type="text"
+            name="nasaId"
+            value={nasaId}
+            onChange={(e) => setNasaId(e.target.value)}
           />
         </label>
         <br />
