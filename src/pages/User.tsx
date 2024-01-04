@@ -1,5 +1,5 @@
-import LogOutButton from '../../components/LogOutButton'
-import { useAppSelector } from '../../hooks/redux'
+import LogOutButton from '../components/LogOutButton'
+import { useAppSelector } from '../hooks/redux'
 
 export default function User() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM

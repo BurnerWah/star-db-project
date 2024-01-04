@@ -5,7 +5,7 @@ import {
   RightAscensionInput,
 } from '~typings/inputs'
 import { EDBObjectTypes } from '~typings/tables'
-import { useAppDispatch } from '../../hooks/redux'
+import { useAppDispatch } from '../hooks/redux'
 
 export default function AddItem() {
   const dispatch = useAppDispatch()
