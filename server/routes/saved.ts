@@ -10,7 +10,7 @@ const saved = Router()
 
 saved.use(rejectUnauthenticated)
 
-saved.get('/', rejectUnauthenticated, async (req, res) => {
+saved.get('/', async (req, res) => {
   if (!req.user) {
     res.sendStatus(401)
     return
