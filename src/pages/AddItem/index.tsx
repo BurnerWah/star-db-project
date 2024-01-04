@@ -24,6 +24,7 @@ export default function AddItem() {
   const [apparentMagnitude, setApparentMagnitude] = useState(0)
   const [absoluteMagnitude, setAbsoluteMagnitude] = useState(0)
   const [mass, setMass] = useState(0)
+  const [redshift, setRedshift] = useState(0)
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -175,6 +176,16 @@ export default function AddItem() {
             name="mass"
             value={mass}
             onChange={(e) => setMass(e.target.valueAsNumber)}
+          />
+        </label>
+        <br />
+        <label>
+          Redshift:{' '}
+          <input
+            type="number"
+            name="redshift"
+            value={redshift}
+            onChange={(e) => setRedshift(e.target.valueAsNumber)}
           />
         </label>
         <br />
