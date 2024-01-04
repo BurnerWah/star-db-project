@@ -1,5 +1,5 @@
 import { FormEventHandler, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux.ts'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
 function LoginForm() {
   const dispatch = useAppDispatch()
