@@ -96,4 +96,25 @@ saved.put('/add', async (req: Request<never, unknown, ItemSaveBody>, res) => {
   }
 })
 
+saved.delete('/remove/:id', async (req, res) => {
+  if (!req.user) {
+    res.sendStatus(401)
+    return
+  }
+  if (!req.params.id) {
+    res.sendStatus(400)
+    return
+  }
+  try {
+    const result = await pool.query(
+      `DELETE FROM users_objects WHERE user_id = $1 AND object_id = $2`,
+      [req.user.id, req.params.id],
+    )
+    console.log(result)
+    res.sendStatus(200)
+  } catch (error) {
+    console.log('Error removing item: ', error)
+  }
+})
+
 export default saved
