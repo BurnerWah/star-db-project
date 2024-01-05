@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
-import { SaveItemSaga } from '~typings/actions'
+import { SaveItemSaga, UnsaveItemSaga } from '~typings/actions'
 import { ItemSaveBody, ListItemsBody } from '~typings/requests'
 import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
@@ -16,6 +16,14 @@ function* saveItem({ payload }: SaveItemSaga): SagaIterator {
     )
   } catch (error) {
     console.log('Error saving item: ', error)
+  }
+}
+
+function* unsaveItem({ payload }: UnsaveItemSaga): SagaIterator {
+  try {
+    yield call(axios.delete, `/api/saved/remove/${payload}`, withCredentials)
+  } catch (error) {
+    console.log('Error unsaving item: ', error)
   }
 }
 
@@ -40,5 +48,6 @@ function* listSavedItems(): SagaIterator {
 
 export default function* savedItemsSaga() {
   yield takeLatest('api/saveItem', saveItem)
+  yield takeLatest('api/unsaveItem', unsaveItem)
   yield takeLatest('api/listSavedItems', listSavedItems)
 }
