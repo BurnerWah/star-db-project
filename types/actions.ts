@@ -66,6 +66,10 @@ export interface SaveItemSaga extends Action<'api/saveItem'> {
   payload: number
 }
 
+export interface UnsaveItemSaga extends Action<'api/unsaveItem'> {
+  payload: number
+}
+
 export type ListSavedItemsSaga = Action<'api/listSavedItems'>
 
 export interface AdminDeleteItemSaga extends Action<'api/admin/deleteItem'> {
@@ -97,6 +101,7 @@ export type SagaActions =
   | FetchListItemsSaga
   | FetchItemDetailsSaga
   | SaveItemSaga
+  | UnsaveItemSaga
   | ListSavedItemsSaga
   | AdminDeleteItemSaga
   | AdminAddItemSaga
