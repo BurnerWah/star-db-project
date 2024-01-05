@@ -25,16 +25,8 @@ import { toast } from '@/components/ui/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, type Control } from 'react-hook-form'
 import { z } from 'zod'
+import { OBJECT_TYPES } from '~shared/schemas'
 import { useAppDispatch } from '../hooks/redux'
-
-const OBJECT_TYPES = z.enum([
-  'Star',
-  'Planet',
-  'Galaxy',
-  'Nebula',
-  'Cluster',
-  'Black Hole',
-])
 
 const formSchema = z.object({
   name: z.string().min(1, { message: 'Name is required.' }),

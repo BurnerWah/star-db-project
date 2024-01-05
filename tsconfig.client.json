@@ -12,8 +12,9 @@
     "baseUrl": ".",
     "paths": {
       "~typings/*": ["./types/*"],
+      "~shared/*": ["./shared/*"],
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "types"]
+  "include": ["src", "types", "shared"]
 }
