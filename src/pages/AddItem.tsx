@@ -1,230 +1,365 @@
-import { Button } from '@/components/ui/button'
-import { FormEventHandler, useState } from 'react'
 import {
-  DeclinationInput,
-  DistanceInput,
-  RightAscensionInput,
-} from '~typings/inputs'
-import { EDBObjectTypes } from '~typings/tables'
+  TypographyH2,
+  TypographyH3,
+  TypographyInlineCode,
+} from '@/components/typography'
+import { Button } from '@/components/ui/button'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { toast } from '@/components/ui/use-toast'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm, type Control } from 'react-hook-form'
+import { z } from 'zod'
 import { useAppDispatch } from '../hooks/redux'
+
+const OBJECT_TYPES = z.enum([
+  'Star',
+  'Planet',
+  'Galaxy',
+  'Nebula',
+  'Cluster',
+  'Black Hole',
+])
+
+const formSchema = z.object({
+  name: z.string().min(1, { message: 'Name is required.' }),
+  type: OBJECT_TYPES,
+  right_ascension: z.optional(
+    z.object({
+      hours: z.optional(z.number().min(0).max(23)),
+      min: z.optional(z.number().min(0).max(59)),
+      sec: z.optional(z.number().min(0).max(59)),
+    }),
+  ),
+  declination: z.optional(
+    z.object({
+      degrees: z.optional(z.number().min(-90).max(90)),
+      arcmin: z.optional(z.number().min(0).max(59)),
+      arcsec: z.optional(z.number().min(0).max(59)),
+    }),
+  ),
+  distance: z.optional(
+    z.object({
+      value: z.optional(z.number().min(0)),
+      error: z.optional(z.number().min(0)),
+    }),
+  ),
+  apparent_magnitude: z.optional(z.number()),
+  absolute_magnitude: z.optional(z.number()),
+  mass: z.optional(z.number().min(0)),
+  redshift: z.optional(z.number().min(0)),
+  nasa_image_id: z.optional(z.string()),
+})
 
 export default function AddItem() {
   const dispatch = useAppDispatch()
 
-  const [name, setName] = useState<string>()
-  const [type, setType] = useState<EDBObjectTypes>(EDBObjectTypes.Star)
-  // I generally don't like multi-value states, but in this case it's a lot
-  // easier than having 6 separate number states and setters. I might change it
-  // to separate states later on though.
-  const [rightAscension, setRightAscension] = useState<RightAscensionInput>({})
-  const [declination, setDeclination] = useState<DeclinationInput>({})
-  const [distance, setDistance] = useState<DistanceInput>({})
-  const [apparentMagnitude, setApparentMagnitude] = useState<number>()
-  const [absoluteMagnitude, setAbsoluteMagnitude] = useState<number>()
-  const [mass, setMass] = useState<number>()
-  const [redshift, setRedshift] = useState<number>()
-  const [nasaId, setNasaId] = useState<string>()
+  // const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  //   e.preventDefault()
+  //   if (!name) return
+  //   dispatch({
+  //     type: 'api/admin/addItem',
+  //     payload: {
+  //       name,
+  //       type,
+  //       right_ascension: rightAscension,
+  //       declination,
+  //       distance,
+  //       apparent_magnitude: apparentMagnitude,
+  //       absolute_magnitude: absoluteMagnitude,
+  //       mass,
+  //       redshift,
+  //       nasa_image_id: nasaId,
+  //     },
+  //   })
+  // }
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault()
-    if (!name) return
-    dispatch({
-      type: 'api/admin/addItem',
-      payload: {
-        name,
-        type,
-        right_ascension: rightAscension,
-        declination,
-        distance,
-        apparent_magnitude: apparentMagnitude,
-        absolute_magnitude: absoluteMagnitude,
-        mass,
-        redshift,
-        nasa_image_id: nasaId,
-      },
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  })
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values)
+    toast({
+      title: 'Submitted',
+      description: (
+        <TypographyInlineCode>
+          {JSON.stringify(values, null, 2)}
+        </TypographyInlineCode>
+      ),
     })
-    // Cleanup
-    setName('')
-    setType(EDBObjectTypes.Star)
-    setRightAscension({})
-    setDeclination({})
-    setDistance({})
-    setApparentMagnitude(undefined)
-    setAbsoluteMagnitude(undefined)
-    setMass(undefined)
-    setRedshift(undefined)
-    setNasaId(undefined)
   }
 
   return (
     <div className="container">
-      <h2>Add Item</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:{' '}
-          <input
-            type="text"
-            name="Name"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
-        <label>
-          Type:{' '}
-          <select
-            name="Type"
-            required
-            value={type}
-            onChange={(e) => setType(parseInt(e.target.value))}
-          >
-            {/* This is hardcoded for now */}
-            <option value={EDBObjectTypes.Star}>Star</option>
-            <option value={EDBObjectTypes.Planet}>Planet</option>
-            <option value={EDBObjectTypes.Galaxy}>Galaxy</option>
-            <option value={EDBObjectTypes.Nebula}>Nebula</option>
-            <option value={EDBObjectTypes.Cluster}>Cluster</option>
-            <option value={EDBObjectTypes['Black Hole']}>Black Hole</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Right Ascension:{' '}
-          <input
-            type="number"
-            name="hours"
-            value={rightAscension.hours}
-            onChange={(e) =>
-              setRightAscension((r) => ({
-                ...r,
-                hours: e.target.valueAsNumber,
-              }))
-            }
-          />
-          h{' '}
-          <input
-            type="number"
-            name="minutes"
-            value={rightAscension.min}
-            onChange={(e) =>
-              setRightAscension((r) => ({ ...r, min: e.target.valueAsNumber }))
-            }
-          />
-          m{' '}
-          <input
-            type="number"
-            name="seconds"
-            value={rightAscension.sec}
-            onChange={(e) =>
-              setRightAscension((r) => ({ ...r, sec: e.target.valueAsNumber }))
-            }
-          />
-          {'s'}
-        </label>
-        <br />
-        <label>
-          Declination:{' '}
-          <input
-            type="number"
-            name="degrees"
-            value={declination.degrees}
-            onChange={(e) =>
-              setDeclination((d) => ({ ...d, degrees: e.target.valueAsNumber }))
-            }
-          />
-          {'° '}
-          <input
-            type="number"
-            name="arcmin"
-            value={declination.arcmin}
-            onChange={(e) =>
-              setDeclination((d) => ({ ...d, arcmin: e.target.valueAsNumber }))
-            }
-          />
-          {"' "}
-          <input
-            type="number"
-            name="arcsec"
-            value={declination.arcsec}
-            onChange={(e) =>
-              setDeclination((d) => ({ ...d, arcsec: e.target.valueAsNumber }))
-            }
-          />
-          {'"'}
-        </label>
-        <br />
-        <label>
-          Distance:{' '}
-          <input
-            type="number"
-            name="distance"
-            value={distance.value}
-            onChange={(e) =>
-              setDistance((d) => ({ ...d, value: e.target.valueAsNumber }))
-            }
-          />
-          {'±'}
-          <input
-            type="number"
-            name="error"
-            value={distance.error}
-            onChange={(e) =>
-              setDistance((d) => ({ ...d, error: e.target.valueAsNumber }))
-            }
-          />
-        </label>
-        <br />
-        <label>
-          Apparent Magnitude:{' '}
-          <input
-            type="number"
-            name="apparentMagnitude"
-            value={apparentMagnitude}
-            onChange={(e) => setApparentMagnitude(e.target.valueAsNumber)}
-          />
-        </label>
-        <label>
-          Absolute Magnitude:{' '}
-          <input
-            type="number"
-            name="absoluteMagnitude"
-            value={absoluteMagnitude}
-            onChange={(e) => setAbsoluteMagnitude(e.target.valueAsNumber)}
-          />
-        </label>
-        <br />
-        <label>
-          Mass:{' '}
-          <input
-            type="number"
-            name="mass"
-            value={mass}
-            onChange={(e) => setMass(e.target.valueAsNumber)}
-          />
-        </label>
-        <br />
-        <label>
-          Redshift:{' '}
-          <input
-            type="number"
-            name="redshift"
-            value={redshift}
-            onChange={(e) => setRedshift(e.target.valueAsNumber)}
-          />
-        </label>
-        <br />
-        <label>
-          NASA ID:{' '}
-          <input
-            type="text"
-            name="nasaId"
-            value={nasaId}
-            onChange={(e) => setNasaId(e.target.value)}
-          />
-        </label>
-        <br />
-        <Button type="submit">Submit</Button>
-      </form>
+      <TypographyH2>Add Item</TypographyH2>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <MainInputs control={form.control} />
+          <RightAscensionInputs control={form.control} />
+          <DeclinationInputs control={form.control} />
+          <DistanceInputs control={form.control} />
+          <OtherInputs control={form.control} />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
     </div>
+  )
+}
+
+type SectionProps = Readonly<{ control: Control<z.infer<typeof formSchema>> }>
+
+function MainInputs({ control }: SectionProps) {
+  return (
+    <>
+      <FormField
+        control={control}
+        name="name"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Name</FormLabel>
+            <FormControl>
+              <Input {...field} />
+            </FormControl>
+            <FormDescription>Enter the name of the object.</FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="type"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Type</FormLabel>
+            <Select onValueChange={field.onChange}>
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder="Choose an object type" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                <SelectItem value={OBJECT_TYPES.enum.Star}>Star</SelectItem>
+                <SelectItem value={OBJECT_TYPES.enum.Planet}>Planet</SelectItem>
+                <SelectItem value={OBJECT_TYPES.enum.Galaxy}>Galaxy</SelectItem>
+                <SelectItem value={OBJECT_TYPES.enum.Nebula}>Nebula</SelectItem>
+                <SelectItem value={OBJECT_TYPES.enum.Cluster}>
+                  Cluster
+                </SelectItem>
+                <SelectItem value={OBJECT_TYPES.enum['Black Hole']}>
+                  Black Hole
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <FormDescription>
+              Choose the type of object you are adding.
+            </FormDescription>
+          </FormItem>
+        )}
+      />
+    </>
+  )
+}
+
+function RightAscensionInputs({ control }: SectionProps) {
+  return (
+    <>
+      <TypographyH3>Right Ascension</TypographyH3>
+      <FormField
+        control={control}
+        name="right_ascension.hours"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Hours</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="right_ascension.min"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Minutes</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="right_ascension.sec"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Seconds</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    </>
+  )
+}
+
+function DeclinationInputs({ control }: SectionProps) {
+  return (
+    <>
+      <TypographyH3>Declination</TypographyH3>
+      <FormField
+        control={control}
+        name="declination.degrees"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Degrees</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="declination.arcmin"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Arc minutes</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="declination.arcsec"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Arc seconds</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    </>
+  )
+}
+
+function DistanceInputs({ control }: SectionProps) {
+  return (
+    <>
+      <TypographyH3>Distance</TypographyH3>
+      <FormField
+        control={control}
+        name="distance.value"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Distance in Light Years</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="distance.error"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Margin of error</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    </>
+  )
+}
+
+function OtherInputs({ control }: SectionProps) {
+  return (
+    <>
+      <TypographyH3>Other</TypographyH3>
+      <FormField
+        control={control}
+        name="apparent_magnitude"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Apparent Magnitude</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="absolute_magnitude"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Absolute Magnitude</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="mass"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Mass</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="redshift"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Redshift</FormLabel>
+            <FormControl>
+              <Input type="number" {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={control}
+        name="nasa_image_id"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>NASA Image ID</FormLabel>
+            <FormControl>
+              <Input {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    </>
   )
 }
