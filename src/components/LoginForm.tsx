@@ -1,68 +1,88 @@
+import { TypographyH2 } from '@/components/typography'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import { FormEventHandler, useState } from 'react'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
+
+const formSchema = z.object({
+  username: z
+    .string()
+    .min(1, { message: 'Username is required.' })
+    .max(64, { message: 'Username must be less than 64 characters.' }),
+  password: z.string().min(8, {
+    message: 'Password must be at least 8 characters.',
+  }),
+})
 
 function LoginForm() {
   const dispatch = useAppDispatch()
-
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
   const errors = useAppSelector((store) => store.errors)
 
-  const login: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault()
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+  })
 
-    if (username && password) {
-      dispatch({
-        type: 'api/auth/login',
-        payload: {
-          username: username,
-          password: password,
-        },
-      })
-    } else {
-      dispatch({ type: 'errors/login/input' })
-    }
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    dispatch({ type: 'api/auth/login', payload: values })
   }
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+    <>
+      <TypographyH2>Login</TypographyH2>
       {errors.loginMessage && (
-        <h3 className="alert" role="alert">
-          {errors.loginMessage}
-        </h3>
+        <Alert variant="destructive">
+          <ExclamationTriangleIcon className="h-4 w-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{errors.loginMessage}</AlertDescription>
+        </Alert>
       )}
-      <div>
-        <label htmlFor="username">
-          Username:{' '}
-          <input
-            type="text"
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
             name="username"
-            required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input required {...field} />
+                </FormControl>
+                <FormDescription>Enter your username.</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:{' '}
-          <input
-            type="password"
+          <FormField
+            control={form.control}
             name="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input type="password" required {...field} />
+                </FormControl>
+                <FormDescription>Enter your password.</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </label>
-      </div>
-      <div>
-        <Button type="submit">Login</Button>
-        {/* <input className="btn" type="submit" name="submit" value="Log In" /> */}
-      </div>
-    </form>
+          <Button type="submit">Login</Button>
+        </form>
+      </Form>
+    </>
   )
 }
 
