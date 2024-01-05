@@ -1,7 +1,13 @@
 {
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "composite": true
+    "composite": true,
+    "checkJs": true
   },
-  "include": ["vite.config.ts", "tsup.config.ts"]
+  "include": [
+    "vite.config.ts",
+    "tsup.config.ts",
+    "tailwind.config.js",
+    "postcss.config.js"
+  ]
 }
