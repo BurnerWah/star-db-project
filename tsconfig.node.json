@@ -8,6 +8,6 @@
     "vite.config.ts",
     "tsup.config.ts",
     "tailwind.config.ts",
-    "postcss.config.ts"
+    "postcss.config.js"
   ]
 }
