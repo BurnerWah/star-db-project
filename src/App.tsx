@@ -10,6 +10,7 @@ import './App.css'
 import Layout from './components/Layout'
 import RequireAdmin from './components/RequireAdmin'
 import RequireAuth from './components/RequireAuth'
+import { TypographyH1 } from './components/typography'
 import './global.css'
 import { useAppDispatch, useAppSelector } from './hooks/redux'
 import AddItem from './pages/AddItem'
@@ -84,7 +85,7 @@ function App() {
           }
         />
         {/* If none of the other routes matched, we will show a 404. */}
-        <Route path="*" element={<h1>404</h1>} />
+        <Route path="*" element={<TypographyH1>404</TypographyH1>} />
       </Route>,
     ),
   )
