@@ -1,3 +1,4 @@
+import { TypographyH2 } from '@/components/typography'
 import LogOutButton from '../components/LogOutButton'
 import { useAppSelector } from '../hooks/redux'
 
@@ -6,7 +7,7 @@ export default function User() {
   const user = useAppSelector((store) => store.user)
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
+      <TypographyH2>Welcome, {user.username}!</TypographyH2>
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />
     </div>

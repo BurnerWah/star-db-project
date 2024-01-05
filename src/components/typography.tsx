@@ -4,7 +4,7 @@
 
 // All of these components have the same props
 type TypographyProps = Readonly<{
-  children?: JSX.Element | string
+  children?: JSX.Element | string | JSX.Element[] | string[]
 }>
 
 /**
