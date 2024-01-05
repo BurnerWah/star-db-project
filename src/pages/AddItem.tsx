@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { FormEventHandler, useState } from 'react'
 import {
   DeclinationInput,
@@ -222,7 +223,7 @@ export default function AddItem() {
           />
         </label>
         <br />
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   )

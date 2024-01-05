@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import LoginForm from '../components/LoginForm'
 
@@ -9,7 +10,7 @@ export default function Login() {
       <LoginForm />
 
       <center>
-        <button
+        <Button
           type="button"
           className="btn btn_asLink"
           onClick={() => {
@@ -17,7 +18,7 @@ export default function Login() {
           }}
         >
           Register
-        </button>
+        </Button>
       </center>
     </div>
   )
