@@ -31,6 +31,7 @@ export interface ItemDetails
   right_ascension?: string | null
   declination?: Declination
   distance?: MeasurementWithUncertainty
+  saved: boolean
 }
 
 export interface ItemSubmission {

@@ -78,10 +78,15 @@ items.get('/', async (req, res) => {
 items.get('/:id', async (req, res) => {
   try {
     // In stretch goals, this would also left join some other tables to get more specialized data
+    // A subquery is used to join the user's saved items to the list of items,
+    // and the IS NOT NULL operator can convert this into a boolean indicating
+    // whether the user has saved the item. If the user isn't logged in, the
+    // user_id in the subquery should be null, but since it's a left join that
+    // just means that it'll say that every item is not saved.
     const result = await pool.query<
       Omit<DBObject, 'created_by' | 'created_at' | 'type_id'> & {
         [Column in keyof DBObjectType as `type_${Column}`]: DBObjectType[Column]
-      }
+      } & { saved: boolean }
     >(
       /*sql*/ `
         SELECT
@@ -97,12 +102,18 @@ items.get('/:id', async (req, res) => {
           o.absolute_magnitude,
           o.mass,
           o.redshift,
-          o.nasa_image_id
+          o.nasa_image_id,
+          s.object_id IS NOT NULL AS saved
         FROM objects AS o
         INNER JOIN object_types AS t ON o.type_id = t.id
+        LEFT JOIN (
+          SELECT object_id
+          FROM users_objects
+          WHERE user_id = $2
+        ) AS s ON o.id = s.object_id
         WHERE o.id = $1;
       `,
-      [req.params.id],
+      [req.params.id, req.user?.id],
     )
     const row = result.rows[0]
     if (!row) {
@@ -132,6 +143,7 @@ items.get('/:id', async (req, res) => {
       mass: row.mass,
       redshift: row.redshift,
       nasa_image_id: row.nasa_image_id,
+      saved: row.saved,
     } as ItemDetails)
   } catch (error) {
     console.log('Error getting item: ', error)
