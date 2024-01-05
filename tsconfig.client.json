@@ -9,8 +9,10 @@
     "allowSyntheticDefaultImports": true,
     "exactOptionalPropertyTypes": false,
     "esModuleInterop": true,
+    "baseUrl": ".",
     "paths": {
-      "~typings/*": ["./types/*"]
+      "~typings/*": ["./types/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", "types"]
