@@ -1,5 +1,7 @@
+import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import RegisterForm from '../../components/RegisterForm'
+import { TypographyH4 } from '../../components/typography'
 import './LandingPage.css'
 
 export default function Landing() {
@@ -47,15 +49,14 @@ export default function Landing() {
           <RegisterForm />
 
           <center>
-            <h4>Already a Member?</h4>
-            <button
-              className="btn btn_sizeSm"
+            <TypographyH4>Already a Member?</TypographyH4>
+            <Button
               onClick={() => {
                 navigate('/login')
               }}
             >
               Login
-            </button>
+            </Button>
           </center>
         </div>
       </div>

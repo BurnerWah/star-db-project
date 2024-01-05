@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { FormEventHandler, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
@@ -58,7 +59,8 @@ function LoginForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+        <Button type="submit">Login</Button>
+        {/* <input className="btn" type="submit" name="submit" value="Log In" /> */}
       </div>
     </form>
   )

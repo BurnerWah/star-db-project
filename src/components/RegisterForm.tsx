@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
@@ -55,7 +56,8 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <Button type="submit">Register</Button>
+        {/* <input className="btn" type="submit" name="submit" value="Register" /> */}
       </div>
     </form>
   )
