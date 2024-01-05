@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useAppSelector } from '../../hooks/redux'
 import LogOutButton from '../LogOutButton'
-import './Nav.css'
+import './OldNav.css'
 
-function Nav() {
+function OldNav() {
   const user = useAppSelector((store) => store.user)
 
   return (
@@ -56,4 +56,4 @@ function Nav() {
   )
 }
 
-export default Nav
+export default OldNav
