@@ -14,6 +14,8 @@ function* saveItem({ payload }: SaveItemSaga): SagaIterator {
       { id: payload } as ItemSaveBody,
       withCredentials,
     )
+    // Refresh item details
+    yield put({ type: 'itemDetails/fetch', payload })
   } catch (error) {
     console.log('Error saving item: ', error)
   }
@@ -22,6 +24,8 @@ function* saveItem({ payload }: SaveItemSaga): SagaIterator {
 function* unsaveItem({ payload }: UnsaveItemSaga): SagaIterator {
   try {
     yield call(axios.delete, `/api/saved/remove/${payload}`, withCredentials)
+    // Refresh item details
+    yield put({ type: 'itemDetails/fetch', payload })
   } catch (error) {
     console.log('Error unsaving item: ', error)
   }
