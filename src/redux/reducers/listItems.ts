@@ -2,10 +2,10 @@ import { Reducer } from 'redux'
 import { SetListItems, UnsetListItems } from '~typings/actions'
 import { ListItem } from '~typings/requests'
 
-const listItems: Reducer<
-  ReadonlyArray<ListItem>,
-  SetListItems | UnsetListItems
-> = (state = [], action) => {
+const listItems: Reducer<ListItem[], SetListItems | UnsetListItems> = (
+  state = [],
+  action,
+) => {
   switch (action.type) {
     case 'listItems/set':
       return action.payload
