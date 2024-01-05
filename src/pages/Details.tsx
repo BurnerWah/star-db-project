@@ -22,15 +22,24 @@ export default function Details() {
       <h2>Details for item {id}</h2>
       {/* I don't wanna format this right now, I just want to validate that it works */}
       <pre>{JSON.stringify(itemDetails, null, 2)}</pre>
-      {user.id && (
-        <button
-          onClick={() =>
-            dispatch({ type: 'api/saveItem', payload: itemDetails.id })
-          }
-        >
-          Save
-        </button>
-      )}
+      {user.id &&
+        (itemDetails.saved ? (
+          <button
+            onClick={() =>
+              dispatch({ type: 'api/unsaveItem', payload: itemDetails.id })
+            }
+          >
+            Unsave
+          </button>
+        ) : (
+          <button
+            onClick={() =>
+              dispatch({ type: 'api/saveItem', payload: itemDetails.id })
+            }
+          >
+            Save
+          </button>
+        ))}
       {user.administrator && (
         <button
           onClick={() =>
