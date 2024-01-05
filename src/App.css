@@ -3,11 +3,11 @@ body,
 #react-root {
   height: 100%;
 }
-
+/* 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-}
+} */
 
 img {
   display: inline-block;
@@ -105,8 +105,8 @@ Form Treatment
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }
-
+/* 
 input {
   margin: 5px;
   margin-bottom: 10px;
-}
+} */
