@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
@@ -24,24 +25,24 @@ export default function Details() {
       <pre>{JSON.stringify(itemDetails, null, 2)}</pre>
       {user.id &&
         (itemDetails.saved ? (
-          <button
+          <Button
             onClick={() =>
               dispatch({ type: 'api/unsaveItem', payload: itemDetails.id })
             }
           >
             Unsave
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
             onClick={() =>
               dispatch({ type: 'api/saveItem', payload: itemDetails.id })
             }
           >
             Save
-          </button>
+          </Button>
         ))}
       {user.administrator && (
-        <button
+        <Button
           onClick={() =>
             dispatch({
               type: 'api/admin/deleteItem',
@@ -50,7 +51,7 @@ export default function Details() {
           }
         >
           Delete
-        </button>
+        </Button>
       )}
     </div>
   )
