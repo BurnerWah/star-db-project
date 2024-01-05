@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router-dom'
 import Footer from './Footer'
-import OldNav from './OldNav'
+import Nav from './Nav'
+// import OldNav from './OldNav'
 
 export default function Layout() {
   return (
     <div>
-      <OldNav />
+      {/* <OldNav /> */}
+      <Nav />
       <Outlet />
       <Footer />
     </div>
