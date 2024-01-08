@@ -33,28 +33,28 @@ const formSchema = z.object({
   type: OBJECT_TYPES,
   right_ascension: z.optional(
     z.object({
-      hours: z.optional(z.number().min(0).max(23)),
-      min: z.optional(z.number().min(0).max(59)),
-      sec: z.optional(z.number().min(0).max(59)),
+      hours: z.optional(z.coerce.number().min(0).max(23)),
+      min: z.optional(z.coerce.number().min(0).max(59)),
+      sec: z.optional(z.coerce.number().min(0).max(59)),
     }),
   ),
   declination: z.optional(
     z.object({
-      degrees: z.optional(z.number().min(-90).max(90)),
-      arcmin: z.optional(z.number().min(0).max(59)),
-      arcsec: z.optional(z.number().min(0).max(59)),
+      degrees: z.optional(z.coerce.number().min(-90).max(90)),
+      arcmin: z.optional(z.coerce.number().min(0).max(59)),
+      arcsec: z.optional(z.coerce.number().min(0).max(59)),
     }),
   ),
   distance: z.optional(
     z.object({
-      value: z.optional(z.number().min(0)),
-      error: z.optional(z.number().min(0)),
+      value: z.optional(z.coerce.number().min(0)),
+      error: z.optional(z.coerce.number().min(0)),
     }),
   ),
-  apparent_magnitude: z.optional(z.number()),
-  absolute_magnitude: z.optional(z.number()),
-  mass: z.optional(z.number().min(0)),
-  redshift: z.optional(z.number().min(0)),
+  apparent_magnitude: z.optional(z.coerce.number()),
+  absolute_magnitude: z.optional(z.coerce.number()),
+  mass: z.optional(z.coerce.number().min(0)),
+  redshift: z.optional(z.coerce.number().min(0)),
   nasa_image_id: z.optional(z.string()),
 })
 
