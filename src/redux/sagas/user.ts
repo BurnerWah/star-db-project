@@ -26,6 +26,8 @@ function* fetchUser(): SagaIterator {
     yield put({ type: 'status/userInitalized' })
   } catch (error) {
     console.log('User get request failed', error)
+    // If an error is thrown, then there probably isn't a user
+    yield put({ type: 'status/userInitalized' })
   }
 }
 
