@@ -1,11 +1,11 @@
 import { TypographyH2 } from '@/components/typography'
-import ItemList from '../components/ItemList'
+import ItemTable from '../components/ItemTable'
 
 export default function Listing() {
   return (
     <div className="container">
       <TypographyH2>Listing</TypographyH2>
-      <ItemList action={{ type: 'listItems/fetch' }} />
+      <ItemTable action={{ type: 'listItems/fetch' }} />
     </div>
   )
 }
