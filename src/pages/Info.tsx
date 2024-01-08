@@ -2,7 +2,7 @@ import { RequireAuth } from '@/components/auth'
 
 export default function Info() {
   return (
-    <div className="container">
+    <div>
       <p>Info Page</p>
     </div>
   )

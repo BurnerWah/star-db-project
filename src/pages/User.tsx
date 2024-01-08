@@ -7,7 +7,7 @@ export default function User() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useAppSelector((store) => store.user)
   return (
-    <div className="container">
+    <div>
       <TypographyH2>Welcome, {user.username}!</TypographyH2>
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />

@@ -81,7 +81,7 @@ export default function AddItem() {
   }
 
   return (
-    <div className="container">
+    <div>
       <TypographyH2>Add Item</TypographyH2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

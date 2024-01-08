@@ -20,7 +20,7 @@ export default function Details() {
   }, [dispatch, id])
 
   return (
-    <div className="container">
+    <div>
       <TypographyH2>{itemDetails.name}</TypographyH2>
       {/* I don't wanna format this right now, I just want to validate that it works */}
       <pre>{JSON.stringify(itemDetails, null, 2)}</pre>

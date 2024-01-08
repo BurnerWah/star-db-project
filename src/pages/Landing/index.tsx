@@ -9,7 +9,7 @@ export default function Landing() {
   const navigate = useNavigate()
 
   return (
-    <div className="container">
+    <div>
       <h2>Welcome</h2>
 
       <div className="grid">

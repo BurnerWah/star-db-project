@@ -3,7 +3,7 @@ import ItemTable from '../components/ItemTable'
 
 export default function Listing() {
   return (
-    <div className="container">
+    <div>
       <TypographyH2>Listing</TypographyH2>
       <ItemTable action={{ type: 'listItems/fetch' }} />
     </div>

@@ -9,7 +9,7 @@ export default function Layout() {
     <div>
       <Nav />
       <body>
-        <main>
+        <main className="p-5">
           <Command />
           <Outlet />
         </main>
