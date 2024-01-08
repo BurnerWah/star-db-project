@@ -6,7 +6,7 @@ import {
 } from '@/components/typography'
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
-import RegisterForm from '../../components/RegisterForm'
+import RegisterForm from '../components/RegisterForm'
 
 export default function Landing() {
   const navigate = useNavigate()
