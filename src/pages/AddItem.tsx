@@ -61,26 +61,6 @@ const formSchema = z.object({
 export default function AddItem() {
   const dispatch = useAppDispatch()
 
-  // const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-  //   e.preventDefault()
-  //   if (!name) return
-  //   dispatch({
-  //     type: 'api/admin/addItem',
-  //     payload: {
-  //       name,
-  //       type,
-  //       right_ascension: rightAscension,
-  //       declination,
-  //       distance,
-  //       apparent_magnitude: apparentMagnitude,
-  //       absolute_magnitude: absoluteMagnitude,
-  //       mass,
-  //       redshift,
-  //       nasa_image_id: nasaId,
-  //     },
-  //   })
-  // }
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
@@ -95,6 +75,8 @@ export default function AddItem() {
         </TypographyInlineCode>
       ),
     })
+    dispatch({ type: 'api/admin/addItem', payload: values })
+    form.reset()
   }
 
   return (
@@ -203,7 +185,7 @@ function RightAscensionInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Seconds</FormLabel>
             <FormControl>
-              <Input type="number" {...field} />
+              <Input type="number" step="0.0001" {...field} />
             </FormControl>
           </FormItem>
         )}
@@ -247,7 +229,7 @@ function DeclinationInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Arc seconds</FormLabel>
             <FormControl>
-              <Input type="number" {...field} />
+              <Input type="number" step="0.0001" {...field} />
             </FormControl>
           </FormItem>
         )}
@@ -267,7 +249,7 @@ function DistanceInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Distance in Light Years</FormLabel>
             <FormControl>
-              <Input type="number" {...field} />
+              <Input type="number" step="0.0001" {...field} />
             </FormControl>
           </FormItem>
         )}
@@ -279,7 +261,7 @@ function DistanceInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Margin of error</FormLabel>
             <FormControl>
-              <Input type="number" {...field} />
+              <Input type="number" step="0.0001" {...field} />
             </FormControl>
           </FormItem>
         )}
@@ -299,7 +281,7 @@ function OtherInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Apparent Magnitude</FormLabel>
             <FormControl>
-              <Input type="number" {...field} />
+              <Input type="number" step="0.0001" {...field} />
             </FormControl>
           </FormItem>
         )}
@@ -311,7 +293,7 @@ function OtherInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Absolute Magnitude</FormLabel>
             <FormControl>
-              <Input type="number" {...field} />
+              <Input type="number" step="0.0001" {...field} />
             </FormControl>
           </FormItem>
         )}
@@ -323,7 +305,7 @@ function OtherInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Mass</FormLabel>
             <FormControl>
-              <Input type="number" {...field} />
+              <Input type="number" step="0.0001" {...field} />
             </FormControl>
           </FormItem>
         )}
@@ -335,7 +317,7 @@ function OtherInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Redshift</FormLabel>
             <FormControl>
-              <Input type="number" {...field} />
+              <Input type="number" step="0.0001" {...field} />
             </FormControl>
           </FormItem>
         )}
