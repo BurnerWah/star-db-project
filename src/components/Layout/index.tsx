@@ -1,5 +1,6 @@
 import { Toaster } from '@/components/ui/toaster'
 import { Outlet } from 'react-router-dom'
+import Command from './Command'
 import Footer from './Footer'
 import Nav from './Nav'
 
@@ -9,6 +10,7 @@ export default function Layout() {
       <Nav />
       <body>
         <main>
+          <Command />
           <Outlet />
         </main>
         <Toaster />
