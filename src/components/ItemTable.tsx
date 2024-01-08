@@ -17,6 +17,12 @@ import Actions from '~typings/actions'
 import { type ListItem } from '~typings/requests'
 import { Declination, MeasurementWithUncertainty } from '~typings/structs'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import {
+  DeclinationTeX,
+  DistanceTeX,
+  MassTeX,
+  RightAscensionTeX,
+} from './formatters'
 
 const columnHelper = createColumnHelper<ListItem>()
 
@@ -29,8 +35,7 @@ const columns = [
     cell: ({ row }) => {
       const ra: string | undefined = row.getValue('right_ascension')
       if (!ra) return null
-      const [hours, minutes, seconds] = ra.split(':')
-      return <TeX>{`${hours}^h ${minutes}^m ${seconds}^s`}</TeX>
+      return <RightAscensionTeX rightAscension={ra} />
     },
   },
   {
@@ -39,8 +44,7 @@ const columns = [
     cell: ({ row }) => {
       const declination: Declination | undefined = row.getValue('declination')
       if (!declination) return null
-      const { sign, degrees, arcmin, arcsec } = declination
-      return <TeX>{`${sign * degrees}\\degree ${arcmin}' ${arcsec}"`}</TeX>
+      return <DeclinationTeX declination={declination} />
     },
   },
   {
@@ -50,8 +54,7 @@ const columns = [
       const distance: MeasurementWithUncertainty | undefined =
         row.getValue('distance')
       if (!distance) return null
-      const { value, error } = distance
-      return <TeX>{`${value}±${error} \\text{ ly}`}</TeX>
+      return <DistanceTeX distance={distance} />
     },
   },
   columnHelper.group({
@@ -66,7 +69,7 @@ const columns = [
     header: 'Mass',
     cell: ({ row }) => {
       const mass: number | undefined = row.getValue('mass')
-      return mass && <TeX>{`${mass} \\ M_\\odot`}</TeX>
+      return mass && <MassTeX mass={mass} />
     },
   },
   {
