@@ -15,8 +15,8 @@ export default function Landing() {
     <div>
       <TypographyH2>Welcome</TypographyH2>
 
-      <div className="flex flex-initial flex-row flex-wrap justify-start items-start">
-        <div className="flex-none p-0 px-2 box-border basis-2/3 max-w-[66.66666667%]">
+      <div className="flex flex-initial flex-row flex-wrap items-start justify-start">
+        <div className="box-border max-w-[66.66666667%] flex-none basis-2/3 p-0 px-2">
           <TypographyP>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
             id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
@@ -49,7 +49,7 @@ export default function Landing() {
             amet nisi.
           </TypographyP>
         </div>
-        <div className="flex-none p-0 px-2 box-border basis-2/3 max-w-[33.33333333%]">
+        <div className="box-border max-w-[33.33333333%] flex-none basis-2/3 p-0 px-2">
           <RegisterForm />
 
           <center>
