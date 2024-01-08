@@ -22,6 +22,8 @@ function* fetchUser(): SagaIterator {
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'user/set', payload: response.data })
+    // Also mark the user as having been initialized
+    yield put({ type: 'status/userInitalized' })
   } catch (error) {
     console.log('User get request failed', error)
   }

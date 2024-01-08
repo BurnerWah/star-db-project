@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import errors from './errors'
 import itemDetails from './itemDetails'
 import listItems from './listItems'
+import status from './status'
 import user from './user'
 
 // rootReducer is the primary reducer for our entire project
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   user,
   listItems,
   itemDetails,
+  status,
 })
 
 export default rootReducer

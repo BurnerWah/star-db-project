@@ -33,6 +33,8 @@ export interface SetItemDetails extends Action<'itemDetails/set'> {
 }
 export type UnsetItemDetails = Action<'itemDetails/unset'>
 
+export type SetUserInitialized = Action<'status/userInitalized'>
+
 export type ReduxActions =
   | UnsetUser
   | SetUser
@@ -47,6 +49,7 @@ export type ReduxActions =
   | UnsetListItems
   | SetItemDetails
   | UnsetItemDetails
+  | SetUserInitialized
 
 export interface LoginSaga extends Action<'api/auth/login'> {
   payload: LoginBody
