@@ -9,5 +9,9 @@ export default function RequireAdmin({
   redirectTo?: string
 }>) {
   const user = useAppSelector((store) => store.user)
-  return user.administrator ? children : <Navigate to={redirectTo} />
+  const userInitalized = useAppSelector((store) => store.status.userInitalized)
+  return (
+    userInitalized &&
+    (user.administrator ? children : <Navigate to={redirectTo} />)
+  )
 }
