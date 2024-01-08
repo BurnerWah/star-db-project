@@ -8,12 +8,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import TeX from '@matejmazur/react-katex'
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table'
 import { MoreHorizontal } from 'lucide-react'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Actions from '~typings/actions'
 import { type ListItem } from '~typings/requests'
+import { Declination, MeasurementWithUncertainty } from '~typings/structs'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
 const columnHelper = createColumnHelper<ListItem>()
@@ -21,19 +23,37 @@ const columnHelper = createColumnHelper<ListItem>()
 const columns = [
   columnHelper.accessor('name', { header: 'Name' }),
   columnHelper.accessor('type.name', { header: 'Type' }),
-  columnHelper.accessor('right_ascension', { header: 'Right Ascension' }),
-  columnHelper.accessor(
-    ({ declination }) =>
-      declination &&
-      `${
-        declination?.sign * declination?.degrees
-      }° ${declination?.arcmin}' ${declination?.arcsec}"`,
-    { header: 'Declination' },
-  ),
-  columnHelper.accessor(
-    ({ distance }) => distance && `${distance.value}±${distance.error} Ly`,
-    { header: 'Distance' },
-  ),
+  {
+    accessorKey: 'right_ascension',
+    header: 'Right Ascension',
+    cell: ({ row }) => {
+      const ra: string | undefined = row.getValue('right_ascension')
+      if (!ra) return null
+      const [hours, minutes, seconds] = ra.split(':')
+      return <TeX>{`${hours}^h ${minutes}^m ${seconds}^s`}</TeX>
+    },
+  },
+  {
+    accessorKey: 'declination',
+    header: 'Declination',
+    cell: ({ row }) => {
+      const declination: Declination | undefined = row.getValue('declination')
+      if (!declination) return null
+      const { sign, degrees, arcmin, arcsec } = declination
+      return <TeX>{`${sign * degrees}\\degree ${arcmin}' ${arcsec}"`}</TeX>
+    },
+  },
+  {
+    accessorKey: 'distance',
+    header: 'Distance',
+    cell: ({ row }) => {
+      const distance: MeasurementWithUncertainty | undefined =
+        row.getValue('distance')
+      if (!distance) return null
+      const { value, error } = distance
+      return <TeX>{`${value}±${error} \\text{ ly}`}</TeX>
+    },
+  },
   columnHelper.group({
     header: 'Magnitude',
     columns: [
@@ -41,8 +61,22 @@ const columns = [
       columnHelper.accessor('absolute_magnitude', { header: 'Absolute' }),
     ],
   }),
-  columnHelper.accessor('mass', { header: 'Mass' }),
-  columnHelper.accessor('redshift', { header: 'Redshift' }),
+  {
+    accessorKey: 'mass',
+    header: 'Mass',
+    cell: ({ row }) => {
+      const mass: number | undefined = row.getValue('mass')
+      return mass && <TeX>{`${mass} \\ M_\\odot`}</TeX>
+    },
+  },
+  {
+    accessorKey: 'redshift',
+    header: 'Redshift',
+    cell: ({ row }) => {
+      const redshift: number | undefined = row.getValue('redshift')
+      return redshift && <TeX>{`${redshift}`}</TeX>
+    },
+  },
   {
     id: 'actions',
     cell: ({ row }) => (
