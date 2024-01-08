@@ -7,7 +7,7 @@ import {
   CommandList,
 } from '@/components/ui/command'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, type NavigateOptions, type To } from 'react-router-dom'
 
 export default function Command() {
   const navigate = useNavigate()
@@ -26,9 +26,9 @@ export default function Command() {
     return () => document.removeEventListener('keydown', down)
   }, [])
 
-  const goToPage: typeof navigate = (...args) => {
+  const goToPage = (to: To, options?: NavigateOptions) => {
     setOpen(false)
-    navigate(...args)
+    navigate(to, options)
   }
 
   return (
