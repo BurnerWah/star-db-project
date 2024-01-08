@@ -9,5 +9,6 @@ export default function RequireAuth({
   redirectTo?: string
 }>) {
   const user = useAppSelector((store) => store.user)
-  return user.id ? children : <Navigate to={redirectTo} />
+  const userInitalized = useAppSelector((store) => store.status.userInitalized)
+  return userInitalized && (user.id ? children : <Navigate to={redirectTo} />)
 }
