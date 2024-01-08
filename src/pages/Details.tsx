@@ -1,3 +1,4 @@
+import { TypographyH2 } from '@/components/typography'
 import { Button } from '@/components/ui/button'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
@@ -20,7 +21,7 @@ export default function Details() {
 
   return (
     <div className="container">
-      <h2>Details for item {id}</h2>
+      <TypographyH2>{itemDetails.name}</TypographyH2>
       {/* I don't wanna format this right now, I just want to validate that it works */}
       <pre>{JSON.stringify(itemDetails, null, 2)}</pre>
       {user.id &&
