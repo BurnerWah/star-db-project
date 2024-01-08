@@ -1,3 +1,4 @@
+import { RequireNotAuth } from '@/components/auth'
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import RegisterForm from '../../components/RegisterForm'
@@ -61,5 +62,13 @@ export default function Landing() {
         </div>
       </div>
     </div>
+  )
+}
+
+export function Component() {
+  return (
+    <RequireNotAuth>
+      <Landing />
+    </RequireNotAuth>
   )
 }

@@ -10,17 +10,15 @@ import './App.css'
 import Layout from './components/Layout'
 import { TypographyH1 } from './components/typography'
 import './global.css'
-import { useAppDispatch, useAppSelector } from './hooks/redux'
-import Landing from './pages/Landing'
-import Login from './pages/Login'
-import Register from './pages/Register'
+import { useAppDispatch } from './hooks/redux'
 
 function App() {
   const dispatch = useAppDispatch()
 
-  const user = useAppSelector((store) => store.user)
-
   useEffect(() => {
+    // We do a dispatch here, but checking for authentication is handled
+    // by the components from ./components/auth.tsx, which are used in many
+    // component functions for pages.
     dispatch({ type: 'user/fetch' })
   }, [dispatch])
 
@@ -34,18 +32,9 @@ function App() {
         <Route path="about" lazy={() => import('./pages/About')} />
         <Route path="user" lazy={() => import('./pages/User')} />
         <Route path="info" lazy={() => import('./pages/Info')} />
-        <Route
-          path="login"
-          element={user.id ? <Navigate to="/user" /> : <Login />}
-        />
-        <Route
-          path="registration"
-          element={user.id ? <Navigate to="/user" /> : <Register />}
-        />
-        <Route
-          path="home"
-          element={user.id ? <Navigate to="/user" /> : <Landing />}
-        />
+        <Route path="login" lazy={() => import('./pages/Login')} />
+        <Route path="registration" lazy={() => import('./pages/Register')} />
+        <Route path="home" lazy={() => import('./pages/Landing')} />
         <Route path="list" lazy={() => import('./pages/Listing')} />
         <Route path="saved" lazy={() => import('./pages/Saved')} />
         <Route path="details/:id" lazy={() => import('./pages/Details')} />

@@ -24,3 +24,12 @@ export function RequireAdmin({
     (user.administrator ? children : <Navigate to={redirectTo} />)
   )
 }
+
+export function RequireNotAuth({
+  children,
+  redirectTo = '/user',
+}: Readonly<{ children: JSX.Element; redirectTo?: string }>) {
+  const user = useAppSelector((store) => store.user)
+  const userInitalized = useAppSelector((store) => store.status.userInitalized)
+  return userInitalized && (!user.id ? children : <Navigate to={redirectTo} />)
+}
