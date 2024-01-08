@@ -1,7 +1,18 @@
 import { TypographyH2 } from '@/components/typography'
+import { Button } from '@/components/ui/button'
 import { DataTable } from '@/components/ui/data-table'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table'
+import { MoreHorizontal } from 'lucide-react'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { type ListItem } from '~typings/requests'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
@@ -32,6 +43,31 @@ const columns = [
   }),
   columnHelper.accessor('mass', { header: 'Mass' }),
   columnHelper.accessor('redshift', { header: 'Redshift' }),
+  {
+    id: 'actions',
+    cell: ({ row }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open Menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem asChild>
+            <Link to={`/details/${row.original.id}`}>View Details</Link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => navigator.clipboard.writeText(row.original.name)}
+          >
+            Copy Name
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
 ] as ColumnDef<ListItem>[]
 
 export default function Saved() {
