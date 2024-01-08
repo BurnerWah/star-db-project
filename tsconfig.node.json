@@ -2,7 +2,8 @@
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "checkJs": true
+    "checkJs": true,
+    "noEmit": true
   },
   "include": [
     "vite.config.ts",
