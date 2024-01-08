@@ -43,6 +43,7 @@ export default function Details() {
         ))}
       {user.administrator && (
         <Button
+          variant="destructive"
           onClick={() =>
             dispatch({
               type: 'api/admin/deleteItem',
