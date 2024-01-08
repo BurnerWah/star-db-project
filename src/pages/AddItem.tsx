@@ -1,4 +1,4 @@
-import RequireAdmin from '@/components/RequireAdmin'
+import { RequireAdmin } from '@/components/auth'
 import {
   TypographyH2,
   TypographyH3,

@@ -1,5 +1,5 @@
 import ItemTable from '@/components/ItemTable'
-import RequireAuth from '@/components/RequireAuth'
+import { RequireAuth } from '@/components/auth'
 import { TypographyH2 } from '@/components/typography'
 
 export default function Saved() {

@@ -1,4 +1,4 @@
-import RequireAuth from '@/components/RequireAuth'
+import { RequireAuth } from '@/components/auth'
 
 export default function Info() {
   return (

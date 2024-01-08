@@ -1,4 +1,4 @@
-import RequireAuth from '@/components/RequireAuth'
+import { RequireAuth } from '@/components/auth'
 import { TypographyH2 } from '@/components/typography'
 import LogOutButton from '../components/LogOutButton'
 import { useAppSelector } from '../hooks/redux'
