@@ -8,18 +8,12 @@ import {
 } from 'react-router-dom'
 import './App.css'
 import Layout from './components/Layout'
-import RequireAdmin from './components/RequireAdmin'
-import RequireAuth from './components/RequireAuth'
 import { TypographyH1 } from './components/typography'
 import './global.css'
 import { useAppDispatch, useAppSelector } from './hooks/redux'
-import AddItem from './pages/AddItem'
-import Info from './pages/Info'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Saved from './pages/Saved'
-import User from './pages/User'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -38,22 +32,8 @@ function App() {
         {/* redirect index to home */}
         <Route index element={<Navigate to="/home" />} />
         <Route path="about" lazy={() => import('./pages/About')} />
-        <Route
-          path="user"
-          element={
-            <RequireAuth>
-              <User />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="info"
-          element={
-            <RequireAuth>
-              <Info />
-            </RequireAuth>
-          }
-        />
+        <Route path="user" lazy={() => import('./pages/User')} />
+        <Route path="info" lazy={() => import('./pages/Info')} />
         <Route
           path="login"
           element={user.id ? <Navigate to="/user" /> : <Login />}
@@ -67,23 +47,9 @@ function App() {
           element={user.id ? <Navigate to="/user" /> : <Landing />}
         />
         <Route path="list" lazy={() => import('./pages/Listing')} />
-        <Route
-          path="saved"
-          element={
-            <RequireAuth>
-              <Saved />
-            </RequireAuth>
-          }
-        />
+        <Route path="saved" lazy={() => import('./pages/Saved')} />
         <Route path="details/:id" lazy={() => import('./pages/Details')} />
-        <Route
-          path="add"
-          element={
-            <RequireAdmin>
-              <AddItem />
-            </RequireAdmin>
-          }
-        />
+        <Route path="add" lazy={() => import('./pages/AddItem')} />
         {/* If none of the other routes matched, we will show a 404. */}
         <Route path="*" element={<TypographyH1>404</TypographyH1>} />
       </Route>,

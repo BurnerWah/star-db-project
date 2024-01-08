@@ -1,3 +1,4 @@
+import RequireAdmin from '@/components/RequireAdmin'
 import {
   TypographyH2,
   TypographyH3,
@@ -335,5 +336,14 @@ function OtherInputs({ control }: SectionProps) {
         )}
       />
     </>
+  )
+}
+
+// For lazy-loading
+export function Component() {
+  return (
+    <RequireAdmin>
+      <AddItem />
+    </RequireAdmin>
   )
 }

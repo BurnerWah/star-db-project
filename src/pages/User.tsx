@@ -1,3 +1,4 @@
+import RequireAuth from '@/components/RequireAuth'
 import { TypographyH2 } from '@/components/typography'
 import LogOutButton from '../components/LogOutButton'
 import { useAppSelector } from '../hooks/redux'
@@ -11,5 +12,13 @@ export default function User() {
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />
     </div>
+  )
+}
+
+export function Component() {
+  return (
+    <RequireAuth>
+      <User />
+    </RequireAuth>
   )
 }
