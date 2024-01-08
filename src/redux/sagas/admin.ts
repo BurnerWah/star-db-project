@@ -7,6 +7,7 @@ import { withCredentials } from '../../constants/axios'
 import {
   prepareDeclination,
   prepareDistance,
+  prepareObjectType,
   prepareRightAscension,
 } from '../../lib/formats'
 
@@ -23,7 +24,7 @@ function* addItem({ payload }: AdminAddItemSaga): SagaIterator {
   try {
     const submission: ItemSubmission = {
       name: payload.name,
-      type: payload.type,
+      type: prepareObjectType(payload.type),
       declination: prepareDeclination(payload.declination),
       right_ascension: prepareRightAscension(payload.right_ascension),
       distance: prepareDistance(payload.distance),

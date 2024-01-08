@@ -1,9 +1,11 @@
+import { ZObjectType } from '~shared/schemas'
 import {
   DeclinationInput,
   DistanceInput,
   RightAscensionInput,
 } from '~typings/inputs'
 import { Declination, MeasurementWithUncertainty } from '~typings/structs'
+import { EDBObjectTypes } from '~typings/tables'
 
 export function prepareDeclination(
   input?: DeclinationInput,
@@ -51,4 +53,21 @@ export function prepareDistance(
     return undefined
   }
   return input as MeasurementWithUncertainty
+}
+
+export function prepareObjectType(input: ZObjectType): EDBObjectTypes {
+  switch (input) {
+    case 'Star':
+      return EDBObjectTypes.Star
+    case 'Planet':
+      return EDBObjectTypes.Planet
+    case 'Galaxy':
+      return EDBObjectTypes.Galaxy
+    case 'Nebula':
+      return EDBObjectTypes.Nebula
+    case 'Cluster':
+      return EDBObjectTypes.Cluster
+    case 'Black Hole':
+      return EDBObjectTypes['Black Hole']
+  }
 }

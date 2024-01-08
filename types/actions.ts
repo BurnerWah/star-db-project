@@ -7,7 +7,8 @@ import {
   RegisterBody,
   UserResponse,
 } from './requests'
-import { EDBObjectTypes } from './tables'
+// import { EDBObjectTypes } from './tables'
+import { ZObjectType } from '~shared/schemas'
 
 export type UnsetUser = Action<'user/unset'>
 export interface SetUser extends Action<'user/set'> {
@@ -81,7 +82,7 @@ export interface AdminDeleteItemSaga extends Action<'api/admin/deleteItem'> {
 export interface AdminAddItemSaga extends Action<'api/admin/addItem'> {
   payload: {
     name: string
-    type: EDBObjectTypes
+    type: ZObjectType
     right_ascension?: RightAscensionInput
     declination?: DeclinationInput
     distance?: DistanceInput

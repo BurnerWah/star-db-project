@@ -8,3 +8,5 @@ export const OBJECT_TYPES = z.enum([
   'Cluster',
   'Black Hole',
 ])
+
+export type ZObjectType = z.infer<typeof OBJECT_TYPES>
