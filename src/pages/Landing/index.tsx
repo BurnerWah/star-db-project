@@ -1,20 +1,23 @@
 import { RequireNotAuth } from '@/components/auth'
+import {
+  TypographyH2,
+  TypographyH4,
+  TypographyP,
+} from '@/components/typography'
 import { Button } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import RegisterForm from '../../components/RegisterForm'
-import { TypographyH4 } from '../../components/typography'
-import './LandingPage.css'
 
 export default function Landing() {
   const navigate = useNavigate()
 
   return (
     <div>
-      <h2>Welcome</h2>
+      <TypographyH2>Welcome</TypographyH2>
 
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          <p>
+      <div className="flex flex-initial flex-row flex-wrap justify-start items-start">
+        <div className="flex-none p-0 px-2 box-border basis-2/3 max-w-[66.66666667%]">
+          <TypographyP>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
             id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
             ut ex molestie blandit. Etiam et turpis sit amet risus mollis
@@ -24,9 +27,9 @@ export default function Landing() {
             interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
             Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
             luctus. Duis a sapien metus.
-          </p>
+          </TypographyP>
 
-          <p>
+          <TypographyP>
             Praesent consectetur orci dui, id elementum eros facilisis id. Sed
             id dolor in augue porttitor faucibus eget sit amet ante. Nunc
             consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
@@ -35,18 +38,18 @@ export default function Landing() {
             euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
             lobortis augue mi vel felis. Duis ultrices sapien at est convallis
             congue.
-          </p>
+          </TypographyP>
 
-          <p>
+          <TypographyP>
             Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
             Suspendisse posuere dapibus maximus. Aliquam vitae felis libero. In
             vehicula sapien at semper ultrices. Vivamus sed feugiat libero. Sed
             sagittis neque id diam euismod, ut egestas felis ultricies. Nullam
             non fermentum mauris. Sed in enim ac turpis faucibus pretium in sit
             amet nisi.
-          </p>
+          </TypographyP>
         </div>
-        <div className="grid-col grid-col_4">
+        <div className="flex-none p-0 px-2 box-border basis-2/3 max-w-[33.33333333%]">
           <RegisterForm />
 
           <center>
