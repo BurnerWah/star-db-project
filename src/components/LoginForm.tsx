@@ -15,27 +15,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { LoginSchema } from '~shared/schemas'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-
-const formSchema = z.object({
-  username: z
-    .string()
-    .min(1, { message: 'Username is required.' })
-    .max(64, { message: 'Username must be less than 64 characters.' }),
-  password: z.string().min(8, {
-    message: 'Password must be at least 8 characters.',
-  }),
-})
 
 function LoginForm() {
   const dispatch = useAppDispatch()
   const errors = useAppSelector((store) => store.errors)
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     dispatch({ type: 'api/auth/login', payload: values })
   }
 
