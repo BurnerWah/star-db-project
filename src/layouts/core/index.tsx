@@ -7,15 +7,15 @@ import Nav from './Nav'
 export function Layout() {
   return (
     <div>
-      <Nav />
       <body>
+        <Nav />
+        <Command />
         <main className="p-5">
-          <Command />
           <Outlet />
         </main>
         <Toaster />
+        <Footer />
       </body>
-      <Footer />
     </div>
   )
 }
