@@ -1,34 +1,11 @@
 import { RequireNotAuth } from '@/components/auth'
+import { LoginForm } from '@/components/forms/Login'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { useAppDispatch } from '@/hooks/redux'
 import { cn } from '@/lib/utils'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { z } from 'zod'
-import { LoginSchema } from '~shared/schemas'
 
 export default function Login() {
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
-  })
-
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    dispatch({ type: 'api/auth/login', payload: values })
-  }
 
   return (
     <div className="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -56,42 +33,7 @@ export default function Login() {
           <div className="flex flex-col space-y-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">Login</h1>
           </div>
-          {/* <TypographyH2>Login</TypographyH2> */}
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input required {...field} />
-                    </FormControl>
-                    <FormDescription>Enter your username.</FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" required {...field} />
-                    </FormControl>
-                    <FormDescription>Enter your password.</FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit">Login</Button>
-            </form>
-          </Form>
-
-          {/* <center> */}
+          <LoginForm />
           <Button
             type="button"
             className="btn btn_asLink"
@@ -101,7 +43,6 @@ export default function Login() {
           >
             Register
           </Button>
-          {/* </center> */}
         </div>
       </div>
     </div>
