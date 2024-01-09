@@ -81,10 +81,6 @@ saved.put(
       res.sendStatus(401)
       return
     }
-    if (!req.body.id) {
-      res.sendStatus(400)
-      return
-    }
     console.log(`User with id ${req.user.id} is saving item ${req.body.id}`)
     try {
       const result = await pool.query(
@@ -111,10 +107,6 @@ saved.delete(
   async (req, res) => {
     if (!req.user) {
       res.sendStatus(401)
-      return
-    }
-    if (!req.params.id) {
-      res.sendStatus(400)
       return
     }
     try {

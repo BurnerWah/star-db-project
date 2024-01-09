@@ -16,12 +16,9 @@ admin.delete(
   async (req, res) => {
     const { id } = req.params
     try {
-      const result = await pool.query(
-        /*sql*/ `
-          DELETE FROM objects WHERE id = $1;
-        `,
-        [id],
-      )
+      const result = await pool.query(`DELETE FROM objects WHERE id = $1;`, [
+        id,
+      ])
       console.log(result)
       res.sendStatus(200)
     } catch (error) {
