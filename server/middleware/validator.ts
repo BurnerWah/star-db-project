@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express'
-import type { AnyZodObject, z } from 'zod'
+import type { ZodObject, ZodTypeAny, z } from 'zod'
 
 /**
  * Middleware to validate a request body, query, and/or params using Zod.
@@ -11,13 +11,17 @@ import type { AnyZodObject, z } from 'zod'
  * @see {@link https://zod.dev/ Zod Documentation}
  */
 export function validate<
-  Schema extends AnyZodObject,
-  P = {
+  Schema extends ZodObject<{
+    body?: ZodTypeAny
+    query?: ZodTypeAny
+    params?: ZodTypeAny
+  }>,
+  Params = {
     [Key in keyof z.infer<Schema>['params']]: string
   },
   ReqBody = z.infer<Schema>['body'],
-  ReqQuery = z.infer<Schema>['query'],
->(schema: Schema): RequestHandler<P, unknown, ReqBody, ReqQuery> {
+  Query = z.infer<Schema>['query'],
+>(schema: Schema): RequestHandler<Params, unknown, ReqBody, Query> {
   return async (req, res, next) => {
     try {
       await schema.parseAsync({
