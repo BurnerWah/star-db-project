@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils'
 import { type HTMLAttributes } from 'react'
 import { NavLink } from 'react-router-dom'
+import LogOutButton from '../../components/LogOutButton'
+import { TypographyH2 } from '../../components/typography'
 import { useAppSelector } from '../../hooks/redux'
-import LogOutButton from '../LogOutButton'
-import { TypographyH2 } from '../typography'
 
 interface LinkInfo {
   title: string

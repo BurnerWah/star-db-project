@@ -8,10 +8,10 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom'
 import './App.css'
-import Layout from './components/Layout'
 import { TypographyH1 } from './components/typography'
 import './global.css'
 import { useAppDispatch } from './hooks/redux'
+import { Layout } from './layouts/core'
 
 function App() {
   const dispatch = useAppDispatch()

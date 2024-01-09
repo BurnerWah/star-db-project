@@ -4,7 +4,7 @@ import Command from './Command'
 import Footer from './Footer'
 import Nav from './Nav'
 
-export default function Layout() {
+export function Layout() {
   return (
     <div>
       <Nav />
