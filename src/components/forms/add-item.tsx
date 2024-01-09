@@ -11,6 +11,11 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -117,50 +122,54 @@ function MainInputs({ control }: SectionProps) {
 
 function RightAscensionInputs({ control }: SectionProps) {
   return (
-    <>
-      <TypographyH3>Right Ascension</TypographyH3>
-      <div className="grid grid-cols-3 gap-2">
-        <FormField
-          control={control}
-          name="right_ascension.hours"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Hours</FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={control}
-          name="right_ascension.min"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Minutes</FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={control}
-          name="right_ascension.sec"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Seconds</FormLabel>
-              <FormControl>
-                <Input type="number" step="0.0001" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-    </>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Right Ascension</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="grid grid-cols-3 gap-2">
+          <FormField
+            control={control}
+            name="right_ascension.hours"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Hours</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name="right_ascension.min"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Minutes</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name="right_ascension.sec"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Seconds</FormLabel>
+                <FormControl>
+                  <Input type="number" step="0.0001" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+      </PopoverContent>
+    </Popover>
   )
 }
 
