@@ -12,7 +12,9 @@ import type { AnyZodObject, z } from 'zod'
  */
 export function validate<
   Schema extends AnyZodObject,
-  P = z.infer<Schema>['params'],
+  P = {
+    [Key in keyof z.infer<Schema>['params']]: string
+  },
   ReqBody = z.infer<Schema>['body'],
   ReqQuery = z.infer<Schema>['query'],
 >(schema: Schema): RequestHandler<P, unknown, ReqBody, ReqQuery> {
