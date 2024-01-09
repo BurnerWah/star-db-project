@@ -1,5 +1,9 @@
-import { Declination, MeasurementWithUncertainty, ParsedItem } from './structs'
-import { DBObject, DBObjectType, DBUser, EDBObjectTypes } from './tables'
+import type {
+  Declination,
+  MeasurementWithUncertainty,
+  ParsedItem,
+} from './structs'
+import type { DBObject, DBObjectType, DBUser, EDBObjectTypes } from './tables'
 
 export interface RegisterBody {
   username: string

@@ -1,14 +1,17 @@
-import { Action, Dispatch } from 'redux'
-import { DeclinationInput, DistanceInput, RightAscensionInput } from './inputs'
-import {
+import type { Action, Dispatch } from 'redux'
+import type { ZObjectType } from '~shared/schemas'
+import type {
+  DeclinationInput,
+  DistanceInput,
+  RightAscensionInput,
+} from './inputs'
+import type {
   ItemDetails,
   ListItem,
   LoginBody,
   RegisterBody,
   UserResponse,
 } from './requests'
-// import { EDBObjectTypes } from './tables'
-import { ZObjectType } from '~shared/schemas'
 
 export type UnsetUser = Action<'user/unset'>
 export interface SetUser extends Action<'user/set'> {

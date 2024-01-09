@@ -1,4 +1,4 @@
-import { MeasurementWithUncertainty } from './structs'
+import type { MeasurementWithUncertainty } from './structs'
 
 export type RightAscensionInput = Readonly<{
   hours?: number

@@ -1,4 +1,4 @@
-import { DBObject, DBObjectType } from './tables'
+import type { DBObject, DBObjectType } from './tables'
 
 export interface Declination {
   sign: -1 | 0 | 1
