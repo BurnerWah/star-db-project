@@ -67,7 +67,7 @@ export function prepareObjectType(input: ZObjectType): EDBObjectTypes {
       return EDBObjectTypes.Nebula
     case 'Cluster':
       return EDBObjectTypes.Cluster
-    case 'Black Hole':
+    case 'BlackHole':
       return EDBObjectTypes['Black Hole']
   }
 }

@@ -100,7 +100,7 @@ function MainInputs({ control }: SectionProps) {
                 <SelectItem value={OBJECT_TYPES.enum.Cluster}>
                   Cluster
                 </SelectItem>
-                <SelectItem value={OBJECT_TYPES.enum['Black Hole']}>
+                <SelectItem value={OBJECT_TYPES.enum.BlackHole}>
                   Black Hole
                 </SelectItem>
               </SelectContent>

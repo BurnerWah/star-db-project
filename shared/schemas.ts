@@ -7,7 +7,7 @@ export const OBJECT_TYPES = z.enum([
   'Galaxy',
   'Nebula',
   'Cluster',
-  'Black Hole',
+  'BlackHole',
 ])
 
 export type ZObjectType = z.infer<typeof OBJECT_TYPES>
