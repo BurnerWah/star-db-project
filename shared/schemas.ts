@@ -79,3 +79,21 @@ export const ItemSubmissionSchema = z.object({
   redshift: RedshiftSchemaPart,
   nasa_image_id: NasaImageIdSchemaPart,
 })
+
+export const ClientItemSubmissionSchema = ItemSubmissionSchema.extend({
+  type: OBJECT_TYPES,
+  right_ascension: z.optional(
+    z.object({
+      hours: z.coerce.number().positive().max(23).int(),
+      min: z.coerce.number().positive().max(59).int(),
+      sec: z.coerce.number().positive().lt(60),
+    }),
+  ),
+  declination: z.optional(
+    z.object({
+      degrees: z.coerce.number().min(-90).max(90).int(),
+      arcmin: ArcMinuteSchemaPart,
+      arcsec: ArcSecondSchemaPart,
+    }),
+  ),
+})
