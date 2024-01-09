@@ -1,27 +1,12 @@
 import { RequireNotAuth } from '@/components/auth'
-import { Button } from '@/components/ui/button'
-import { useNavigate } from 'react-router-dom'
-import RegisterForm from '../components/RegisterForm'
+import { RegisterForm } from '@/components/forms/register'
+import { AuthLayout } from '@/layouts/auth'
 
 export default function Register() {
-  const navigate = useNavigate()
-
   return (
-    <div>
+    <AuthLayout otherPage={{ to: '/login', text: 'Login' }} title="Register">
       <RegisterForm />
-
-      <center>
-        <Button
-          type="button"
-          className="btn btn_asLink"
-          onClick={() => {
-            navigate('/login')
-          }}
-        >
-          Login
-        </Button>
-      </center>
-    </div>
+    </AuthLayout>
   )
 }
 
