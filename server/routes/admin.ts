@@ -1,29 +1,35 @@
 import { Request, Router } from 'express'
+import { z } from 'zod'
 import { ItemSubmission } from '~typings/requests.ts'
 import { unparseDeclination } from '../db/normalizers.ts'
 import pool from '../db/pool.ts'
 import { rejectNonAdmin } from '../middleware/authentication.ts'
+import { validate } from '../middleware/validator.ts'
 
 const admin = Router()
 
 admin.use(rejectNonAdmin)
 
-admin.delete('/delete/:id', async (req, res) => {
-  const { id } = req.params
-  try {
-    const result = await pool.query(
-      /*sql*/ `
-        DELETE FROM objects WHERE id = $1;
-      `,
-      [id],
-    )
-    console.log(result)
-    res.sendStatus(200)
-  } catch (error) {
-    console.log(error)
-    res.sendStatus(500)
-  }
-})
+admin.delete(
+  '/delete/:id',
+  validate(z.object({ params: z.object({ id: z.coerce.number() }) })),
+  async (req, res) => {
+    const { id } = req.params
+    try {
+      const result = await pool.query(
+        /*sql*/ `
+          DELETE FROM objects WHERE id = $1;
+        `,
+        [id],
+      )
+      console.log(result)
+      res.sendStatus(200)
+    } catch (error) {
+      console.log(error)
+      res.sendStatus(500)
+    }
+  },
+)
 
 // I hate that it's not until the *third* generic that the only thing I want to
 // change can be set

@@ -1,10 +1,12 @@
 import { hash } from '@node-rs/argon2'
 import { Router } from 'express'
-import { RegisterBody } from '~typings/requests.ts'
+import { z } from 'zod'
+import { LoginSchema, RegisterSchema } from '~shared/schemas.ts'
 import { DBUser } from '~typings/tables.ts'
 import { ARGON2_OPTIONS } from '../constants/security.ts'
 import pool from '../db/pool.ts'
 import { rejectUnauthenticated } from '../middleware/authentication.ts'
+import { validate } from '../middleware/validator.ts'
 import passport from '../strategies/argon2id.ts'
 
 const router = Router()
@@ -21,8 +23,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * This honestly feels like a bit of a hack
  * @see {@link https://github.com/passport/todos-express-password/blob/master/routes/auth.js passport example}
  */
-router.post<'/register', never, unknown, RegisterBody>(
+router.post(
   '/register',
+  validate(z.object({ body: RegisterSchema })),
   async (req, res, next) => {
     const { username, password } = req.body
     try {
@@ -57,6 +60,7 @@ router.post<'/register', never, unknown, RegisterBody>(
  */
 router.post(
   '/login',
+  validate(z.object({ body: LoginSchema })),
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',

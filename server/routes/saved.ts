@@ -1,10 +1,11 @@
-import { Request, Router } from 'express'
-import { ItemSaveBody } from '~typings/requests.ts'
+import { Router } from 'express'
+import { z } from 'zod'
 import { ParsedItem } from '~typings/structs.ts'
 import { DBObject, DBObjectType } from '~typings/tables.ts'
 import { parseDeclination } from '../db/normalizers.ts'
 import pool from '../db/pool.ts'
 import { rejectUnauthenticated } from '../middleware/authentication.ts'
+import { validate } from '../middleware/validator.ts'
 
 const saved = Router()
 
@@ -68,53 +69,65 @@ saved.get('/', async (req, res) => {
   }
 })
 
-saved.put('/add', async (req: Request<never, unknown, ItemSaveBody>, res) => {
-  if (!req.user) {
-    res.sendStatus(401)
-    return
-  }
-  if (!req.body.id) {
-    res.sendStatus(400)
-    return
-  }
-  console.log(`User with id ${req.user.id} is saving item ${req.body.id}`)
-  try {
-    const result = await pool.query(
-      /*sql*/ `
-        INSERT INTO users_objects (
-          user_id,
-          object_id
-        ) VALUES ($1, $2);
-      `,
-      [req.user.id, req.body.id],
-    )
-    console.log(result)
-    res.sendStatus(201)
-  } catch (error) {
-    console.log('Error saving item: ', error)
-    res.sendStatus(500)
-  }
-})
+saved.put(
+  '/add',
+  validate(
+    z.object({
+      body: z.object({ id: z.number() }),
+    }),
+  ),
+  async (req, res) => {
+    if (!req.user) {
+      res.sendStatus(401)
+      return
+    }
+    if (!req.body.id) {
+      res.sendStatus(400)
+      return
+    }
+    console.log(`User with id ${req.user.id} is saving item ${req.body.id}`)
+    try {
+      const result = await pool.query(
+        /*sql*/ `
+          INSERT INTO users_objects (
+            user_id,
+            object_id
+          ) VALUES ($1, $2);
+        `,
+        [req.user.id, req.body.id],
+      )
+      console.log(result)
+      res.sendStatus(201)
+    } catch (error) {
+      console.log('Error saving item: ', error)
+      res.sendStatus(500)
+    }
+  },
+)
 
-saved.delete('/remove/:id', async (req, res) => {
-  if (!req.user) {
-    res.sendStatus(401)
-    return
-  }
-  if (!req.params.id) {
-    res.sendStatus(400)
-    return
-  }
-  try {
-    const result = await pool.query(
-      `DELETE FROM users_objects WHERE user_id = $1 AND object_id = $2`,
-      [req.user.id, req.params.id],
-    )
-    console.log(result)
-    res.sendStatus(200)
-  } catch (error) {
-    console.log('Error removing item: ', error)
-  }
-})
+saved.delete(
+  '/remove/:id',
+  validate(z.object({ params: z.object({ id: z.string() }) })),
+  async (req, res) => {
+    if (!req.user) {
+      res.sendStatus(401)
+      return
+    }
+    if (!req.params.id) {
+      res.sendStatus(400)
+      return
+    }
+    try {
+      const result = await pool.query(
+        `DELETE FROM users_objects WHERE user_id = $1 AND object_id = $2`,
+        [req.user.id, req.params.id],
+      )
+      console.log(result)
+      res.sendStatus(200)
+    } catch (error) {
+      console.log('Error removing item: ', error)
+    }
+  },
+)
 
 export default saved
