@@ -1,7 +1,7 @@
 import { verify } from '@node-rs/argon2'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
-import { DBUser } from '~typings/tables.ts'
+import type { DBUser } from '~typings/tables.ts'
 import { ARGON2_OPTIONS } from '../constants/security.ts'
 import pool from '../db/pool.ts'
 

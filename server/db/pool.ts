@@ -1,4 +1,4 @@
-import pg, { PoolConfig } from 'pg'
+import pg, { type PoolConfig } from 'pg'
 
 const dbUrl = process.env['DATABASE_URL']
 

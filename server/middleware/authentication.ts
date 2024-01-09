@@ -1,4 +1,4 @@
-import { RequestHandler } from 'express'
+import type { RequestHandler } from 'express'
 
 export const rejectUnauthenticated: RequestHandler = (req, res, next) => {
   // check if logged in

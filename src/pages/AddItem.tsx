@@ -26,11 +26,22 @@ import { toast } from '@/components/ui/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, type Control } from 'react-hook-form'
 import { z } from 'zod'
-import { OBJECT_TYPES } from '~shared/schemas'
+import {
+  AbsoluteMagnitudeSchemaPart,
+  ApparentMagnitudeSchemaPart,
+  ArcMinuteSchemaPart,
+  ArcSecondSchemaPart,
+  DistanceSchemaPart,
+  ItemNameSchemaPart,
+  MassSchemaPart,
+  NasaImageIdSchemaPart,
+  OBJECT_TYPES,
+  RedshiftSchemaPart,
+} from '~shared/schemas'
 import { useAppDispatch } from '../hooks/redux'
 
 const formSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required.' }),
+  name: ItemNameSchemaPart,
   type: OBJECT_TYPES,
   right_ascension: z.optional(
     z.object({
@@ -42,21 +53,16 @@ const formSchema = z.object({
   declination: z.optional(
     z.object({
       degrees: z.optional(z.coerce.number().min(-90).max(90)),
-      arcmin: z.optional(z.coerce.number().min(0).max(59)),
-      arcsec: z.optional(z.coerce.number().min(0).max(59)),
+      arcmin: ArcMinuteSchemaPart,
+      arcsec: ArcSecondSchemaPart,
     }),
   ),
-  distance: z.optional(
-    z.object({
-      value: z.optional(z.coerce.number().min(0)),
-      error: z.optional(z.coerce.number().min(0)),
-    }),
-  ),
-  apparent_magnitude: z.optional(z.coerce.number()),
-  absolute_magnitude: z.optional(z.coerce.number()),
-  mass: z.optional(z.coerce.number().min(0)),
-  redshift: z.optional(z.coerce.number().min(0)),
-  nasa_image_id: z.optional(z.string()),
+  distance: DistanceSchemaPart,
+  apparent_magnitude: ApparentMagnitudeSchemaPart,
+  absolute_magnitude: AbsoluteMagnitudeSchemaPart,
+  mass: MassSchemaPart,
+  redshift: RedshiftSchemaPart,
+  nasa_image_id: NasaImageIdSchemaPart,
 })
 
 export default function AddItem() {

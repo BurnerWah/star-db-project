@@ -1,4 +1,6 @@
-import { Declination } from '~typings/structs.ts'
+import type { z } from 'zod'
+import { ServerDeclinatorSchemaPart } from '~shared/schemas.ts'
+import type { Declination } from '~typings/structs.ts'
 
 /**
  * Converts a number of arc seconds into a Declination object
@@ -19,7 +21,9 @@ export function parseDeclination(declination: number): Declination {
  * @param declination A declination object
  * @returns A number of arcseconds
  */
-export function unparseDeclination(declination: Declination): number {
+export function unparseDeclination(
+  declination: NonNullable<z.infer<typeof ServerDeclinatorSchemaPart>>,
+): number {
   const { sign, degrees, arcmin, arcsec } = declination
   return sign * (degrees * 3600 + arcmin * 60 + arcsec)
 }

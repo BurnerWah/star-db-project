@@ -36,7 +36,7 @@ app.use(express.static('dist/client'))
 // App Set
 const PORT = process.env['PORT'] ?? 5001
 
-/** Listen * */
+// Listen
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`)
 })

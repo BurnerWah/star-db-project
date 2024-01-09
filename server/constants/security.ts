@@ -1,4 +1,4 @@
-import { Algorithm, Options as Argon2Options } from '@node-rs/argon2'
+import { Algorithm, type Options as Argon2Options } from '@node-rs/argon2'
 
 /**
  * Argon2 options

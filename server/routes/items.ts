@@ -118,7 +118,7 @@ items.get(
           ) AS s ON o.id = s.object_id
           WHERE o.id = $1;
         `,
-        [req.params['id'], req.user?.id],
+        [req.params.id, req.user?.id],
       )
       const row = result.rows[0]
       if (!row) {
