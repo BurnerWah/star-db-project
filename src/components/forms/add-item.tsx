@@ -25,6 +25,7 @@ import {
 import { toast } from '@/components/ui/use-toast'
 import { useAppDispatch } from '@/hooks/redux'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Diff } from 'lucide-react'
 import { useForm, type Control } from 'react-hook-form'
 import { z } from 'zod'
 import {
@@ -175,86 +176,110 @@ function RightAscensionInputs({ control }: SectionProps) {
 
 function DeclinationInputs({ control }: SectionProps) {
   return (
-    <>
-      <TypographyH3>Declination</TypographyH3>
-      <div className="grid grid-cols-3 gap-2">
-        <FormField
-          control={control}
-          name="declination.degrees"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Degrees</FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={control}
-          name="declination.arcmin"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Arc minutes</FormLabel>
-              <FormControl>
-                <Input type="number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={control}
-          name="declination.arcsec"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Arc seconds</FormLabel>
-              <FormControl>
-                <Input type="number" step="0.0001" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-    </>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Declination</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="grid grid-cols-3 gap-2">
+          <FormField
+            control={control}
+            name="declination.degrees"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Degrees</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name="declination.arcmin"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Arc minutes</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name="declination.arcsec"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Arc seconds</FormLabel>
+                <FormControl>
+                  <Input type="number" step="0.0001" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+      </PopoverContent>
+    </Popover>
   )
 }
 
 function DistanceInputs({ control }: SectionProps) {
   return (
-    <>
-      <TypographyH3>Distance</TypographyH3>
-      <div className="grid grid-cols-4 gap-2">
-        <FormField
-          control={control}
-          name="distance.value"
-          render={({ field }) => (
-            <FormItem className="col-span-3">
-              <FormLabel>Distance in Light Years</FormLabel>
-              <FormControl>
-                <Input type="number" step="0.0001" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={control}
-          name="distance.error"
-          render={({ field }) => (
-            <FormItem className="col-span-1">
-              <FormLabel>Margin of error</FormLabel>
-              <FormControl>
-                <Input type="number" step="0.0001" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-    </>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Distance</Button>
+      </PopoverTrigger>
+      <PopoverContent className="min-w-fit">
+        <div className="grid grid-cols-5 gap-2">
+          <div className="col-span-3 flex">
+            <FormField
+              control={control}
+              name="distance.value"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      aria-label="Distance in light years"
+                      type="number"
+                      step="0.0001"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Diff className="inline-block" />
+          </div>
+          <div className="col-span-2 flex">
+            <FormField
+              control={control}
+              name="distance.error"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      aria-label="Margin of error"
+                      type="number"
+                      step="0.0001"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+        <FormDescription>
+          Distance in Light Years with a margin of error
+        </FormDescription>
+      </PopoverContent>
+    </Popover>
   )
 }
 
