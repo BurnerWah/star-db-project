@@ -1,8 +1,8 @@
-import axios, { AxiosResponse } from 'axios'
-import { SagaIterator } from 'redux-saga'
+import axios, { type AxiosResponse } from 'axios'
+import { type SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
-import { SaveItemSaga, UnsaveItemSaga } from '~typings/actions'
-import { ItemSaveBody, ListItemsBody } from '~typings/requests'
+import type { SaveItemSaga, UnsaveItemSaga } from '~typings/actions'
+import type { ItemSaveBody, ListItemsBody } from '~typings/requests'
 import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
 

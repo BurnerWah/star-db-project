@@ -1,6 +1,6 @@
-import { Reducer } from 'redux'
-import { SetUser, UnsetUser } from '~typings/actions'
-import { UserResponse } from '~typings/requests'
+import { type Reducer } from 'redux'
+import type { SetUser, UnsetUser } from '~typings/actions'
+import type { UserResponse } from '~typings/requests'
 
 const user: Reducer<
   Readonly<UserResponse | Record<string, never>>,

@@ -1,7 +1,7 @@
-import axios, { AxiosError } from 'axios'
-import { SagaIterator } from 'redux-saga'
+import axios, { type AxiosError } from 'axios'
+import type { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
-import { LoginSaga } from '~typings/actions'
+import type { LoginSaga } from '~typings/actions'
 import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
 

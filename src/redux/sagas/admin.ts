@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { SagaIterator } from 'redux-saga'
+import { type SagaIterator } from 'redux-saga'
 import { call, takeEvery } from 'redux-saga/effects'
-import { AdminAddItemSaga, AdminDeleteItemSaga } from '~typings/actions'
-import { ItemSubmission } from '~typings/requests'
+import type { AdminAddItemSaga, AdminDeleteItemSaga } from '~typings/actions'
+import type { ItemSubmission } from '~typings/requests'
 import { withCredentials } from '../../constants/axios'
 import {
   prepareDeclination,

@@ -1,5 +1,5 @@
-import { Reducer, combineReducers } from 'redux'
-import { SetUserInitialized } from '~typings/actions'
+import { combineReducers, type Reducer } from 'redux'
+import type { SetUserInitialized } from '~typings/actions'
 
 /**
  * A reducer that says whether the user has been initialized.

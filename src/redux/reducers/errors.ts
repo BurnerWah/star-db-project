@@ -1,5 +1,5 @@
-import { Reducer, combineReducers } from 'redux'
-import {
+import { combineReducers, type Reducer } from 'redux'
+import type {
   ClearLoginError,
   ClearRegistrationError,
   LoginFailed,

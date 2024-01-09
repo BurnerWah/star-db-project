@@ -1,8 +1,8 @@
-import axios, { AxiosResponse } from 'axios'
-import { SagaIterator } from 'redux-saga'
+import axios, { type AxiosResponse } from 'axios'
+import { type SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
-import { FetchItemDetailsSaga } from '~typings/actions'
-import { ItemDetails } from '~typings/requests'
+import type { FetchItemDetailsSaga } from '~typings/actions'
+import type { ItemDetails } from '~typings/requests'
 import { put } from '../../hooks/redux'
 
 function* fetchItemDetails({ payload }: FetchItemDetailsSaga): SagaIterator {

@@ -1,6 +1,6 @@
-import { Reducer } from 'redux'
-import { SetListItems, UnsetListItems } from '~typings/actions'
-import { ListItem } from '~typings/requests'
+import { type Reducer } from 'redux'
+import type { SetListItems, UnsetListItems } from '~typings/actions'
+import type { ListItem } from '~typings/requests'
 
 const listItems: Reducer<ListItem[], SetListItems | UnsetListItems> = (
   state = [],

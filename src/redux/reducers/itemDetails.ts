@@ -1,6 +1,6 @@
-import { Reducer } from 'redux'
-import { SetItemDetails, UnsetItemDetails } from '~typings/actions'
-import { ItemDetails } from '~typings/requests'
+import { type Reducer } from 'redux'
+import type { SetItemDetails, UnsetItemDetails } from '~typings/actions'
+import type { ItemDetails } from '~typings/requests'
 
 const itemDetails: Reducer<
   Readonly<ItemDetails | Record<string, never>>,
