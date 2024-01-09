@@ -7,6 +7,13 @@ interface OtherPageInfo {
   text: string
 }
 
+/**
+ * Shared layout for login and registration pages.
+ * Based on shadcn/ui's Authentication example, with some small changes like
+ * adding the JWST deep field BG image and making the code more generic.
+ * @see {@link https://ui.shadcn.com/examples/authentication shadcn/ui - Authentication example}
+ * @see {@link https://github.com/shadcn-ui/ui/blob/main/apps/www/app/examples/authentication/page.tsx shadcn/ui - Authentication example source code}
+ */
 export function AuthLayout({
   otherPage,
   title,
