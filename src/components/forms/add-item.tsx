@@ -69,6 +69,11 @@ export function AddItemForm() {
 
 type SectionProps = Readonly<{ control: Control<z.infer<typeof formSchema>> }>
 
+const patterns = {
+  decimal: '[\\d.,]*',
+  numeric: '\\d*',
+}
+
 function MainInputs({ control }: SectionProps) {
   return (
     <div className="grid grid-cols-4 gap-2">
@@ -136,7 +141,12 @@ function RightAscensionPopover({ control }: SectionProps) {
               <FormItem>
                 <FormLabel>Hours</FormLabel>
                 <FormControl>
-                  <Input type="number" {...field} />
+                  <Input
+                    type="text"
+                    inputMode="numeric"
+                    pattern={patterns.numeric}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -149,7 +159,12 @@ function RightAscensionPopover({ control }: SectionProps) {
               <FormItem>
                 <FormLabel>Minutes</FormLabel>
                 <FormControl>
-                  <Input type="number" {...field} />
+                  <Input
+                    type="text"
+                    inputMode="numeric"
+                    pattern={patterns.numeric}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -162,7 +177,12 @@ function RightAscensionPopover({ control }: SectionProps) {
               <FormItem>
                 <FormLabel>Seconds</FormLabel>
                 <FormControl>
-                  <Input type="number" step="0.0001" {...field} />
+                  <Input
+                    type="text"
+                    inputMode="decimal"
+                    pattern={patterns.decimal}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -189,7 +209,12 @@ function DeclinationPopover({ control }: SectionProps) {
               <FormItem>
                 <FormLabel>Degrees</FormLabel>
                 <FormControl>
-                  <Input type="number" {...field} />
+                  <Input
+                    type="text"
+                    inputMode="numeric"
+                    pattern={patterns.numeric}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -202,7 +227,12 @@ function DeclinationPopover({ control }: SectionProps) {
               <FormItem>
                 <FormLabel>Arc minutes</FormLabel>
                 <FormControl>
-                  <Input type="number" {...field} />
+                  <Input
+                    type="text"
+                    inputMode="numeric"
+                    pattern={patterns.numeric}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -215,7 +245,12 @@ function DeclinationPopover({ control }: SectionProps) {
               <FormItem>
                 <FormLabel>Arc seconds</FormLabel>
                 <FormControl>
-                  <Input type="number" step="0.0001" {...field} />
+                  <Input
+                    type="text"
+                    inputMode="decimal"
+                    pattern={patterns.decimal}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -244,8 +279,9 @@ function DistancePopover({ control }: SectionProps) {
                   <FormControl>
                     <Input
                       aria-label="Distance in light years"
-                      type="number"
-                      step="0.0001"
+                      type="text"
+                      inputMode="decimal"
+                      pattern={patterns.decimal}
                       {...field}
                     />
                   </FormControl>
@@ -264,8 +300,9 @@ function DistancePopover({ control }: SectionProps) {
                   <FormControl>
                     <Input
                       aria-label="Margin of error"
-                      type="number"
-                      step="0.0001"
+                      type="text"
+                      inputMode="decimal"
+                      pattern={patterns.decimal}
                       {...field}
                     />
                   </FormControl>
@@ -295,7 +332,12 @@ function OtherInputs({ control }: SectionProps) {
             <FormItem>
               <FormLabel>Apparent Magnitude</FormLabel>
               <FormControl>
-                <Input type="number" step="0.0001" {...field} />
+                <Input
+                  type="text"
+                  inputMode="decimal"
+                  pattern={patterns.decimal}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -308,7 +350,12 @@ function OtherInputs({ control }: SectionProps) {
             <FormItem>
               <FormLabel>Absolute Magnitude</FormLabel>
               <FormControl>
-                <Input type="number" step="0.0001" {...field} />
+                <Input
+                  type="text"
+                  inputMode="decimal"
+                  pattern={patterns.decimal}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -322,7 +369,12 @@ function OtherInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Mass</FormLabel>
             <FormControl>
-              <Input type="number" step="0.0001" {...field} />
+              <Input
+                type="text"
+                inputMode="decimal"
+                pattern={patterns.decimal}
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -335,7 +387,12 @@ function OtherInputs({ control }: SectionProps) {
           <FormItem>
             <FormLabel>Redshift</FormLabel>
             <FormControl>
-              <Input type="number" step="0.0001" {...field} />
+              <Input
+                type="text"
+                inputMode="decimal"
+                pattern={patterns.decimal}
+                {...field}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
