@@ -6,16 +6,16 @@ import Header from './Header'
 
 export function Layout() {
   return (
-    <div>
-      <body>
+    <body className="min-h-screen">
+      <Command />
+      <div className="relative flex min-h-screen flex-col">
         <Header />
-        <Command />
-        <main className="p-5">
+        <main className="flex-1">
           <Outlet />
         </main>
-        <Toaster />
         <Footer />
-      </body>
-    </div>
+      </div>
+      <Toaster />
+    </body>
   )
 }
