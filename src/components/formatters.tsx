@@ -1,5 +1,5 @@
 import TeX from '@matejmazur/react-katex'
-import { Declination, MeasurementWithUncertainty } from '~typings/structs'
+import type { Declination, MeasurementWithUncertainty } from '~typings/structs'
 
 // This has a bunch of TeX components so that they can be reused in multiple
 // places.

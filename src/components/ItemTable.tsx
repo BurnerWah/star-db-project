@@ -13,9 +13,9 @@ import { createColumnHelper, type ColumnDef } from '@tanstack/react-table'
 import { MoreHorizontal } from 'lucide-react'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Actions from '~typings/actions'
-import { type ListItem } from '~typings/requests'
-import { Declination, MeasurementWithUncertainty } from '~typings/structs'
+import type Actions from '~typings/actions'
+import type { ListItem } from '~typings/requests'
+import type { Declination, MeasurementWithUncertainty } from '~typings/structs'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import {
   DeclinationTeX,

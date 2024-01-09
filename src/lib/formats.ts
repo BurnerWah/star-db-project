@@ -1,10 +1,10 @@
-import { ZObjectType } from '~shared/schemas'
-import {
+import type { ZObjectType } from '~shared/schemas'
+import type {
   DeclinationInput,
   DistanceInput,
   RightAscensionInput,
 } from '~typings/inputs'
-import { Declination, MeasurementWithUncertainty } from '~typings/structs'
+import type { Declination, MeasurementWithUncertainty } from '~typings/structs'
 import { EDBObjectTypes } from '~typings/tables'
 
 export function prepareDeclination(

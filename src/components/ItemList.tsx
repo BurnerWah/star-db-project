@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Actions from '~typings/actions'
+import type Actions from '~typings/actions'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
 export default function ItemList<A extends Actions>({ action }: { action: A }) {

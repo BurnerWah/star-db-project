@@ -1,6 +1,10 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { PutEffect, put as originalPut } from 'redux-saga/effects'
-import Actions, { AppDispatch } from '~typings/actions'
+import {
+  useDispatch,
+  useSelector,
+  type TypedUseSelectorHook,
+} from 'react-redux'
+import { put as originalPut, type PutEffect } from 'redux-saga/effects'
+import Actions, { type AppDispatch } from '~typings/actions'
 import type { RootState } from '../redux/store'
 
 // See https://redux.js.org/usage/usage-with-typescript#define-typed-hooks

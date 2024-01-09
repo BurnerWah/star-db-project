@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { HTMLAttributes } from 'react'
+import { type HTMLAttributes } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useAppSelector } from '../../hooks/redux'
 import LogOutButton from '../LogOutButton'
