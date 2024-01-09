@@ -1,4 +1,4 @@
-import jwstDeepField from '@/assets/images/jwst-deep-field.png'
+import jwstDeepField from '@/assets/images/jwst-deep-field.png?format=webp'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Link, To } from 'react-router-dom'
