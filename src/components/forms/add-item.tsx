@@ -25,7 +25,7 @@ import {
 import { toast } from '@/components/ui/use-toast'
 import { useAppDispatch } from '@/hooks/redux'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Diff } from 'lucide-react'
+import { Diff, ListRestart } from 'lucide-react'
 import { useForm, type Control } from 'react-hook-form'
 import { z } from 'zod'
 import {
@@ -62,6 +62,10 @@ export function AddItemForm() {
         <DistancePopover control={form.control} />
         <OtherInputs control={form.control} />
         <Button type="submit">Submit</Button>
+        <Button type="reset" variant="outline">
+          <ListRestart className="mr-2 h-4 w-4" />
+          Reset
+        </Button>
       </form>
     </Form>
   )
