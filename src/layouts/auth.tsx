@@ -1,3 +1,4 @@
+import jwstDeepField from '@/assets/images/jwst-deep-field.png'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Link, To } from 'react-router-dom'
@@ -35,7 +36,9 @@ export function AuthLayout({
         {otherPage.text}
       </Link>
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-        <div className={cn('absolute inset-0', 'bg-jwst-deep-field')} />
+        <picture className="absolute inset-0">
+          <img src={jwstDeepField} alt="JWST Deep Field" />
+        </picture>
         <div className="relative z-20 flex items-center text-lg font-medium">
           StarForge
         </div>
