@@ -1,4 +1,7 @@
-import jwstDeepField from '@/assets/images/jwst-deep-field.png?format=webp'
+import jwstDeepField from '@/assets/images/jwst-deep-field.png?w=1200&format=webp'
+import jwstDeepFieldsAvif from '@/assets/images/jwst-deep-field.png?w=500;700;900;1200&format=avif&as=srcset'
+import jwstDeepFieldsJpeg from '@/assets/images/jwst-deep-field.png?w=500;700;900;1200&format=jpeg&as=srcset'
+import jwstDeepFieldsWebp from '@/assets/images/jwst-deep-field.png?w=500;700;900;1200&format=webp&as=srcset'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Link, To } from 'react-router-dom'
@@ -37,6 +40,12 @@ export function AuthLayout({
       </Link>
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
         <picture className="absolute inset-0">
+          {/* AVIF conversion is very slow and should be avoided in development builds */}
+          {import.meta.env.PROD && (
+            <source srcSet={jwstDeepFieldsAvif} type="image/avif" />
+          )}
+          <source srcSet={jwstDeepFieldsWebp} type="image/webp" />
+          <source srcSet={jwstDeepFieldsJpeg} type="image/jpeg" />
           <img src={jwstDeepField} alt="JWST Deep Field" />
         </picture>
         <div className="relative z-20 flex items-center text-lg font-medium">

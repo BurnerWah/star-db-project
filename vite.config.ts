@@ -4,8 +4,8 @@ import { imagetools } from 'vite-imagetools'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  plugins: [react(), tsconfigPaths(), mode === 'production' && imagetools()],
+export default defineConfig({
+  plugins: [react(), tsconfigPaths(), imagetools()],
   build: {
     outDir: 'dist/client',
   },
@@ -14,4 +14,4 @@ export default defineConfig(({ mode }) => ({
       '/api': 'http://localhost:5001',
     },
   },
-}))
+})
