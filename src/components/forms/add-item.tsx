@@ -48,8 +48,7 @@ export function AddItemForm() {
         </TypographyInlineCode>
       ),
     })
-    // Commented out while testing invalid inputs and designing the form
-    // dispatch({ type: 'api/admin/addItem', payload: values })
+    dispatch({ type: 'api/admin/addItem', payload: values })
     form.reset()
   }
 
