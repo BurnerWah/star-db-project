@@ -55,20 +55,27 @@ export function AddItemForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        className="flex flex-col gap-2"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         <MainInputs control={form.control} />
-        <RightAscensionPopover control={form.control} />
-        <DeclinationPopover control={form.control} />
-        <DistancePopover control={form.control} />
+        <div className="flex gap-2">
+          <RightAscensionPopover control={form.control} />
+          <DeclinationPopover control={form.control} />
+          <DistancePopover control={form.control} />
+        </div>
         <OtherInputs control={form.control} />
-        <Button type="submit">
-          <Upload className="mr-2 h-4 w-4" />
-          Submit
-        </Button>
-        <Button type="reset" variant="outline">
-          <ListRestart className="mr-2 h-4 w-4" />
-          Reset
-        </Button>
+        <div className="flex gap-2">
+          <Button type="submit">
+            <Upload className="mr-2 h-4 w-4" />
+            Submit
+          </Button>
+          <Button type="reset" variant="outline">
+            <ListRestart className="mr-2 h-4 w-4" />
+            Reset
+          </Button>
+        </div>
       </form>
     </Form>
   )
