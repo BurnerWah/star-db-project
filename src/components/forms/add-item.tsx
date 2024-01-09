@@ -127,6 +127,7 @@ function RightAscensionInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -139,6 +140,7 @@ function RightAscensionInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -151,6 +153,7 @@ function RightAscensionInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" step="0.0001" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -171,6 +174,7 @@ function DeclinationInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -183,6 +187,7 @@ function DeclinationInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -195,6 +200,7 @@ function DeclinationInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" step="0.0001" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -215,6 +221,7 @@ function DistanceInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" step="0.0001" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -227,6 +234,7 @@ function DistanceInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" step="0.0001" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -247,6 +255,7 @@ function OtherInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" step="0.0001" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -259,6 +268,7 @@ function OtherInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" step="0.0001" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -271,6 +281,7 @@ function OtherInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" step="0.0001" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -283,6 +294,7 @@ function OtherInputs({ control }: SectionProps) {
             <FormControl>
               <Input type="number" step="0.0001" {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -295,6 +307,7 @@ function OtherInputs({ control }: SectionProps) {
             <FormControl>
               <Input {...field} />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
