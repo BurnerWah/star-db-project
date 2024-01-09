@@ -1,14 +1,21 @@
 import { RequireNotAuth } from '@/components/auth'
 import { LoginForm } from '@/components/forms/Login'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
-  const navigate = useNavigate()
-
   return (
     <div className="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <Link
+        to="/registration"
+        className={cn(
+          buttonVariants({ variant: 'ghost' }),
+          'absolute right-4 top-4 md:right-8 md:top-8',
+        )}
+      >
+        Register
+      </Link>
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
         <div className={cn('absolute inset-0', 'bg-jwst-deep-field')} />
         <div className="relative z-20 flex items-center text-lg font-medium">
@@ -34,15 +41,6 @@ export default function Login() {
             <h1 className="text-2xl font-semibold tracking-tight">Login</h1>
           </div>
           <LoginForm />
-          <Button
-            type="button"
-            className="btn btn_asLink"
-            onClick={() => {
-              navigate('/registration')
-            }}
-          >
-            Register
-          </Button>
         </div>
       </div>
     </div>
