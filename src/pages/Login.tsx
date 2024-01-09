@@ -1,5 +1,4 @@
 import { RequireNotAuth } from '@/components/auth'
-import { TypographyH2 } from '@/components/typography'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -31,53 +30,66 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <TypographyH2>Login</TypographyH2>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input required {...field} />
-                </FormControl>
-                <FormDescription>Enter your username.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" required {...field} />
-                </FormControl>
-                <FormDescription>Enter your password.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Login</Button>
-        </form>
-      </Form>
+    <div className="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+        <div className="absolute inset-0 bg-zinc-900" />
+        <div className="relative z-20 flex items-center text-lg font-medium">
+          StarForge
+        </div>
+      </div>
+      <div className="lg:p-8">
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+          <div className="flex flex-col space-y-2 text-center">
+            <h1 className="text-2xl font-semibold tracking-tight">Login</h1>
+          </div>
+          {/* <TypographyH2>Login</TypographyH2> */}
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input required {...field} />
+                    </FormControl>
+                    <FormDescription>Enter your username.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" required {...field} />
+                    </FormControl>
+                    <FormDescription>Enter your password.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Login</Button>
+            </form>
+          </Form>
 
-      <center>
-        <Button
-          type="button"
-          className="btn btn_asLink"
-          onClick={() => {
-            navigate('/registration')
-          }}
-        >
-          Register
-        </Button>
-      </center>
+          {/* <center> */}
+          <Button
+            type="button"
+            className="btn btn_asLink"
+            onClick={() => {
+              navigate('/registration')
+            }}
+          >
+            Register
+          </Button>
+          {/* </center> */}
+        </div>
+      </div>
     </div>
   )
 }
