@@ -9,8 +9,9 @@
     "isolatedModules": false,
     "noEmit": true,
     "paths": {
-      "~typings/*": ["./types/*"]
+      "~typings/*": ["./types/*"],
+      "~shared/*": ["./shared/*"]
     }
   },
-  "include": ["server", "types"]
+  "include": ["server", "types", "shared"]
 }
