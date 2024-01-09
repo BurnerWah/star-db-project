@@ -57,9 +57,9 @@ export function AddItemForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <MainInputs control={form.control} />
-        <RightAscensionInputs control={form.control} />
-        <DeclinationInputs control={form.control} />
-        <DistanceInputs control={form.control} />
+        <RightAscensionPopover control={form.control} />
+        <DeclinationPopover control={form.control} />
+        <DistancePopover control={form.control} />
         <OtherInputs control={form.control} />
         <Button type="submit">Submit</Button>
       </form>
@@ -121,7 +121,7 @@ function MainInputs({ control }: SectionProps) {
   )
 }
 
-function RightAscensionInputs({ control }: SectionProps) {
+function RightAscensionPopover({ control }: SectionProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -174,7 +174,7 @@ function RightAscensionInputs({ control }: SectionProps) {
   )
 }
 
-function DeclinationInputs({ control }: SectionProps) {
+function DeclinationPopover({ control }: SectionProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -227,7 +227,7 @@ function DeclinationInputs({ control }: SectionProps) {
   )
 }
 
-function DistanceInputs({ control }: SectionProps) {
+function DistancePopover({ control }: SectionProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
