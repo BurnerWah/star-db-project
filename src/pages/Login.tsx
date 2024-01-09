@@ -1,5 +1,5 @@
 import { RequireNotAuth } from '@/components/auth'
-import { LoginForm } from '@/components/forms/Login'
+import { LoginForm } from '@/components/forms/login'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Link } from 'react-router-dom'
