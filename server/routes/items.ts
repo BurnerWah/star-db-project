@@ -64,7 +64,7 @@ items.get(
           LIMIT 5 OFFSET 5 * ($2 - 1)
           ;
         `,
-        [req.query.search ?? '', req.query.page],
+        [req.query.search ?? '', req.query.page ?? 1],
       )
       const items: ParsedItem[] = result.rows.map((item) => ({
         id: item.id,
