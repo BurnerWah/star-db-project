@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import morgan from 'morgan'
+import path from 'node:path'
 import session from './middleware/session.ts'
 import admin from './routes/admin.ts'
 import items from './routes/items.ts'
@@ -32,6 +33,10 @@ app.use('/api/admin', admin)
 
 // Serve static files
 app.use(express.static('dist/client'))
+// Fallback for client-side routing
+app.get('*', (_req, res) => {
+  res.sendFile(path.resolve('dist/client/index.html'))
+})
 
 // App Set
 const PORT = process.env['PORT'] ?? 5001
