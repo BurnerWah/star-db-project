@@ -58,5 +58,5 @@ export interface ItemSaveBody {
 export interface ListingResponse {
   page: number
   pageCount: number
-  items: ParsedItem[]
+  items: ListItem[]
 }
