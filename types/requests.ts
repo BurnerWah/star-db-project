@@ -54,3 +54,9 @@ export interface ItemSubmission {
 export interface ItemSaveBody {
   id: DBObject['id']
 }
+
+export interface ListingResponse {
+  page: number
+  count: number
+  items: ParsedItem[]
+}
