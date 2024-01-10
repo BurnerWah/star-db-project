@@ -11,6 +11,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { useAppDispatch } from '@/hooks/redux'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { UserPlus } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { RegisterSchema } from '~shared/schemas'
@@ -60,7 +61,9 @@ export function RegisterForm() {
               )}
             />
           </div>
-          <Button type="submit">Register</Button>
+          <Button type="submit">
+            <UserPlus className="mr-2 h-4 w-4" /> Register
+          </Button>
         </div>
       </form>
     </Form>

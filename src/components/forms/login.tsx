@@ -11,6 +11,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { useAppDispatch } from '@/hooks/redux'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LogIn } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { LoginSchema } from '~shared/schemas'
@@ -59,7 +60,10 @@ export function LoginForm() {
               )}
             />
           </div>
-          <Button type="submit">Login</Button>
+          <Button type="submit">
+            <LogIn className="mr-2 h-4 w-4" />
+            Login
+          </Button>
         </div>
       </form>
     </Form>
