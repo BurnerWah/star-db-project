@@ -4,6 +4,7 @@ import { ItemListingQuerySchema } from '~shared/schemas.ts'
 import type { ItemDetails, ListingResponse } from '~typings/requests.ts'
 import type { ParsedItem } from '~typings/structs.ts'
 import type { DBObject, DBObjectType } from '~typings/tables.ts'
+import { LISTING_PAGE_SIZE } from '../constants/queries.ts'
 import { parseDeclination } from '../db/normalizers.ts'
 import pool from '../db/pool.ts'
 import { validate } from '../middleware/validator.ts'
@@ -59,10 +60,10 @@ items.get(
             o.name ILIKE '%' || $1 || '%'
           ORDER BY
             o.name
-          LIMIT 5 OFFSET 5 * ($2 - 1)
+          LIMIT $3 OFFSET $3 * ($2 - 1)
           ;
         `,
-        [req.query.search ?? '', req.query.page ?? 1],
+        [req.query.search ?? '', req.query.page ?? 1, LISTING_PAGE_SIZE],
       )
       const items: ParsedItem[] = result.rows.map((item) => ({
         id: item.id,
@@ -90,7 +91,7 @@ items.get(
       const total_rows = result.rows[0]?.total_rows ?? 0
       res.send({
         page: req.query.page ?? 1,
-        pageCount: Math.ceil(total_rows / 5),
+        pageCount: Math.ceil(total_rows / LISTING_PAGE_SIZE),
         items,
       } as ListingResponse)
     } catch (error) {
