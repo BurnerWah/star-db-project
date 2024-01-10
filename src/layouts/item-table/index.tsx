@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { useEffect, type ReactNode } from 'react'
-import type Actions from '~typings/actions'
+import { FetchListItemsSaga, ListSavedItemsSaga } from '~typings/actions'
 import { columns } from './columns'
 import { DataTable } from './data-table'
 
-export function ItemTable<A extends Actions>({
+export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
   action,
   title,
 }: Readonly<{ action: A; title?: string }>) {
