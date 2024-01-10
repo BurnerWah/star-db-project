@@ -11,6 +11,4 @@ export default defineConfig((options) => ({
   target: 'node20',
   onSuccess: options.watch ? 'node dist/server/server.js' : undefined,
   ignoreWatch: ['dist', 'src', 'documentation', 'public'],
-  // I'd love to define what to watch here but tsup doesn't allow that without
-  // a lot of jank.
 }))
