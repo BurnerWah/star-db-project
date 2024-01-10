@@ -4,6 +4,7 @@ import {
   MassTeX,
   RightAscensionTeX,
 } from '@/components/formatters'
+import { TypographyH2 } from '@/components/typography'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -109,7 +110,8 @@ const columns = [
 
 export function ItemTable<A extends Actions>({
   action,
-}: Readonly<{ action: A }>) {
+  title,
+}: Readonly<{ action: A; title: string }>) {
   const dispatch = useAppDispatch()
   const listItems = useAppSelector((state) => state.listItems)
 
@@ -117,5 +119,10 @@ export function ItemTable<A extends Actions>({
     dispatch(action)
   }, [action, dispatch])
 
-  return <DataTable columns={columns} data={listItems} />
+  return (
+    <>
+      <TypographyH2>{title}</TypographyH2>
+      <DataTable columns={columns} data={listItems} />
+    </>
+  )
 }
