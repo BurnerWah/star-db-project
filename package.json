@@ -99,5 +99,10 @@
     "vite-imagetools": "^6.2.9",
     "vite-tsconfig-paths": "^4.2.3"
   },
+  "overrides": {
+    "cmdk": {
+      "@radix-ui/react-dialog": "$@radix-ui/react-dialog"
+    }
+  },
   "heroku-run-build-script": true
 }
