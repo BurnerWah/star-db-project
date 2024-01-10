@@ -7,7 +7,7 @@ import type {
 } from './inputs'
 import type {
   ItemDetails,
-  ListItem,
+  ListingResponse,
   LoginBody,
   RegisterBody,
   UserResponse,
@@ -27,7 +27,7 @@ export type RegistrationInputError = Action<'errors/registration/input'>
 export type RegistrationFailed = Action<'errors/registration/fail'>
 
 export interface SetListItems extends Action<'listItems/set'> {
-  payload: ListItem[]
+  payload: ListingResponse
 }
 export type UnsetListItems = Action<'listItems/unset'>
 

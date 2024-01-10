@@ -1,16 +1,16 @@
 import { type Reducer } from 'redux'
 import type { SetListItems, UnsetListItems } from '~typings/actions'
-import type { ListItem } from '~typings/requests'
+import type { ListingResponse } from '~typings/requests'
 
-const listItems: Reducer<ListItem[], SetListItems | UnsetListItems> = (
-  state = [],
-  action,
-) => {
+const listItems: Reducer<
+  ListingResponse | Record<string, never>,
+  SetListItems | UnsetListItems
+> = (state = {}, action) => {
   switch (action.type) {
     case 'listItems/set':
       return action.payload
     case 'listItems/unset':
-      return []
+      return {}
     default:
       return state
   }
