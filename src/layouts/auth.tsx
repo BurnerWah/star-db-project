@@ -49,9 +49,12 @@ export function AuthLayout({
           <source srcSet={jwstDeepFieldsJpeg} type="image/jpeg" />
           <img src={jwstDeepField} alt="JWST Deep Field" />
         </picture>
-        <div className="relative z-20 flex items-center text-lg font-medium">
+        <Link
+          to="/home"
+          className="relative z-20 flex items-center text-lg font-medium"
+        >
           <Orbit /> StarForge
-        </div>
+        </Link>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
