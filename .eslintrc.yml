@@ -14,7 +14,21 @@ parserOptions:
 # I generally prefer rules and settings to be configured everywhere in case I
 # want to enable a plugin in another place
 rules:
-  react-refresh/only-export-components: 'warn'
+  react-refresh/only-export-components: warn
+  jsx-a11y/autocomplete-valid:
+    - error
+    - inputComponents:
+        - Input
+  jsx-a11y/heading-has-content:
+    - error
+    - components:
+        - TypographyH1
+        - TypographyH2
+        - TypographyH3
+        - TypographyH4
+        - AlertTitle
+        - CardTitle
+        - DialogTitle
 
 settings:
   react:
