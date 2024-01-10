@@ -19,3 +19,5 @@ export function Component() {
     </RequireAdmin>
   )
 }
+
+Component.displayName = 'LazyAddItem'

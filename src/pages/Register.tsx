@@ -17,3 +17,5 @@ export function Component() {
     </RequireNotAuth>
   )
 }
+
+Component.displayName = 'LazyRegister'

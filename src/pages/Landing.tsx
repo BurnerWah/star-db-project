@@ -75,3 +75,5 @@ export function Component() {
     </RequireNotAuth>
   )
 }
+
+Component.displayName = 'LazyLanding'

@@ -25,3 +25,5 @@ export function Component() {
     </RequireAuth>
   )
 }
+
+Component.displayName = 'LazyUser'

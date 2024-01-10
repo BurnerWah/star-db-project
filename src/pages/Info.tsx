@@ -15,3 +15,5 @@ export function Component() {
     </RequireAuth>
   )
 }
+
+Component.displayName = 'LazyInfo'
