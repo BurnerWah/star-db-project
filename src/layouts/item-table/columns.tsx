@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import TeX from '@matejmazur/react-katex'
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table'
+import 'katex/dist/katex.min.css'
 import { MoreHorizontal } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { ListItem } from '~typings/requests'

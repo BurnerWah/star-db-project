@@ -1,4 +1,5 @@
 import TeX from '@matejmazur/react-katex'
+import 'katex/dist/katex.min.css'
 import type { Declination, MeasurementWithUncertainty } from '~typings/structs'
 
 // This has a bunch of TeX components so that they can be reused in multiple

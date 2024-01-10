@@ -1,4 +1,3 @@
-import 'katex/dist/katex.min.css'
 import { useEffect } from 'react'
 import {
   Navigate,
