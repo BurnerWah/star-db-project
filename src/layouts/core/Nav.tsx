@@ -1,54 +1,96 @@
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+} from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils'
-import { type HTMLAttributes } from 'react'
-import { NavLink } from 'react-router-dom'
-import LogOutButton from '../../components/LogOutButton'
-import { TypographyH2 } from '../../components/typography'
-import { useAppSelector } from '../../hooks/redux'
-
-interface LinkInfo {
-  title: string
-  href: string
-  predicate?: () => boolean
-}
+import { Orbit } from 'lucide-react'
+import {
+  forwardRef,
+  type ComponentProps,
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+  type HTMLAttributes,
+} from 'react'
+import { Link, NavLink, type NavLinkProps } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 
 export default function Nav({
   className,
-  ...props
 }: Readonly<HTMLAttributes<HTMLElement>>) {
   const user = useAppSelector((store) => store.user)
+  const dispatch = useAppDispatch()
 
   // This lets me define the nav a bit faster
-  const links: LinkInfo[] = [
-    { title: 'Login / Register', href: '/login', predicate: () => !user.id },
-    { title: 'Home', href: '/user', predicate: () => Boolean(user.id) },
-    { title: 'Info Page', href: '/info', predicate: () => Boolean(user.id) },
-    { title: 'Saved Items', href: '/saved', predicate: () => Boolean(user.id) },
-    { title: 'Add Item', href: '/add', predicate: () => user.administrator },
-    { title: 'About', href: '/about' },
-    { title: 'List Items', href: '/list' },
+  const links: ComponentProps<typeof ConditionalNavLink>[] = [
+    { to: '/list', children: 'List Items' },
+    { to: '/about', children: 'About' },
+    { to: '/login', children: 'Login', predicate: () => !user.id },
+    { to: '/registration', children: 'Register', predicate: () => !user.id },
+    { to: '/user', children: 'User Info', predicate: () => Boolean(user.id) },
+    { to: '/info', children: 'Info Page', predicate: () => Boolean(user.id) },
+    { to: '/saved', children: 'Saved', predicate: () => Boolean(user.id) },
+    { to: '/add', children: 'Add Item', predicate: () => user.administrator },
   ]
 
   return (
-    <nav
-      className={cn('flex items-center space-x-4 lg:space-x-6', className)}
-      {...props}
-    >
-      <NavLink to="/home">
-        <TypographyH2>StarForge</TypographyH2>
-      </NavLink>
-      {links.map((link) => (
-        <LinkFromInfo info={link} key={link.href} />
-      ))}
-      {/* I'd like to get rid of the LogOutButton component here eventually */}
-      {user.id && <LogOutButton />}
-    </nav>
+    <div className={cn('mr-4 hidden md:flex', className)}>
+      <Link to="/home" className="mr-6 flex items-center space-x-2">
+        <Orbit />
+        <span className="hidden font-bold sm:inline-block">StarForge</span>
+      </Link>
+      <nav>
+        <NavigationMenu>
+          <NavigationMenuList className="gap-6">
+            {links.map((props) => (
+              <ConditionalNavLink key={props.to} {...props} />
+            ))}
+            {user.id && (
+              <NavigationMenuItem>
+                <button
+                  className="text-foreground/60 transition-colors hover:text-foreground/80"
+                  onClick={() => dispatch({ type: 'api/auth/logout' })}
+                >
+                  Log Out
+                </button>
+              </NavigationMenuItem>
+            )}
+          </NavigationMenuList>
+        </NavigationMenu>
+      </nav>
+    </div>
   )
 }
 
-function LinkFromInfo({ info }: { info: LinkInfo }) {
-  return info.predicate ? (
-    info.predicate() && <NavLink to={info.href}>{info.title}</NavLink>
-  ) : (
-    <NavLink to={info.href}>{info.title}</NavLink>
+const StyledNavLink = forwardRef<
+  ElementRef<typeof NavLink>,
+  ComponentPropsWithoutRef<typeof NavLink>
+>(({ className, ...props }, ref) => {
+  return (
+    <NavLink
+      ref={ref}
+      className={({ isActive }) =>
+        cn(
+          'transition-colors hover:text-foreground/80',
+          isActive ? 'text-foreground' : 'text-foreground/60',
+          className,
+        )
+      }
+      {...props}
+    />
+  )
+})
+StyledNavLink.displayName = 'Nav.StyledNavLink'
+
+function ConditionalNavLink({
+  predicate = () => true,
+  ...props
+}: { predicate?: () => boolean; to: string } & Omit<NavLinkProps, 'to'>) {
+  return (
+    predicate() && (
+      <NavigationMenuItem>
+        <StyledNavLink {...props} />
+      </NavigationMenuItem>
+    )
   )
 }
