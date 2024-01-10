@@ -10,7 +10,7 @@ export function Layout() {
   const showFooter = useAppSelector((state) => state.ui.showFooter)
 
   return (
-    <body className="min-h-screen">
+    <div className="min-h-screen">
       <Command />
       <div className="relative flex min-h-screen flex-col">
         {showHeader && <Header />}
@@ -20,6 +20,6 @@ export function Layout() {
         {showFooter && <Footer />}
       </div>
       <Toaster />
-    </body>
+    </div>
   )
 }
