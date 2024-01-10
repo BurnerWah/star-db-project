@@ -1,3 +1,9 @@
+import {
+  DeclinationTeX,
+  DistanceTeX,
+  MassTeX,
+  RightAscensionTeX,
+} from '@/components/formatters'
 import { Button } from '@/components/ui/button'
 import { DataTable } from '@/components/ui/data-table'
 import {
@@ -8,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import TeX from '@matejmazur/react-katex'
 import { createColumnHelper, type ColumnDef } from '@tanstack/react-table'
 import { MoreHorizontal } from 'lucide-react'
@@ -16,13 +23,6 @@ import { Link } from 'react-router-dom'
 import type Actions from '~typings/actions'
 import type { ListItem } from '~typings/requests'
 import type { Declination, MeasurementWithUncertainty } from '~typings/structs'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import {
-  DeclinationTeX,
-  DistanceTeX,
-  MassTeX,
-  RightAscensionTeX,
-} from './formatters'
 
 const columnHelper = createColumnHelper<ListItem>()
 
@@ -107,7 +107,7 @@ const columns = [
   },
 ] as ColumnDef<ListItem>[]
 
-export default function ItemTable<A extends Actions>({
+export function ItemTable<A extends Actions>({
   action,
 }: Readonly<{ action: A }>) {
   const dispatch = useAppDispatch()
