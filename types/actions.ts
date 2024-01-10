@@ -72,7 +72,14 @@ export interface RegisterSaga extends Action<'api/auth/register'> {
 }
 export type FetchUserSaga = Action<'user/fetch'>
 
-export type FetchListItemsSaga = Action<'listItems/fetch'>
+export interface ListingFetcher<T extends string> extends Action<T> {
+  payload?: {
+    search?: string
+    page?: number
+  }
+}
+
+export type FetchListItemsSaga = ListingFetcher<'listItems/fetch'>
 
 export interface FetchItemDetailsSaga extends Action<'itemDetails/fetch'> {
   payload: number | string
@@ -86,7 +93,7 @@ export interface UnsaveItemSaga extends Action<'api/unsaveItem'> {
   payload: number
 }
 
-export type ListSavedItemsSaga = Action<'api/listSavedItems'>
+export type ListSavedItemsSaga = ListingFetcher<'api/listSavedItems'>
 
 export interface AdminDeleteItemSaga extends Action<'api/admin/deleteItem'> {
   payload: {
