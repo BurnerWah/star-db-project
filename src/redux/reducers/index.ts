@@ -3,6 +3,7 @@ import errors from './errors'
 import itemDetails from './itemDetails'
 import listItems from './listItems'
 import status from './status'
+import ui from './ui'
 import user from './user'
 
 // rootReducer is the primary reducer for our entire project
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   listItems,
   itemDetails,
   status,
+  ui,
 })
 
 export default rootReducer

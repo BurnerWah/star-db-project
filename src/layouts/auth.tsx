@@ -3,8 +3,10 @@ import jwstDeepFieldsAvif from '@/assets/images/jwst-deep-field.png?w=500;700;90
 import jwstDeepFieldsJpeg from '@/assets/images/jwst-deep-field.png?w=500;700;900;1200&format=jpeg&as=srcset'
 import jwstDeepFieldsWebp from '@/assets/images/jwst-deep-field.png?w=500;700;900;1200&format=webp&as=srcset'
 import { buttonVariants } from '@/components/ui/button'
+import { useAppDispatch } from '@/hooks/redux'
 import { cn } from '@/lib/utils'
 import { Orbit } from 'lucide-react'
+import { useEffect } from 'react'
 import { Link, To } from 'react-router-dom'
 
 interface OtherPageInfo {
@@ -28,6 +30,19 @@ export function AuthLayout({
   title: string
   children: JSX.Element
 }>) {
+  // Hide the header & footer while this layout is active, as they don't work
+  // with the design
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch({ type: 'ui/header/hide' })
+    dispatch({ type: 'ui/footer/hide' })
+    return () => {
+      dispatch({ type: 'ui/header/show' })
+      dispatch({ type: 'ui/footer/show' })
+    }
+  }, [dispatch])
+
   return (
     <div className="container relative hidden h-[800px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link

@@ -38,6 +38,11 @@ export type UnsetItemDetails = Action<'itemDetails/unset'>
 
 export type SetUserInitialized = Action<'status/userInitalized'>
 
+export type ShowHeader = Action<'ui/header/show'>
+export type HideHeader = Action<'ui/header/hide'>
+export type ShowFooter = Action<'ui/footer/show'>
+export type HideFooter = Action<'ui/footer/hide'>
+
 export type ReduxActions =
   | UnsetUser
   | SetUser
@@ -53,6 +58,10 @@ export type ReduxActions =
   | SetItemDetails
   | UnsetItemDetails
   | SetUserInitialized
+  | ShowHeader
+  | HideHeader
+  | ShowFooter
+  | HideFooter
 
 export interface LoginSaga extends Action<'api/auth/login'> {
   payload: LoginBody
