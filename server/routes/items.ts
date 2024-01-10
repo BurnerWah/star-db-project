@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import { z } from 'zod'
 import { ItemListingQuerySchema } from '~shared/schemas.ts'
-import { ItemDetails } from '~typings/requests.ts'
-import { ParsedItem } from '~typings/structs.ts'
-import { DBObject, DBObjectType } from '~typings/tables.ts'
+import type { ItemDetails, ListingResponse } from '~typings/requests.ts'
+import type { ParsedItem } from '~typings/structs.ts'
+import type { DBObject, DBObjectType } from '~typings/tables.ts'
 import { parseDeclination } from '../db/normalizers.ts'
 import pool from '../db/pool.ts'
 import { validate } from '../middleware/validator.ts'
@@ -26,15 +26,13 @@ type ItemQuery = Pick<
   | 'redshift'
 > & {
   [Column in keyof DBObjectType as `type_${Column}`]: DBObjectType[Column]
-}
+} & { total_rows: number }
 
 items.get(
   '/',
   validate(z.object({ query: ItemListingQuerySchema })),
   async (req, res) => {
     try {
-      // An undefined offset will just be treated as 0, but an undefined search
-      // will cause there to not be any results.
       const result = await pool.query<ItemQuery>(
         /*sql*/ `
           SELECT
@@ -89,7 +87,12 @@ items.get(
         mass: item.mass,
         redshift: item.redshift,
       }))
-      res.send(items)
+      const total_rows = result.rows[0]?.total_rows ?? 0
+      res.send({
+        page: req.query.page ?? 1,
+        pageCount: Math.ceil(total_rows / 5),
+        items,
+      } as ListingResponse)
     } catch (error) {
       console.log('Error getting items: ', error)
       res.sendStatus(500)

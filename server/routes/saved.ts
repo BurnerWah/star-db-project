@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { z } from 'zod'
 import { ItemListingQuerySchema } from '~shared/schemas.ts'
+import type { ListingResponse } from '~typings/requests.ts'
 import type { ParsedItem } from '~typings/structs.ts'
 import type { DBObject, DBObjectType } from '~typings/tables.ts'
 import { parseDeclination } from '../db/normalizers.ts'
@@ -28,7 +29,7 @@ saved.get(
       const results = await pool.query<
         DBObject & {
           [Column in keyof DBObjectType as `type_${Column}`]: DBObjectType[Column]
-        }
+        } & { total_rows: number }
       >(
         /*sql*/ `
           SELECT
@@ -54,7 +55,7 @@ saved.get(
         `,
         [req.user.id, req.query.search ?? '', req.query.page ?? 1],
       )
-      const savedItems: ParsedItem[] = results.rows.map((row) => ({
+      const items: ParsedItem[] = results.rows.map((row) => ({
         id: row.id,
         name: row.name,
         type: {
@@ -77,7 +78,12 @@ saved.get(
         mass: row.mass,
         redshift: row.redshift,
       }))
-      res.send(savedItems)
+      const total_rows = results.rows[0]?.total_rows ?? 0
+      res.send({
+        page: req.query.page ?? 1,
+        pageCount: Math.ceil(total_rows / 5),
+        items,
+      } as ListingResponse)
     } catch (error) {
       console.error(error)
       res.sendStatus(500)
