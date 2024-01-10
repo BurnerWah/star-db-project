@@ -33,24 +33,39 @@ items.get(
   validate(z.object({ query: ItemListingQuerySchema })),
   async (req, res) => {
     try {
-      const result = await pool.query<ItemQuery>(/*sql*/ `
-        SELECT
-          o.id,
-          o.name,
-          t.id AS type_id,
-          t.name AS type_name,
-          o.right_ascension,
-          o.declination,
-          o.distance,
-          o.distance_error,
-          o.apparent_magnitude,
-          o.absolute_magnitude,
-          o.mass,
-          o.redshift
-        FROM
-          objects AS o
-          INNER JOIN object_types AS t ON o.type_id = t.id;
-      `)
+      // An undefined offset will just be treated as 0, but an undefined search
+      // will cause there to not be any results.
+      const result = await pool.query<ItemQuery>(
+        /*sql*/ `
+          SELECT
+            o.id,
+            o.name,
+            t.id AS type_id,
+            t.name AS type_name,
+            o.right_ascension,
+            o.declination,
+            o.distance,
+            o.distance_error,
+            o.apparent_magnitude,
+            o.absolute_magnitude,
+            o.mass,
+            o.redshift,
+            c.count AS total_rows
+          FROM
+            objects AS o
+            INNER JOIN object_types AS t ON o.type_id = t.id
+            JOIN (
+              SELECT count(*) FROM objects
+            ) AS c ON true
+          WHERE
+            o.name ILIKE '%' || $1 || '%'
+          ORDER BY
+            o.name
+          LIMIT 5 OFFSET 5 * ($2 - 1)
+          ;
+        `,
+        [req.query.search ?? '', req.query.page],
+      )
       const items: ParsedItem[] = result.rows.map((item) => ({
         id: item.id,
         name: item.name,
