@@ -7,7 +7,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom'
-import './App.css'
 import { TypographyH1 } from './components/typography'
 import './global.css'
 import { useAppDispatch } from './hooks/redux'
