@@ -5,7 +5,6 @@ import {
   RightAscensionTeX,
 } from '@/components/formatters'
 import { Button } from '@/components/ui/button'
-import { DataTable } from '@/components/ui/data-table'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,6 +22,7 @@ import { Link } from 'react-router-dom'
 import type Actions from '~typings/actions'
 import type { ListItem } from '~typings/requests'
 import type { Declination, MeasurementWithUncertainty } from '~typings/structs'
+import { DataTable } from './data-table'
 
 const columnHelper = createColumnHelper<ListItem>()
 
