@@ -4,7 +4,6 @@ import {
   NavigationMenuList,
 } from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils'
-import { Orbit } from 'lucide-react'
 import {
   forwardRef,
   type ComponentProps,
@@ -12,8 +11,9 @@ import {
   type ElementRef,
   type HTMLAttributes,
 } from 'react'
-import { Link, NavLink, type NavLinkProps } from 'react-router-dom'
+import { NavLink, type NavLinkProps } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import { AppTitle } from '../common/app-title'
 
 export default function Nav({
   className,
@@ -35,10 +35,7 @@ export default function Nav({
 
   return (
     <div className={cn('mr-4 hidden md:flex', className)}>
-      <Link to="/home" className="mr-6 flex items-center space-x-2">
-        <Orbit />
-        <span className="hidden font-bold sm:inline-block">StarForge</span>
-      </Link>
+      <AppTitle className="mr-6 font-bold" />
       <nav>
         <NavigationMenu>
           <NavigationMenuList className="gap-6">

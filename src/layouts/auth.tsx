@@ -5,9 +5,9 @@ import jwstDeepFieldsWebp from '@/assets/images/jwst-deep-field.png?w=500;700;90
 import { buttonVariants } from '@/components/ui/button'
 import { useAppDispatch } from '@/hooks/redux'
 import { cn } from '@/lib/utils'
-import { Orbit } from 'lucide-react'
 import { useEffect } from 'react'
 import { Link, To } from 'react-router-dom'
+import { AppTitle } from './common/app-title'
 
 interface OtherPageInfo {
   to: To
@@ -64,12 +64,7 @@ export function AuthLayout({
           <source srcSet={jwstDeepFieldsJpeg} type="image/jpeg" />
           <img src={jwstDeepField} alt="JWST Deep Field" />
         </picture>
-        <Link
-          to="/home"
-          className="relative z-20 flex items-center text-lg font-medium"
-        >
-          <Orbit /> StarForge
-        </Link>
+        <AppTitle className="relative z-20 text-lg font-medium" />
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
