@@ -1,3 +1,4 @@
+import type { PaginationState } from '@tanstack/react-table'
 import type { Action, Dispatch } from 'redux'
 import type { ZObjectType } from '~shared/schemas'
 import type {
@@ -43,6 +44,11 @@ export type HideHeader = Action<'ui/header/hide'>
 export type ShowFooter = Action<'ui/footer/show'>
 export type HideFooter = Action<'ui/footer/hide'>
 
+export interface SetTablePagination extends Action<'table/pagination/set'> {
+  payload: PaginationState
+}
+export type ClearTablePagination = Action<'table/pagination/clear'>
+
 export type ReduxActions =
   | UnsetUser
   | SetUser
@@ -62,6 +68,7 @@ export type ReduxActions =
   | HideHeader
   | ShowFooter
   | HideFooter
+  | SetTablePagination
 
 export interface LoginSaga extends Action<'api/auth/login'> {
   payload: LoginBody

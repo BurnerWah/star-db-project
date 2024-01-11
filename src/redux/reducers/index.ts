@@ -3,6 +3,7 @@ import errors from './errors'
 import itemDetails from './itemDetails'
 import listItems from './listItems'
 import status from './status'
+import table from './table'
 import ui from './ui'
 import user from './user'
 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   itemDetails,
   status,
   ui,
+  table,
 })
 
 export default rootReducer
