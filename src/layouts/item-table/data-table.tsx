@@ -1,4 +1,3 @@
-// import { Button } from '@/components/ui/button'
 import {
   Table,
   TableBody,
@@ -14,6 +13,7 @@ import {
   type ColumnDef,
   type Table as TanstackTable,
 } from '@tanstack/react-table'
+import { DataTableViewOptions } from './column-toggle'
 import { DataTablePagination } from './pagination'
 
 interface DataTableProps<TData, TValue> {
@@ -38,13 +38,18 @@ export function DirectDataTable<TData, TValue>({
   table,
   columns,
   pagination = false,
+  viewOptions = false,
 }: Readonly<{
   table: TanstackTable<TData>
   columns: ColumnDef<TData, TValue>[]
   pagination?: boolean
+  viewOptions?: boolean
 }>) {
   return (
     <>
+      <div className="flex items-center py-4">
+        {viewOptions && <DataTableViewOptions table={table} />}
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

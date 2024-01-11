@@ -24,7 +24,13 @@ import type { Declination, MeasurementWithUncertainty } from '~typings/structs'
 const columnHelper = createColumnHelper<ListItem>()
 
 export const columns = [
-  columnHelper.accessor('name', { header: 'Name' }),
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    cell: ({ row }) => (
+      <Link to={`/details/${row.original.id}`}>{row.original.name}</Link>
+    ),
+  },
   columnHelper.accessor('type.name', { header: 'Type' }),
   {
     accessorKey: 'right_ascension',
@@ -54,13 +60,8 @@ export const columns = [
       return <DistanceTeX distance={distance} />
     },
   },
-  columnHelper.group({
-    header: 'Magnitude',
-    columns: [
-      columnHelper.accessor('apparent_magnitude', { header: 'Apparent' }),
-      columnHelper.accessor('absolute_magnitude', { header: 'Absolute' }),
-    ],
-  }),
+  columnHelper.accessor('apparent_magnitude', { header: 'Appt. Magnitude' }),
+  columnHelper.accessor('absolute_magnitude', { header: 'Abs. Magnitude' }),
   {
     accessorKey: 'mass',
     header: 'Mass',

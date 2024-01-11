@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import {
+  VisibilityState,
   getCoreRowModel,
   useReactTable,
   type PaginationState,
@@ -22,13 +23,15 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
   title,
 }: Readonly<{ action: A; title?: string }>) {
   const dispatch = useAppDispatch()
+  const actionType = action.type
+
   const listItems = useAppSelector((state) => state.listItems)
   const pageCount = useAppSelector((state) => state.listItems.pageCount)
   const pagination = useAppSelector((state) => state.table.pagination)
 
   const [search, setSearch] = useState('')
 
-  const actionType = action.type
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
 
   const table = useReactTable({
     data: listItems.items,
@@ -36,6 +39,7 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
     pageCount,
     state: {
       pagination,
+      columnVisibility,
     },
     onPaginationChange: (updater) => {
       const nextState = (updater as (old: PaginationState) => PaginationState)(
@@ -50,6 +54,7 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
         },
       } as A)
     },
+    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
     debugTable: import.meta.env.DEV,
@@ -86,7 +91,12 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
         <Button type="submit">Submit</Button>
       </form>
       {listItems.items && (
-        <DirectDataTable table={table} columns={columns} pagination />
+        <DirectDataTable
+          table={table}
+          columns={columns}
+          pagination
+          viewOptions
+        />
       )}
     </div>
   )
