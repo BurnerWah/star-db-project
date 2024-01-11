@@ -11,6 +11,7 @@ import {
   getCoreRowModel,
   useReactTable,
   type ColumnDef,
+  type Table as TanstackTable,
 } from '@tanstack/react-table'
 
 interface DataTableProps<TData, TValue> {
@@ -28,6 +29,16 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   })
 
+  return <DirectDataTable table={table} columns={columns} />
+}
+
+export function DirectDataTable<TData, TValue>({
+  table,
+  columns,
+}: Readonly<{
+  table: TanstackTable<TData>
+  columns: ColumnDef<TData, TValue>[]
+}>) {
   return (
     <div className="rounded-md border">
       <Table>
