@@ -4,7 +4,6 @@ import { ItemListingQuerySchema } from '~shared/schemas.ts'
 import type { ItemDetails, ListingResponse } from '~typings/requests.ts'
 import type { ParsedItem } from '~typings/structs.ts'
 import type { DBObject, DBObjectType } from '~typings/tables.ts'
-import { LISTING_PAGE_SIZE } from '../constants/queries.ts'
 import { parseDeclination } from '../db/normalizers.ts'
 import pool from '../db/pool.ts'
 import { validate } from '../middleware/validator.ts'
@@ -94,7 +93,7 @@ items.get(
       res.send({
         page,
         pageSize,
-        pageCount: Math.ceil(total_rows / LISTING_PAGE_SIZE),
+        pageCount: Math.ceil(total_rows / pageSize),
         items,
       } as ListingResponse)
     } catch (error) {
