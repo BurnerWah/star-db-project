@@ -1,8 +1,12 @@
 import axios, { type AxiosResponse } from 'axios'
 import { type SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
-import type { SaveItemSaga, UnsaveItemSaga } from '~typings/actions'
-import type { ItemSaveBody, ListItemsBody } from '~typings/requests'
+import type {
+  ListSavedItemsSaga,
+  SaveItemSaga,
+  UnsaveItemSaga,
+} from '~typings/actions'
+import type { ItemSaveBody, ListingResponse } from '~typings/requests'
 import { withCredentials } from '../../constants/axios'
 import { put } from '../../hooks/redux'
 
@@ -36,13 +40,17 @@ function* unsaveItem({ payload }: UnsaveItemSaga): SagaIterator {
  * This hijacks the listItems reducer to store the saved items since they're
  * the same types, and won't ever be set at the same time.
  */
-function* listSavedItems(): SagaIterator {
+function* listSavedItems({ payload }: ListSavedItemsSaga): SagaIterator {
   try {
+    const { search, page, page_size } = payload || {}
     yield put({ type: 'listItems/unset' })
-    const response: AxiosResponse<ListItemsBody> = yield call(
+    const response: AxiosResponse<ListingResponse> = yield call(
       axios.get,
       '/api/saved',
-      withCredentials,
+      {
+        params: { search, page, page_size },
+        ...withCredentials,
+      },
     )
     yield put({ type: 'listItems/set', payload: response.data })
   } catch (error) {

@@ -1,8 +1,9 @@
 import { Router } from 'express'
 import { z } from 'zod'
-import { ItemDetails } from '~typings/requests.ts'
-import { ParsedItem } from '~typings/structs.ts'
-import { DBObject, DBObjectType } from '~typings/tables.ts'
+import { ItemListingQuerySchema } from '~shared/schemas.ts'
+import type { ItemDetails, ListingResponse } from '~typings/requests.ts'
+import type { ParsedItem } from '~typings/structs.ts'
+import type { DBObject, DBObjectType } from '~typings/tables.ts'
 import { parseDeclination } from '../db/normalizers.ts'
 import pool from '../db/pool.ts'
 import { validate } from '../middleware/validator.ts'
@@ -25,57 +26,82 @@ type ItemQuery = Pick<
   | 'redshift'
 > & {
   [Column in keyof DBObjectType as `type_${Column}`]: DBObjectType[Column]
-}
+} & { total_rows: number }
 
-items.get('/', async (req, res) => {
-  try {
-    const result = await pool.query<ItemQuery>(/*sql*/ `
-      SELECT
-	      o.id,
-	      o.name,
-	      t.id AS type_id,
-	      t.name AS type_name,
-	      o.right_ascension,
-	      o.declination,
-	      o.distance,
-	      o.distance_error,
-	      o.apparent_magnitude,
-	      o.absolute_magnitude,
-	      o.mass,
-	      o.redshift
-      FROM
-	      objects AS o
-	      INNER JOIN object_types AS t ON o.type_id = t.id;
-    `)
-    const items: ParsedItem[] = result.rows.map((item) => ({
-      id: item.id,
-      name: item.name,
-      type: {
-        id: item.type_id,
-        name: item.type_name,
-      },
-      right_ascension: item.right_ascension,
-      declination: item.declination
-        ? parseDeclination(item.declination)
-        : undefined,
-      distance:
-        item.distance && item.distance_error
-          ? {
-              value: item.distance,
-              error: item.distance_error,
-            }
+items.get(
+  '/',
+  validate(z.object({ query: ItemListingQuerySchema })),
+  async (req, res) => {
+    try {
+      const page = Number(req.query.page ?? 0)
+      const pageSize = Number(req.query.page_size ?? 10)
+      const result = await pool.query<ItemQuery>(
+        /*sql*/ `
+          SELECT
+            o.id,
+            o.name,
+            t.id AS type_id,
+            t.name AS type_name,
+            o.right_ascension,
+            o.declination,
+            o.distance,
+            o.distance_error,
+            o.apparent_magnitude,
+            o.absolute_magnitude,
+            o.mass,
+            o.redshift,
+            c.count AS total_rows
+          FROM
+            objects AS o
+            INNER JOIN object_types AS t ON o.type_id = t.id
+            JOIN (
+              SELECT count(*) FROM objects
+            ) AS c ON true
+          WHERE
+            o.name ILIKE '%' || $1 || '%'
+          ORDER BY
+            o.name
+          LIMIT $3::integer OFFSET $3::integer * $2::integer
+          ;
+        `,
+        [req.query.search ?? '', page, pageSize],
+      )
+      const items: ParsedItem[] = result.rows.map((item) => ({
+        id: item.id,
+        name: item.name,
+        type: {
+          id: item.type_id,
+          name: item.type_name,
+        },
+        right_ascension: item.right_ascension,
+        declination: item.declination
+          ? parseDeclination(item.declination)
           : undefined,
-      apparent_magnitude: item.apparent_magnitude,
-      absolute_magnitude: item.absolute_magnitude,
-      mass: item.mass,
-      redshift: item.redshift,
-    }))
-    res.send(items)
-  } catch (error) {
-    console.log('Error getting items: ', error)
-    res.sendStatus(500)
-  }
-})
+        distance:
+          item.distance && item.distance_error
+            ? {
+                value: item.distance,
+                error: item.distance_error,
+              }
+            : undefined,
+        apparent_magnitude: item.apparent_magnitude,
+        absolute_magnitude: item.absolute_magnitude,
+        mass: item.mass,
+        redshift: item.redshift,
+      }))
+      const total_rows = result.rows[0]?.total_rows ?? 0
+      res.send({
+        page,
+        pageSize,
+        pageCount: Math.ceil(total_rows / pageSize),
+        items,
+      } as ListingResponse)
+    } catch (error) {
+      console.log('Error getting items: ', error)
+      res.sendStatus(500)
+    }
+  },
+)
 
 items.get(
   '/:id',

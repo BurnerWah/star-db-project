@@ -1,3 +1,4 @@
+import type { PaginationState } from '@tanstack/react-table'
 import type { Action, Dispatch } from 'redux'
 import type { ZObjectType } from '~shared/schemas'
 import type {
@@ -7,7 +8,7 @@ import type {
 } from './inputs'
 import type {
   ItemDetails,
-  ListItem,
+  ListingResponse,
   LoginBody,
   RegisterBody,
   UserResponse,
@@ -27,7 +28,7 @@ export type RegistrationInputError = Action<'errors/registration/input'>
 export type RegistrationFailed = Action<'errors/registration/fail'>
 
 export interface SetListItems extends Action<'listItems/set'> {
-  payload: ListItem[]
+  payload: ListingResponse
 }
 export type UnsetListItems = Action<'listItems/unset'>
 
@@ -42,6 +43,11 @@ export type ShowHeader = Action<'ui/header/show'>
 export type HideHeader = Action<'ui/header/hide'>
 export type ShowFooter = Action<'ui/footer/show'>
 export type HideFooter = Action<'ui/footer/hide'>
+
+export interface SetTablePagination extends Action<'table/pagination/set'> {
+  payload: PaginationState
+}
+export type ClearTablePagination = Action<'table/pagination/clear'>
 
 export type ReduxActions =
   | UnsetUser
@@ -62,6 +68,7 @@ export type ReduxActions =
   | HideHeader
   | ShowFooter
   | HideFooter
+  | SetTablePagination
 
 export interface LoginSaga extends Action<'api/auth/login'> {
   payload: LoginBody
@@ -72,7 +79,15 @@ export interface RegisterSaga extends Action<'api/auth/register'> {
 }
 export type FetchUserSaga = Action<'user/fetch'>
 
-export type FetchListItemsSaga = Action<'listItems/fetch'>
+export interface ListingFetcher<T extends string> extends Action<T> {
+  payload?: {
+    search?: string
+    page?: number
+    page_size?: number
+  }
+}
+
+export type FetchListItemsSaga = ListingFetcher<'listItems/fetch'>
 
 export interface FetchItemDetailsSaga extends Action<'itemDetails/fetch'> {
   payload: number | string
@@ -86,7 +101,7 @@ export interface UnsaveItemSaga extends Action<'api/unsaveItem'> {
   payload: number
 }
 
-export type ListSavedItemsSaga = Action<'api/listSavedItems'>
+export type ListSavedItemsSaga = ListingFetcher<'api/listSavedItems'>
 
 export interface AdminDeleteItemSaga extends Action<'api/admin/deleteItem'> {
   payload: {

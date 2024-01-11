@@ -1,14 +1,19 @@
 import axios, { type AxiosResponse } from 'axios'
 import { type SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
-import type { ListItemsBody } from '~typings/requests'
+import { FetchListItemsSaga } from '~typings/actions'
+import type { ListingResponse } from '~typings/requests'
 import { put } from '../../hooks/redux'
 
-function* fetchListItems(): SagaIterator {
+function* fetchListItems({ payload }: FetchListItemsSaga): SagaIterator {
   try {
-    const response: AxiosResponse<ListItemsBody> = yield call(
+    const { search, page, page_size } = payload || {}
+    const response: AxiosResponse<ListingResponse> = yield call(
       axios.get,
       '/api/items',
+      {
+        params: { search, page, page_size },
+      },
     )
     yield put({ type: 'listItems/set', payload: response.data })
   } catch (error) {
