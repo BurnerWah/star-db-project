@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useEffect, type ReactNode } from 'react'
-import { FetchListItemsSaga, ListSavedItemsSaga } from '~typings/actions'
+import type { FetchListItemsSaga, ListSavedItemsSaga } from '~typings/actions'
 import { columns } from './columns'
 import { DirectDataTable } from './data-table'
 
