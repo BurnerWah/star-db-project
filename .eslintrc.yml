@@ -64,6 +64,10 @@ overrides:
         - error
         - ignore:
             - className
+      react/no-unknown-property:
+        - error
+        - ignore:
+            - cmdk-input-wrapper
 
 ignorePatterns:
   - dist
