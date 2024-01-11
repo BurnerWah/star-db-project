@@ -6,7 +6,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom'
-import { TypographyH1 } from './components/typography'
 import './global.css'
 import { useAppDispatch } from './hooks/redux'
 import { Layout } from './layouts/core'
@@ -39,7 +38,7 @@ function App() {
         <Route path="details/:id" lazy={() => import('./pages/Details')} />
         <Route path="add" lazy={() => import('./pages/AddItem')} />
         {/* If none of the other routes matched, we will show a 404. */}
-        <Route path="*" element={<TypographyH1>404</TypographyH1>} />
+        <Route path="*" lazy={() => import('./pages/404')} />
       </Route>,
     ),
   )
