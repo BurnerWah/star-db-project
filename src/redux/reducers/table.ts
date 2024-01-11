@@ -14,15 +14,18 @@ import type {
 const pagination: Reducer<
   Readonly<PaginationState>,
   SetTablePagination | ClearTablePagination | SetListItems | UnsetListItems
-> = (state = { pageIndex: 0, pageSize: 5 }, action) => {
+> = (state = { pageIndex: 0, pageSize: 10 }, action) => {
   switch (action.type) {
     case 'table/pagination/set':
       return action.payload
     case 'listItems/set':
-      return { ...state, pageIndex: action.payload.page }
+      return {
+        pageIndex: action.payload.page,
+        pageSize: action.payload.pageSize,
+      }
     case 'table/pagination/clear':
     case 'listItems/unset':
-      return { pageIndex: 0, pageSize: 5 }
+      return { pageIndex: 0, pageSize: 10 }
     default:
       return state
   }
