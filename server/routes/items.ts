@@ -90,7 +90,7 @@ items.get(
       }))
       const total_rows = result.rows[0]?.total_rows ?? 0
       res.send({
-        page: req.query.page ?? 1,
+        page: req.query.page ?? 0,
         pageCount: Math.ceil(total_rows / LISTING_PAGE_SIZE),
         items,
       } as ListingResponse)
