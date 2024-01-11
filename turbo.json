@@ -1,0 +1,82 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["tsconfig.json", "tsconfig.node.json"],
+  "pipeline": {
+    "build": {
+      "outputs": ["dist/**"]
+    },
+    "build:client": {
+      "dotEnv": [
+        ".env",
+        ".env.local",
+        ".env.production",
+        ".env.production.local"
+      ],
+      "inputs": [
+        "components.json",
+        "postcss.config.js",
+        "tailwind.config.ts",
+        "tsconfig.client.json",
+        "vite.config.ts",
+        "index.html",
+        "src/**",
+        "public/**",
+        "shared/**",
+        "types/**"
+      ],
+      "outputs": ["dist/client/**"]
+    },
+    "build:server": {
+      "inputs": [
+        "tsconfig.server.json",
+        "tsup.config.ts",
+        "server/**",
+        "shared/**",
+        "types/**"
+      ],
+      "outputs": ["dist/server/**"]
+    },
+    "client": {
+      "cache": false,
+      "persistent": true
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint:eslint": {
+      "inputs": [
+        ".eslintrc.*",
+        "tsconfig.*.json",
+        "**/*.{ts,tsx}",
+        "**/*.{js,jsx,mjs,cjs}",
+        "!node_modules/**",
+        "!dist/**"
+      ]
+    },
+    "lint:prettier": {
+      "inputs": [
+        ".prettierrc.*",
+        ".editorconfig",
+        "**/*.{ts,tsx}",
+        "**/*.{js,jsx,mjs,cjs}",
+        "**/*.{yml,yaml}",
+        "**/*.json",
+        "**/*.html",
+        "**/*.md",
+        "**/*.css",
+        ".hintrc",
+        "!node_modules/**",
+        "!dist/**"
+      ]
+    },
+    "preview": {
+      "cache": false,
+      "persistent": true
+    },
+    "server": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}
