@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import express from 'express'
+import helmet from 'helmet'
 import morgan from 'morgan'
 import path from 'node:path'
 import session from './middleware/session.ts'
@@ -11,12 +12,13 @@ import passport from './strategies/argon2id.ts'
 
 const app = express()
 
-// Body parser middleware
+// Middleware
+app.use(morgan('dev'))
+app.use(helmet())
+
+// Express body parser
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
-// This is such a funny name for a logger I love it
-app.use(morgan('dev'))
 
 // Passport Session Configuration
 app.use(session)
