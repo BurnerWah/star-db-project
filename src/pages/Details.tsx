@@ -21,7 +21,7 @@ export default function Details() {
   }, [dispatch, id])
 
   return (
-    <div>
+    <div className="container mt-8">
       <TypographyH2>{itemDetails.name}</TypographyH2>
       <Card>
         <CardHeader>
