@@ -13,6 +13,7 @@ import {
   type ColumnDef,
   type Table as TanstackTable,
 } from '@tanstack/react-table'
+import { ReactNode } from 'react'
 import { DataTableViewOptions } from './column-toggle'
 import { DataTablePagination } from './pagination'
 
@@ -39,17 +40,22 @@ export function DirectDataTable<TData, TValue>({
   columns,
   pagination = false,
   viewOptions = false,
+  search,
 }: Readonly<{
   table: TanstackTable<TData>
   columns: ColumnDef<TData, TValue>[]
   pagination?: boolean
   viewOptions?: boolean
+  search?: ReactNode
 }>) {
   return (
     <>
-      <div className="flex items-center py-4">
-        {viewOptions && <DataTableViewOptions table={table} />}
-      </div>
+      {(search || viewOptions) && (
+        <div className="flex items-center py-4">
+          {search}
+          {viewOptions && <DataTableViewOptions table={table} />}
+        </div>
+      )}
       <div className="rounded-md border">
         <Table>
           <TableHeader>

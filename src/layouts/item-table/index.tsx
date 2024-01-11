@@ -11,8 +11,10 @@ import { Search } from 'lucide-react'
 import {
   useEffect,
   useState,
+  type Dispatch,
   type FormEventHandler,
   type ReactNode,
+  type SetStateAction,
 } from 'react'
 import type { FetchListItemsSaga, ListSavedItemsSaga } from '~typings/actions'
 import { columns } from './columns'
@@ -75,27 +77,15 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
   return (
     <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">
       {title && <TableTitle>{title}</TableTitle>}
-      <form
-        onSubmit={handleSearch}
-        className="flex items-center space-x-2 py-4"
-      >
-        <div className="relative">
-          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search ..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="max-w-sm pl-8"
-          />
-        </div>
-        <Button type="submit">Submit</Button>
-      </form>
       {listItems.items && (
         <DirectDataTable
           table={table}
           columns={columns}
           pagination
           viewOptions
+          search={
+            <TableSearch state={[search, setSearch]} handler={handleSearch} />
+          }
         />
       )}
     </div>
@@ -104,4 +94,27 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
 
 function TableTitle({ children }: Readonly<{ children: ReactNode }>) {
   return <h2 className="text-2xl font-bold tracking-tight">{children}</h2>
+}
+
+function TableSearch({
+  state: [state, setState],
+  handler,
+}: Readonly<{
+  state: [string, Dispatch<SetStateAction<string>>]
+  handler: FormEventHandler<HTMLFormElement>
+}>) {
+  return (
+    <form onSubmit={handler} className="flex items-center space-x-2 py-4">
+      <div className="relative">
+        <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Search ..."
+          value={state}
+          onChange={(e) => setState(e.target.value)}
+          className="max-w-sm pl-8"
+        />
+      </div>
+      <Button type="submit">Submit</Button>
+    </form>
+  )
 }
