@@ -27,14 +27,16 @@ export const columns = [
   {
     accessorKey: 'name',
     header: 'Name',
+    enableHiding: false,
     cell: ({ row }) => (
       <Link to={`/details/${row.original.id}`}>{row.original.name}</Link>
     ),
   },
-  columnHelper.accessor('type.name', { header: 'Type' }),
+  columnHelper.accessor('type.name', { header: 'Type', enableHiding: false }),
   {
     accessorKey: 'right_ascension',
     header: 'Right Ascension',
+    enableHiding: false,
     cell: ({ row }) => {
       const ra: string | undefined = row.getValue('right_ascension')
       if (!ra) return null
@@ -44,6 +46,7 @@ export const columns = [
   {
     accessorKey: 'declination',
     header: 'Declination',
+    enableHiding: false,
     cell: ({ row }) => {
       const declination: Declination | undefined = row.getValue('declination')
       if (!declination) return null
@@ -60,8 +63,14 @@ export const columns = [
       return <DistanceTeX distance={distance} />
     },
   },
-  columnHelper.accessor('apparent_magnitude', { header: 'Appt. Magnitude' }),
-  columnHelper.accessor('absolute_magnitude', { header: 'Abs. Magnitude' }),
+  columnHelper.accessor('apparent_magnitude', {
+    header: 'Appt. Magnitude',
+    id: 'Appt. Mag.',
+  }),
+  columnHelper.accessor('absolute_magnitude', {
+    header: 'Abs. Magnitude',
+    id: 'Abs. Mag.',
+  }),
   {
     accessorKey: 'mass',
     header: 'Mass',
