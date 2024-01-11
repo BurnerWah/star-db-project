@@ -83,6 +83,7 @@ export interface ListingFetcher<T extends string> extends Action<T> {
   payload?: {
     search?: string
     page?: number
+    page_size?: number
   }
 }
 

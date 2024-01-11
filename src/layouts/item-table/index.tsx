@@ -43,7 +43,11 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
       )
       dispatch({
         type: actionType,
-        payload: { page: nextState.pageIndex, search },
+        payload: {
+          page: nextState.pageIndex,
+          page_size: nextState.pageSize,
+          search,
+        },
       } as A)
     },
     getCoreRowModel: getCoreRowModel(),

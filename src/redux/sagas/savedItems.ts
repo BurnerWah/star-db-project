@@ -42,12 +42,13 @@ function* unsaveItem({ payload }: UnsaveItemSaga): SagaIterator {
  */
 function* listSavedItems({ payload }: ListSavedItemsSaga): SagaIterator {
   try {
+    const { search, page, page_size } = payload || {}
     yield put({ type: 'listItems/unset' })
     const response: AxiosResponse<ListingResponse> = yield call(
       axios.get,
       '/api/saved',
       {
-        params: { search: payload?.search, page: payload?.page },
+        params: { search, page, page_size },
         ...withCredentials,
       },
     )

@@ -7,11 +7,12 @@ import { put } from '../../hooks/redux'
 
 function* fetchListItems({ payload }: FetchListItemsSaga): SagaIterator {
   try {
+    const { search, page, page_size } = payload || {}
     const response: AxiosResponse<ListingResponse> = yield call(
       axios.get,
       '/api/items',
       {
-        params: { search: payload?.search, page: payload?.page },
+        params: { search, page, page_size },
       },
     )
     yield put({ type: 'listItems/set', payload: response.data })
