@@ -1,8 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useEffect, type ReactNode } from 'react'
 import { FetchListItemsSaga, ListSavedItemsSaga } from '~typings/actions'
 import { columns } from './columns'
-import { DataTable } from './data-table'
+import { DirectDataTable } from './data-table'
 
 export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
   action,
@@ -11,6 +12,12 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
   const dispatch = useAppDispatch()
   const listItems = useAppSelector((state) => state.listItems)
 
+  const table = useReactTable({
+    data: listItems.items,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  })
+
   useEffect(() => {
     dispatch(action)
   }, [action, dispatch])
@@ -18,9 +25,7 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
   return (
     <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">
       {title && <TableTitle>{title}</TableTitle>}
-      {listItems.items && (
-        <DataTable columns={columns} data={listItems.items} />
-      )}
+      {listItems.items && <DirectDataTable table={table} columns={columns} />}
     </div>
   )
 }
