@@ -33,6 +33,9 @@ rules:
 settings:
   react:
     version: detect
+  tailwindcss:
+    calees: [cn, cva, classnames, clsx, ctl]
+    whitelist: [destructive]
 
 # I prefer applying most configuration settings via overrides, unless they
 # really are generic settings that should apply to every file. It seems to make
@@ -61,14 +64,15 @@ overrides:
       - react
   - files: ['src/components/ui/**/*']
     rules:
+      jsx-a11y/heading-has-content: off
       react/prop-types:
         - error
         - ignore:
+            - align
+            - checked
             - className
-      react/no-unknown-property:
-        - error
-        - ignore:
-            - cmdk-input-wrapper
+            - position
+            - sideOffset
 
 ignorePatterns:
   - dist
