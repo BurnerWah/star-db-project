@@ -51,13 +51,13 @@ saved.get(
             AND o.name ILIKE '%' || $2 || '%'
           ORDER BY
             o.name
-          LIMIT $4 OFFSET $4 * ($3 - 1)
+          LIMIT $4 OFFSET $4 * $3
           ;
         `,
         [
           req.user.id,
           req.query.search ?? '',
-          req.query.page ?? 1,
+          req.query.page ?? 0,
           LISTING_PAGE_SIZE,
         ],
       )
