@@ -2,10 +2,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import {
-  VisibilityState,
   getCoreRowModel,
   useReactTable,
   type PaginationState,
+  type VisibilityState,
 } from '@tanstack/react-table'
 import { Search } from 'lucide-react'
 import {

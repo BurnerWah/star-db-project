@@ -25,8 +25,9 @@ import { useNavigate, type NavigateOptions, type To } from 'react-router-dom'
 
 export default function Command() {
   const navigate = useNavigate()
-  const user = useAppSelector((store) => store.user)
   const dispatch = useAppDispatch()
+
+  const user = useAppSelector((store) => store.user)
 
   const [open, setOpen] = useState(false)
 

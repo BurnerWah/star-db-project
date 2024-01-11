@@ -11,26 +11,33 @@ import {
   type ElementRef,
   type HTMLAttributes,
 } from 'react'
-import { NavLink, type NavLinkProps } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { AppTitle } from '../common/app-title'
+
+type LinkInfo = Omit<ComponentProps<typeof StyledNavLink>, 'to'> & {
+  hide?: boolean
+  to: string
+}
 
 export default function Nav({
   className,
 }: Readonly<HTMLAttributes<HTMLElement>>) {
-  const user = useAppSelector((store) => store.user)
   const dispatch = useAppDispatch()
 
+  const loggedIn = useAppSelector((store) => Boolean(store.user.id))
+  const isAdmin = useAppSelector((store) => Boolean(store.user.administrator))
+
   // This lets me define the nav a bit faster
-  const links: ComponentProps<typeof ConditionalNavLink>[] = [
+  const links: LinkInfo[] = [
     { to: '/list', children: 'List Items' },
     { to: '/about', children: 'About' },
-    { to: '/login', children: 'Login', predicate: () => !user.id },
-    { to: '/registration', children: 'Register', predicate: () => !user.id },
-    { to: '/user', children: 'User Info', predicate: () => Boolean(user.id) },
-    { to: '/info', children: 'Info Page', predicate: () => Boolean(user.id) },
-    { to: '/saved', children: 'Saved', predicate: () => Boolean(user.id) },
-    { to: '/add', children: 'Add Item', predicate: () => user.administrator },
+    { to: '/login', children: 'Login', hide: loggedIn },
+    { to: '/registration', children: 'Register', hide: loggedIn },
+    { to: '/user', children: 'User Info', hide: !loggedIn },
+    { to: '/info', children: 'Info Page', hide: !loggedIn },
+    { to: '/saved', children: 'Saved', hide: !loggedIn },
+    { to: '/add', children: 'Add Item', hide: !isAdmin },
   ]
 
   return (
@@ -39,10 +46,15 @@ export default function Nav({
       <nav>
         <NavigationMenu>
           <NavigationMenuList className="gap-6">
-            {links.map((props) => (
-              <ConditionalNavLink key={props.to} {...props} />
-            ))}
-            {user.id && (
+            {links.map(
+              ({ hide, ...props }) =>
+                hide || (
+                  <NavigationMenuItem key={props.to}>
+                    <StyledNavLink {...props} />
+                  </NavigationMenuItem>
+                ),
+            )}
+            {loggedIn && (
               <NavigationMenuItem>
                 <button
                   className="text-foreground/60 transition-colors hover:text-foreground/80"
@@ -78,16 +90,3 @@ const StyledNavLink = forwardRef<
   )
 })
 StyledNavLink.displayName = 'Nav.StyledNavLink'
-
-function ConditionalNavLink({
-  predicate = () => true,
-  ...props
-}: { predicate?: () => boolean; to: string } & Omit<NavLinkProps, 'to'>) {
-  return (
-    predicate() && (
-      <NavigationMenuItem>
-        <StyledNavLink {...props} />
-      </NavigationMenuItem>
-    )
-  )
-}

@@ -6,7 +6,7 @@ import { buttonVariants } from '@/components/ui/use-button'
 import { useAppDispatch } from '@/hooks/redux'
 import { cn } from '@/lib/utils'
 import { useEffect } from 'react'
-import { Link, To } from 'react-router-dom'
+import { Link, type To } from 'react-router-dom'
 import { AppTitle } from './common/app-title'
 
 interface OtherPageInfo {
