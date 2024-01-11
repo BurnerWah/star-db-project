@@ -12,23 +12,31 @@ import type { ZodObject, ZodTypeAny, z } from 'zod'
  */
 export function validate<
   Schema extends ZodObject<{
+    params?: ZodTypeAny
     body?: ZodTypeAny
     query?: ZodTypeAny
-    params?: ZodTypeAny
   }>,
-  Params = {
-    [Key in keyof z.infer<Schema>['params']]: string
-  },
-  ReqBody = z.infer<Schema>['body'],
-  Query = z.infer<Schema>['query'],
->(schema: Schema): RequestHandler<Params, unknown, ReqBody, Query> {
+>(
+  schema: Schema,
+): RequestHandler<
+  z.infer<Schema>['params'],
+  unknown,
+  z.infer<Schema>['body'],
+  z.infer<Schema>['query']
+> {
   return async (req, res, next) => {
     try {
-      await schema.parseAsync({
+      const { params, body, query } = await schema.parseAsync({
+        params: req.params,
         body: req.body,
         query: req.query,
-        params: req.params,
       })
+
+      // Assign the validated values to the request object
+      req.params = params
+      req.body = body
+      req.query = query
+
       return next()
     } catch (error) {
       return res.status(400).json({ error })

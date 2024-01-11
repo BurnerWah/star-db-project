@@ -94,7 +94,7 @@ export const ClientItemSubmissionSchema = ItemSubmissionSchema.extend({
 export const TABLE_PAGE_SIZES = ['5', '10', '25', '50', '100'] as const
 
 export const ItemListingQuerySchema = z.object({
-  search: z.string().optional(),
-  page: z.coerce.number().int().nonnegative().optional(),
-  page_size: z.enum(TABLE_PAGE_SIZES).optional(),
+  search: z.string().default(''),
+  page: z.coerce.number().int().nonnegative().default(0),
+  page_size: z.enum(TABLE_PAGE_SIZES).default('10').transform(Number),
 })

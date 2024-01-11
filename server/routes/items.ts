@@ -33,8 +33,7 @@ items.get(
   validate(z.object({ query: ItemListingQuerySchema })),
   async (req, res) => {
     try {
-      const page = Number(req.query.page ?? 0)
-      const pageSize = Number(req.query.page_size ?? 10)
+      const { page, page_size, search } = req.query
       const result = await pool.query<ItemQuery>(
         /*sql*/ `
           SELECT
@@ -58,13 +57,12 @@ items.get(
               SELECT count(*) FROM objects
             ) AS c ON true
           WHERE
-            o.name ILIKE '%' || $1 || '%'
+            o.name ILIKE '%' || $3::text || '%'
           ORDER BY
             o.name
-          LIMIT $3::integer OFFSET $3::integer * $2::integer
-          ;
+          LIMIT $1::integer OFFSET $1::integer * $2::integer
         `,
-        [req.query.search ?? '', page, pageSize],
+        [page_size, page, search],
       )
       const items: ParsedItem[] = result.rows.map((item) => ({
         id: item.id,
@@ -92,8 +90,8 @@ items.get(
       const total_rows = result.rows[0]?.total_rows ?? 0
       res.send({
         page,
-        pageSize,
-        pageCount: Math.ceil(total_rows / pageSize),
+        pageSize: page_size,
+        pageCount: Math.ceil(total_rows / page_size),
         items,
       } as ListingResponse)
     } catch (error) {
@@ -140,9 +138,9 @@ items.get(
           LEFT JOIN (
             SELECT object_id
             FROM users_objects
-            WHERE user_id = $2
+            WHERE user_id = $2::integer
           ) AS s ON o.id = s.object_id
-          WHERE o.id = $1;
+          WHERE o.id = $1::integer;
         `,
         [req.params.id, req.user?.id],
       )

@@ -36,7 +36,7 @@ router.post(
             username,
             argon2id_hash
           )
-          VALUES ($1, $2)
+          VALUES ($1::text, $2::text)
           RETURNING *
         `,
         [username, hashedPassword],

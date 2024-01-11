@@ -9,10 +9,7 @@ passport.use(
   new LocalStrategy(async (username, password, cb) => {
     try {
       const result = await pool.query<DBUser>(
-        /*sql*/ `
-          SELECT * FROM users
-          WHERE username = $1
-        `,
+        `SELECT * FROM users WHERE username = $1::text`,
         [username],
       )
       const user = result.rows[0]

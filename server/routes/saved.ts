@@ -22,8 +22,7 @@ saved.get(
       return
     }
     try {
-      const page = Number(req.query.page ?? 0)
-      const pageSize = Number(req.query.page_size ?? 10)
+      const { page, page_size, search } = req.query
       // This query gives the client a lot more information than they need, but
       // it's the simpllest possible query to get everything. It'll be turned
       // into a longer but more limited query later, but postgres has no way
@@ -48,14 +47,13 @@ saved.get(
               WHERE user_id = $1
             ) as c ON true
           WHERE
-            uo.user_id = $1
-            AND o.name ILIKE '%' || $2 || '%'
+            uo.user_id = $4::integer
+            AND o.name ILIKE '%' || $3::text || '%'
           ORDER BY
             o.name
-          LIMIT $4::integer OFFSET $4::integer * $3::integer
-          ;
+          LIMIT $1::integer OFFSET $1::integer * $2::integer
         `,
-        [req.user.id, req.query.search ?? '', page, pageSize],
+        [page_size, page, search, req.user.id],
       )
       const items: ParsedItem[] = results.rows.map((row) => ({
         id: row.id,
@@ -83,8 +81,8 @@ saved.get(
       const total_rows = results.rows[0]?.total_rows ?? 0
       res.send({
         page,
-        pageSize,
-        pageCount: Math.ceil(total_rows / pageSize),
+        pageSize: page_size,
+        pageCount: Math.ceil(total_rows / page_size),
         items,
       } as ListingResponse)
     } catch (error) {
@@ -96,11 +94,7 @@ saved.get(
 
 saved.put(
   '/add',
-  validate(
-    z.object({
-      body: z.object({ id: z.number() }),
-    }),
-  ),
+  validate(z.object({ body: z.object({ id: z.coerce.number() }) })),
   async (req, res) => {
     if (!req.user) {
       res.sendStatus(401)
@@ -113,7 +107,7 @@ saved.put(
           INSERT INTO users_objects (
             user_id,
             object_id
-          ) VALUES ($1, $2);
+          ) VALUES ($1::integer, $2::integer);
         `,
         [req.user.id, req.body.id],
       )
@@ -128,7 +122,7 @@ saved.put(
 
 saved.delete(
   '/remove/:id',
-  validate(z.object({ params: z.object({ id: z.string() }) })),
+  validate(z.object({ params: z.object({ id: z.coerce.number() }) })),
   async (req, res) => {
     if (!req.user) {
       res.sendStatus(401)
@@ -136,7 +130,13 @@ saved.delete(
     }
     try {
       const result = await pool.query(
-        `DELETE FROM users_objects WHERE user_id = $1 AND object_id = $2`,
+        /*sql*/ `
+          DELETE FROM
+            users_objects
+          WHERE
+            user_id = $1::integer
+            AND object_id = $2::integer
+        `,
         [req.user.id, req.params.id],
       )
       console.log(result)
