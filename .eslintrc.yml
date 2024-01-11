@@ -58,6 +58,12 @@ overrides:
     plugins:
       - react-refresh
       - react
+  - files: ['src/components/ui/**/*']
+    rules:
+      react/prop-types:
+        - error
+        - ignore:
+            - className
 
 ignorePatterns:
   - dist
