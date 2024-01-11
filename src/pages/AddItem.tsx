@@ -4,7 +4,7 @@ import { TypographyH2 } from '@/components/typography'
 
 export default function AddItem() {
   return (
-    <div>
+    <div className="container mt-8">
       <TypographyH2>Add Item</TypographyH2>
       <AddItemForm />
     </div>
