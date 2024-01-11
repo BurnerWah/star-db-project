@@ -2,7 +2,7 @@ import jwstDeepField from '@/assets/images/jwst-deep-field.png?w=1200&format=web
 import jwstDeepFieldsAvif from '@/assets/images/jwst-deep-field.png?w=500;700;900;1200&format=avif&as=srcset'
 import jwstDeepFieldsJpeg from '@/assets/images/jwst-deep-field.png?w=500;700;900;1200&format=jpeg&as=srcset'
 import jwstDeepFieldsWebp from '@/assets/images/jwst-deep-field.png?w=500;700;900;1200&format=webp&as=srcset'
-import { buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/use-button'
 import { useAppDispatch } from '@/hooks/redux'
 import { cn } from '@/lib/utils'
 import { useEffect } from 'react'
