@@ -62,7 +62,7 @@ items.get(
             o.name ILIKE '%' || $1 || '%'
           ORDER BY
             o.name
-          LIMIT $3 OFFSET $3 * $2
+          LIMIT $3::integer OFFSET $3::integer * $2::integer
           ;
         `,
         [req.query.search ?? '', page, pageSize],
