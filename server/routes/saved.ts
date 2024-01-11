@@ -23,6 +23,8 @@ saved.get(
       return
     }
     try {
+      const page = Number(req.query.page ?? 0)
+      const pageSize = Number(req.query.page_size ?? 10)
       // This query gives the client a lot more information than they need, but
       // it's the simpllest possible query to get everything. It'll be turned
       // into a longer but more limited query later, but postgres has no way
@@ -51,10 +53,10 @@ saved.get(
             AND o.name ILIKE '%' || $2 || '%'
           ORDER BY
             o.name
-          LIMIT 5 OFFSET 5 * $3
+          LIMIT $4 OFFSET $4 * $3
           ;
         `,
-        [req.user.id, req.query.search ?? '', req.query.page ?? 0],
+        [req.user.id, req.query.search ?? '', page, pageSize],
       )
       const items: ParsedItem[] = results.rows.map((row) => ({
         id: row.id,
@@ -81,7 +83,8 @@ saved.get(
       }))
       const total_rows = results.rows[0]?.total_rows ?? 0
       res.send({
-        page: req.query.page ?? 0,
+        page,
+        pageSize,
         pageCount: Math.ceil(total_rows / LISTING_PAGE_SIZE),
         items,
       } as ListingResponse)

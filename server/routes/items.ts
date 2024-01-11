@@ -34,6 +34,8 @@ items.get(
   validate(z.object({ query: ItemListingQuerySchema })),
   async (req, res) => {
     try {
+      const page = Number(req.query.page ?? 0)
+      const pageSize = Number(req.query.page_size ?? 10)
       const result = await pool.query<ItemQuery>(
         /*sql*/ `
           SELECT
@@ -60,10 +62,10 @@ items.get(
             o.name ILIKE '%' || $1 || '%'
           ORDER BY
             o.name
-          LIMIT 5 OFFSET 5 * $2
+          LIMIT $3 OFFSET $3 * $2
           ;
         `,
-        [req.query.search ?? '', req.query.page ?? 0],
+        [req.query.search ?? '', page, pageSize],
       )
       const items: ParsedItem[] = result.rows.map((item) => ({
         id: item.id,
@@ -90,7 +92,8 @@ items.get(
       }))
       const total_rows = result.rows[0]?.total_rows ?? 0
       res.send({
-        page: req.query.page ?? 0,
+        page,
+        pageSize,
         pageCount: Math.ceil(total_rows / LISTING_PAGE_SIZE),
         items,
       } as ListingResponse)
