@@ -25,68 +25,61 @@ export const LoginSchema = z.object({
 export const RegisterSchema = LoginSchema
 
 // Parts of the item submission schema that the client could reuse
-export const ItemNameSchemaPart = z
-  .string()
-  .min(1, { message: 'Name must be at least 1 character.' })
-export const ArcMinuteSchemaPart = z.coerce.number().min(0).max(59)
-export const ArcSecondSchemaPart = z.coerce.number().min(0).lt(60)
+export const ArcMinuteSchemaPart = z.coerce.number().nonnegative().max(59)
+export const ArcSecondSchemaPart = z.coerce.number().nonnegative().lt(60)
 // The server has degrees and sign separated, while the client does not
 export const ServerDeclinatorSchemaPart = z.optional(
   z.object({
     sign: z.number().min(-1).max(1).int(),
-    degrees: z.number().min(0).lt(90).int(),
+    degrees: z.number().nonnegative().lt(90).int(),
     arcmin: ArcMinuteSchemaPart,
     arcsec: ArcSecondSchemaPart,
   }),
 )
-export const DistanceSchemaPart = z.optional(
-  z.object({
-    value: z.coerce.number().positive({
-      message: 'Distances are always positive',
-    }),
-    error: z.coerce.number().positive({
-      message: 'A margin of error cannot be negative',
-    }),
-  }),
-)
-export const ApparentMagnitudeSchemaPart = z.optional(z.coerce.number())
-export const AbsoluteMagnitudeSchemaPart = z.optional(z.coerce.number())
-export const MassSchemaPart = z.optional(
-  z.coerce.number().positive({
-    message: 'Negative masses have yet to be discovered',
-  }),
-)
-export const RedshiftSchemaPart = z.optional(z.coerce.number())
-export const NasaImageIdSchemaPart = z.optional(
-  z.string().max(64, { message: 'Image ID too long' }),
-)
 
 export const ItemSubmissionSchema = z.object({
-  name: ItemNameSchemaPart,
+  name: z.string().min(1, { message: 'Name must be at least 1 character.' }),
   type: z.nativeEnum(EDBObjectTypes),
-  right_ascension: z.optional(
-    z
-      .string({ invalid_type_error: 'Right ascension must be a string' })
-      .min(9, { message: 'Right ascension input is incomplete' })
-      .max(15, { message: 'Right ascension must be less than 15 characters' })
-      .regex(/^\d\d:\d\d:\d\d(?:\.\d{,6})?$/, { message: 'Invalid format' }),
-  ),
+  right_ascension: z
+    .string({ invalid_type_error: 'Right ascension must be a string' })
+    .min(9, { message: 'Right ascension input is incomplete' })
+    .max(15, { message: 'Right ascension must be less than 15 characters' })
+    // Regex partially based on https://github.com/validatorjs/validator.js/blob/master/src/lib/isTime.js
+    .regex(/^([01]?\d|2[0-3]):([0-5]\d):([0-5]\d)($|\.\d{1,6}$)/, {
+      message: 'Invalid format',
+    })
+    .optional(),
   declination: ServerDeclinatorSchemaPart,
-  distance: DistanceSchemaPart,
-  apparent_magnitude: ApparentMagnitudeSchemaPart,
-  absolute_magnitude: AbsoluteMagnitudeSchemaPart,
-  mass: MassSchemaPart,
-  redshift: RedshiftSchemaPart,
-  nasa_image_id: NasaImageIdSchemaPart,
+  distance: z.optional(
+    z.object({
+      value: z.coerce.number().positive({
+        message: 'Distances are always positive',
+      }),
+      error: z.coerce.number().nonnegative({
+        message: 'A margin of error cannot be negative',
+      }),
+    }),
+  ),
+  apparent_magnitude: z.coerce.number().optional(),
+  absolute_magnitude: z.coerce.number().optional(),
+  mass: z.optional(
+    z.coerce.number().positive({
+      message: 'Negative masses have yet to be discovered',
+    }),
+  ),
+  redshift: z.coerce.number().optional(),
+  nasa_image_id: z.optional(
+    z.string().max(64, { message: 'Image ID too long' }),
+  ),
 })
 
 export const ClientItemSubmissionSchema = ItemSubmissionSchema.extend({
   type: OBJECT_TYPES,
   right_ascension: z.optional(
     z.object({
-      hours: z.coerce.number().positive().max(23).int(),
-      min: z.coerce.number().positive().max(59).int(),
-      sec: z.coerce.number().positive().lt(60),
+      hours: z.coerce.number().nonnegative().max(23).int(),
+      min: z.coerce.number().nonnegative().max(59).int(),
+      sec: z.coerce.number().nonnegative().lt(60),
     }),
   ),
   declination: z.optional(
