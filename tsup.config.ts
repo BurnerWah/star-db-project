@@ -9,6 +9,8 @@ export default defineConfig((options) => ({
   sourcemap: true,
   clean: true,
   target: 'node20',
-  onSuccess: options.watch ? 'node dist/server/server.js' : undefined,
+  onSuccess: options.watch
+    ? 'DOTENV_CONFIG_PATH=.env.server node dist/server/server.js'
+    : undefined,
   ignoreWatch: ['dist', 'src', 'documentation', 'public'],
 }))
