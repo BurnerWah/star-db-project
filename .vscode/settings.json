@@ -30,6 +30,10 @@
   "[sql]": {
     "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
   },
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2
@@ -49,6 +53,10 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
+  "files.associations": {
+    "*.css": "tailwindcss",
+    ".env.*": "dotenv"
+  },
   "npm-intellisense.importES6": true,
   "npm-intellisense.importLinebreak": "",
   "Prettier-SQL.SQLFlavourOverride": "postgresql",
