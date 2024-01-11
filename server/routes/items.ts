@@ -60,10 +60,10 @@ items.get(
             o.name ILIKE '%' || $1 || '%'
           ORDER BY
             o.name
-          LIMIT $3 OFFSET $3 * $2
+          LIMIT 5 OFFSET 5 * $2
           ;
         `,
-        [req.query.search ?? '', req.query.page ?? 0, LISTING_PAGE_SIZE],
+        [req.query.search ?? '', req.query.page ?? 0],
       )
       const items: ParsedItem[] = result.rows.map((item) => ({
         id: item.id,

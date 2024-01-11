@@ -51,15 +51,10 @@ saved.get(
             AND o.name ILIKE '%' || $2 || '%'
           ORDER BY
             o.name
-          LIMIT $4 OFFSET $4 * $3
+          LIMIT 5 OFFSET 5 * $3
           ;
         `,
-        [
-          req.user.id,
-          req.query.search ?? '',
-          req.query.page ?? 0,
-          LISTING_PAGE_SIZE,
-        ],
+        [req.user.id, req.query.search ?? '', req.query.page ?? 0],
       )
       const items: ParsedItem[] = results.rows.map((row) => ({
         id: row.id,
