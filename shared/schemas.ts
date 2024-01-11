@@ -100,5 +100,5 @@ export const ClientItemSubmissionSchema = ItemSubmissionSchema.extend({
 
 export const ItemListingQuerySchema = z.object({
   search: z.string().optional(),
-  page: z.number().int().min(1).positive().optional(),
+  page: z.coerce.number().int().nonnegative().optional(),
 })
