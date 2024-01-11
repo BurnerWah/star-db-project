@@ -61,7 +61,6 @@ export function ItemTable<A extends FetchListItemsSaga | ListSavedItemsSaga>({
       type: actionType,
       payload: { search },
     } as A)
-    setSearch('')
   }
 
   useEffect(() => {
