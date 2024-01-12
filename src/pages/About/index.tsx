@@ -22,7 +22,7 @@ import {
 
 export default function About() {
   return (
-    <article className="container prose prose-invert mt-8 lg:prose-xl prose-a:transition-colors">
+    <article className="container prose prose-invert mt-8 lg:prose-xl prose-a:decoration-white prose-a:transition-colors">
       <h1>About</h1>
       <p>
         {`
