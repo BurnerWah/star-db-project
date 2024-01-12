@@ -6,3 +6,4 @@ printWidth: 80
 jsxSingleQuote: false
 plugins:
   - prettier-plugin-tailwindcss
+tailwindFunctions: [cn, cva, classnames, clsx, ctl]
