@@ -49,7 +49,7 @@ export default function About() {
       <h2>Source Code</h2>
       <p>
         The source code is available{' '}
-        <a href="https://github.com/BurnerWah/star-db-project">on GitHub</a>
+        <a href="https://github.com/BurnerWah/star-db-project">on GitHub</a>.
       </p>
     </article>
   )
