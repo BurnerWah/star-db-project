@@ -12,78 +12,74 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
 // Based loosely off of https://tailwindui.com/components/application-ui/data-display/description-lists
 export default function Details() {
-  const { id: pageId } = useParams()
+  const { id } = useParams()
 
   const dispatch = useAppDispatch()
 
   const loggedIn = useAppSelector((state) => Boolean(state.user.id))
   const administrator = useAppSelector((state) => state.user.administrator)
 
-  const id = useAppSelector((state) => state.itemDetails.id)
-  const name = useAppSelector((state) => state.itemDetails.name)
-  const type = useAppSelector((state) => state.itemDetails.type?.name)
-  const ra = useAppSelector((state) => state.itemDetails.right_ascension)
-  const declination = useAppSelector((state) => state.itemDetails.declination)
-  const distance = useAppSelector((state) => state.itemDetails.distance)
-  const apparentMagnitude = useAppSelector(
-    (state) => state.itemDetails.apparent_magnitude,
-  )
-  const absoluteMagnitude = useAppSelector(
-    (state) => state.itemDetails.absolute_magnitude,
-  )
-  const mass = useAppSelector((state) => state.itemDetails.mass)
-  const redshift = useAppSelector((state) => state.itemDetails.redshift)
-  const saved = useAppSelector((state) => state.itemDetails.saved)
+  const item = useAppSelector((state) => state.itemDetails)
 
   useEffect(() => {
-    if (pageId) {
-      dispatch({ type: 'itemDetails/fetch', payload: pageId })
+    if (id) {
+      dispatch({ type: 'itemDetails/fetch', payload: id })
     }
     return () => {
       dispatch({ type: 'itemDetails/unset' })
     }
-  }, [dispatch, pageId])
+  }, [dispatch, id])
 
   return (
     <div className="container mt-8">
       <TypographyH1>
-        {name} ({type})
+        {item.name} ({item.type?.name})
       </TypographyH1>
       <div className="mt-6 border-t">
         <dl className="divide-y">
           <DescriptionListItem label="Right Ascension">
-            {ra ? <RightAscensionTeX rightAscension={ra} /> : 'N/A'}
+            {item.right_ascension ? (
+              <RightAscensionTeX rightAscension={item.right_ascension} />
+            ) : (
+              'N/A'
+            )}
           </DescriptionListItem>
           <DescriptionListItem label="Declination">
-            {declination ? <DeclinationTeX declination={declination} /> : 'N/A'}
+            {item.declination ? (
+              <DeclinationTeX declination={item.declination} />
+            ) : (
+              'N/A'
+            )}
           </DescriptionListItem>
           <DescriptionListItem label="Distance">
-            {distance ? <DistanceTeX distance={distance} /> : 'N/A'}
+            {item.distance ? <DistanceTeX distance={item.distance} /> : 'N/A'}
           </DescriptionListItem>
           <DescriptionListItem label="Apparent Magnitude">
-            {apparentMagnitude || 'N/A'}
+            {item.apparent_magnitude || 'N/A'}
           </DescriptionListItem>
           <DescriptionListItem label="Absolute Magnitude">
-            {absoluteMagnitude || 'N/A'}
+            {item.absolute_magnitude || 'N/A'}
           </DescriptionListItem>
           <DescriptionListItem label="Mass">
-            {mass ? <MassTeX mass={mass} /> : 'N/A'}
+            {item.mass ? <MassTeX mass={item.mass} /> : 'N/A'}
           </DescriptionListItem>
           <DescriptionListItem label="Redshift">
-            {redshift || 'N/A'}
+            {item.redshift || 'N/A'}
           </DescriptionListItem>
         </dl>
       </div>
       {loggedIn &&
-        (saved ? (
+        (item.saved ? (
           <Button
-            onClick={() => dispatch({ type: 'api/unsaveItem', payload: id })}
+            onClick={() =>
+              dispatch({ type: 'api/unsaveItem', payload: item.id })
+            }
           >
             Unsave
           </Button>
         ) : (
           <Button
-            onClick={() => dispatch({ type: 'api/saveItem', payload: id })}
+            onClick={() => dispatch({ type: 'api/saveItem', payload: item.id })}
           >
             Save
           </Button>
@@ -94,7 +90,7 @@ export default function Details() {
           onClick={() =>
             dispatch({
               type: 'api/admin/deleteItem',
-              payload: { id },
+              payload: { id: item.id },
             })
           }
         >
