@@ -1,10 +1,23 @@
 import {
+  Express,
+  KaTeX,
   Lucide,
+  Node,
+  PostgreSQL,
   RadixUI,
   React,
+  ReactHookForm,
+  ReactRouter,
+  Redux,
+  ReduxSaga,
   ShadcnUI,
   TailwindCSS,
   TailwindUI,
+  TanStackTable,
+  Tsup,
+  TypeScript,
+  Vite,
+  Zod,
 } from './links'
 
 export default function About() {
@@ -21,10 +34,22 @@ export default function About() {
       </p>
       <h2>Tech Stack</h2>
       <p>
-        This app is built with {React}, and styled using {TailwindCSS}. The core
-        design is based on {ShadcnUI} & {TailwindUI}. Most icons are from{' '}
-        {Lucide}, with a few others from {RadixUI}, which is also used
-        under-the-hood in a lot of components.
+        This app is made with {TypeScript}, {React}, & {TailwindCSS}, and built
+        with {Vite}. The core design is based on {ShadcnUI} & {TailwindUI}. Most
+        icons are from {Lucide}, with a few others from {RadixUI}, which is also
+        used under-the-hood in a lot of components. State is managed by {Redux},
+        with {ReduxSaga} handling side-effects. Tables use {TanStackTable},
+        forms use {ReactHookForm} & {Zod}, math rendering uses {KaTeX}, and
+        routing is done by {ReactRouter}.
+      </p>
+      <p>
+        The server uses {Node} with {Express}, written in {TypeScript}, and
+        built with {Tsup}. It also uses {PostgreSQL} for storage.
+      </p>
+      <h2>Source Code</h2>
+      <p>
+        The source code is available{' '}
+        <a href="https://github.com/BurnerWah/star-db-project">on GitHub</a>
       </p>
     </article>
   )
