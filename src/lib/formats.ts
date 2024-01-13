@@ -21,8 +21,8 @@ export function prepareDeclination(
   return {
     sign: Math.sign(input.degrees) as Declination['sign'],
     degrees: Math.abs(input.degrees),
-    arcmin: input.arcmin || 0,
-    arcsec: input.arcsec || 0,
+    arcmin: input.arcmin ?? 0,
+    arcsec: input.arcsec ?? 0,
   }
 }
 
@@ -45,14 +45,19 @@ export function prepareRightAscension(
   return `${hours}:${min}:${sec}`
 }
 
+function isMeasurementWithUncertainty(
+  input?: DistanceInput,
+): input is MeasurementWithUncertainty {
+  return !!input?.value && !!input?.error
+}
+
 export function prepareDistance(
   input?: DistanceInput,
 ): MeasurementWithUncertainty | undefined {
-  // Just a type guard
-  if (!input || !input.value || !input.error) {
-    return undefined
+  if (isMeasurementWithUncertainty(input)) {
+    return input
   }
-  return input as MeasurementWithUncertainty
+  return undefined
 }
 
 export function prepareObjectType(input: ZObjectType): EDBObjectTypes {

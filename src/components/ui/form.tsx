@@ -5,48 +5,28 @@ import { Slot } from '@radix-ui/react-slot'
 import * as React from 'react'
 import {
   Controller,
-  ControllerProps,
-  FieldPath,
-  FieldValues,
   FormProvider,
+  type ControllerProps,
+  type FieldPath,
+  type FieldValues,
 } from 'react-hook-form'
+import { FormFieldContext, FormItemContext } from './form-context'
 import { useFormField } from './use-form'
 
-const Form = FormProvider
+export const Form = FormProvider
 
-type FormFieldContextValue<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = {
-  name: TName
-}
-
-export const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue,
-)
-
-const FormField = <
+export const FormField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   ...props
-}: ControllerProps<TFieldValues, TName>) => {
-  return (
-    <FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
-    </FormFieldContext.Provider>
-  )
-}
-
-type FormItemContextValue = {
-  id: string
-}
-
-export const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue,
+}: ControllerProps<TFieldValues, TName>) => (
+  <FormFieldContext.Provider value={{ name: props.name }}>
+    <Controller {...props} />
+  </FormFieldContext.Provider>
 )
 
-const FormItem = React.forwardRef<
+export const FormItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
@@ -60,7 +40,7 @@ const FormItem = React.forwardRef<
 })
 FormItem.displayName = 'FormItem'
 
-const FormLabel = React.forwardRef<
+export const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >(({ className, ...props }, ref) => {
@@ -77,7 +57,7 @@ const FormLabel = React.forwardRef<
 })
 FormLabel.displayName = 'FormLabel'
 
-const FormControl = React.forwardRef<
+export const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
   React.ComponentPropsWithoutRef<typeof Slot>
 >(({ ...props }, ref) => {
@@ -99,7 +79,7 @@ const FormControl = React.forwardRef<
 })
 FormControl.displayName = 'FormControl'
 
-const FormDescription = React.forwardRef<
+export const FormDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => {
@@ -116,7 +96,7 @@ const FormDescription = React.forwardRef<
 })
 FormDescription.displayName = 'FormDescription'
 
-const FormMessage = React.forwardRef<
+export const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
@@ -139,13 +119,3 @@ const FormMessage = React.forwardRef<
   )
 })
 FormMessage.displayName = 'FormMessage'
-
-export {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-}
