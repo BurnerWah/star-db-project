@@ -3,7 +3,9 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { cn } from '@/lib/utils'
+import { selectAdministrator, selectLoggedIn } from '@/redux/selectors'
 import {
   forwardRef,
   type ComponentProps,
@@ -12,7 +14,6 @@ import {
   type HTMLAttributes,
 } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { AppTitle } from '../common/app-title'
 
 type LinkInfo = Omit<ComponentProps<typeof StyledNavLink>, 'to'> & {
@@ -25,8 +26,8 @@ export default function Nav({
 }: Readonly<HTMLAttributes<HTMLElement>>) {
   const dispatch = useAppDispatch()
 
-  const loggedIn = useAppSelector((store) => Boolean(store.user.id))
-  const isAdmin = useAppSelector((store) => Boolean(store.user.administrator))
+  const loggedIn = useAppSelector(selectLoggedIn)
+  const isAdmin = useAppSelector(selectAdministrator)
 
   // This lets me define the nav a bit faster
   const links: LinkInfo[] = [

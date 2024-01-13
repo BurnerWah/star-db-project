@@ -11,7 +11,7 @@ import { Table } from '@tanstack/react-table'
 import { SlidersHorizontal } from 'lucide-react'
 
 interface DataTableViewOptionsProps<TData> {
-  table: Table<TData>
+  readonly table: Table<TData>
 }
 
 export function DataTableViewOptions<TData>({

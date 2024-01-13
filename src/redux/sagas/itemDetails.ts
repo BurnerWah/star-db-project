@@ -1,5 +1,5 @@
 import axios, { type AxiosResponse } from 'axios'
-import { type SagaIterator } from 'redux-saga'
+import type { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import type { FetchItemDetailsSaga } from '~typings/actions'
 import type { ItemDetails } from '~typings/requests'

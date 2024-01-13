@@ -6,9 +6,10 @@ import {
 } from '@/components/formatters'
 import { TypographyH1 } from '@/components/typography'
 import { Button } from '@/components/ui/button'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { selectAdministrator, selectLoggedIn } from '@/redux/selectors'
 import { useEffect, type ReactNode } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
 
 // Based loosely off of https://tailwindui.com/components/application-ui/data-display/description-lists
 export default function Details() {
@@ -16,8 +17,8 @@ export default function Details() {
 
   const dispatch = useAppDispatch()
 
-  const loggedIn = useAppSelector((state) => Boolean(state.user.id))
-  const administrator = useAppSelector((state) => state.user.administrator)
+  const loggedIn = useAppSelector(selectLoggedIn)
+  const administrator = useAppSelector(selectAdministrator)
 
   const item = useAppSelector((state) => state.itemDetails)
 

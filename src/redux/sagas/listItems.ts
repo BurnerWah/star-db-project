@@ -1,7 +1,7 @@
 import axios, { type AxiosResponse } from 'axios'
-import { type SagaIterator } from 'redux-saga'
+import type { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
-import { FetchListItemsSaga } from '~typings/actions'
+import type { FetchListItemsSaga } from '~typings/actions'
 import type { ListingResponse } from '~typings/requests'
 import { put } from '../../hooks/redux'
 

@@ -27,7 +27,7 @@ import { useAppDispatch } from '@/hooks/redux'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Diff, ListRestart, Upload } from 'lucide-react'
 import { useForm, type Control } from 'react-hook-form'
-import { z } from 'zod'
+import type { z } from 'zod'
 import {
   OBJECT_TYPES,
   ClientItemSubmissionSchema as formSchema,
@@ -85,7 +85,7 @@ type SectionProps = Readonly<{ control: Control<z.infer<typeof formSchema>> }>
 const patterns = {
   decimal: '[\\d.,]*',
   numeric: '\\d*',
-}
+} as const
 
 function MainInputs({ control }: SectionProps) {
   return (

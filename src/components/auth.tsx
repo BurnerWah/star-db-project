@@ -1,38 +1,39 @@
 import { useAppSelector } from '@/hooks/redux'
+import { selectAdministrator, selectLoggedIn } from '@/redux/selectors'
 import type { RootState } from '@/redux/store'
-import { Navigate } from 'react-router-dom'
+import type { ComponentProps, ReactNode } from 'react'
+import { Navigate, type To } from 'react-router-dom'
+
+type AuthProps = Readonly<
+  Omit<ComponentProps<typeof Navigate>, 'to'> & {
+    to?: To
+    children: ReactNode
+  }
+>
 
 const selectUserInitialized = (store: RootState) => store.status.userInitalized
 
-export function RequireAuth({
-  children,
-  redirectTo = '/login',
-}: Readonly<{ children: JSX.Element; redirectTo?: string }>) {
-  const user = useAppSelector((store) => store.user)
-  const userInitalized = useAppSelector(selectUserInitialized)
-  return userInitalized && (user.id ? children : <Navigate to={redirectTo} />)
+export function RequireAuth({ children, to = '/login', ...props }: AuthProps) {
+  const initalized = useAppSelector(selectUserInitialized)
+  const loggedIn = useAppSelector(selectLoggedIn)
+
+  return initalized && (loggedIn ? children : <Navigate to={to} {...props} />)
 }
 
-export function RequireAdmin({
-  children,
-  redirectTo = '/login',
-}: Readonly<{
-  children: JSX.Element
-  redirectTo?: string
-}>) {
-  const user = useAppSelector((store) => store.user)
-  const userInitalized = useAppSelector(selectUserInitialized)
-  return (
-    userInitalized &&
-    (user.administrator ? children : <Navigate to={redirectTo} />)
-  )
+export function RequireAdmin({ children, to = '/login', ...props }: AuthProps) {
+  const initalized = useAppSelector(selectUserInitialized)
+  const isAdmin = useAppSelector(selectAdministrator)
+
+  return initalized && (isAdmin ? children : <Navigate to={to} {...props} />)
 }
 
 export function RequireNotAuth({
   children,
-  redirectTo = '/user',
-}: Readonly<{ children: JSX.Element; redirectTo?: string }>) {
-  const user = useAppSelector((store) => store.user)
-  const userInitalized = useAppSelector(selectUserInitialized)
-  return userInitalized && (!user.id ? children : <Navigate to={redirectTo} />)
+  to = '/user',
+  ...props
+}: AuthProps) {
+  const initalized = useAppSelector(selectUserInitialized)
+  const loggedIn = useAppSelector(selectLoggedIn)
+
+  return initalized && (loggedIn ? <Navigate to={to} {...props} /> : children)
 }

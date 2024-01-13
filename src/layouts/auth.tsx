@@ -5,7 +5,7 @@ import jwstDeepFieldsWebp from '@/assets/images/jwst-deep-field.png?w=500;700;90
 import { buttonVariants } from '@/components/ui/use-button'
 import { useAppDispatch } from '@/hooks/redux'
 import { cn } from '@/lib/utils'
-import { useEffect } from 'react'
+import { useEffect, type ReactNode } from 'react'
 import { Link, type To } from 'react-router-dom'
 import { AppTitle } from './common/app-title'
 
@@ -28,7 +28,7 @@ export function AuthLayout({
 }: Readonly<{
   otherPage: OtherPageInfo
   title: string
-  children: JSX.Element
+  children: ReactNode
 }>) {
   // Hide the header & footer while this layout is active, as they don't work
   // with the design

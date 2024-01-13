@@ -13,7 +13,7 @@ import { useAppDispatch } from '@/hooks/redux'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LogIn } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import type { z } from 'zod'
 import { LoginSchema } from '~shared/schemas'
 
 export function LoginForm() {

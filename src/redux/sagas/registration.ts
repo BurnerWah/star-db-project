@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { type SagaIterator } from 'redux-saga'
+import type { SagaIterator } from 'redux-saga'
 import { call, takeLatest } from 'redux-saga/effects'
 import type { RegisterSaga } from '~typings/actions'
 import { put } from '../../hooks/redux'

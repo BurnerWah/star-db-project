@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { type SagaIterator } from 'redux-saga'
+import type { SagaIterator } from 'redux-saga'
 import { call, takeEvery } from 'redux-saga/effects'
 import type { AdminAddItemSaga, AdminDeleteItemSaga } from '~typings/actions'
 import type { ItemSubmission } from '~typings/requests'

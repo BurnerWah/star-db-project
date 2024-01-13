@@ -1,4 +1,4 @@
-import { type Reducer } from 'redux'
+import type { Reducer } from 'redux'
 import type { SetItemDetails, UnsetItemDetails } from '~typings/actions'
 import type { ItemDetails } from '~typings/requests'
 

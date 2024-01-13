@@ -8,6 +8,7 @@ import {
   CommandSeparator,
 } from '@/components/ui/command'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { selectAdministrator, selectLoggedIn } from '@/redux/selectors'
 import {
   BookMarked,
   CircleUser,
@@ -27,7 +28,8 @@ export default function Command() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const user = useAppSelector((store) => store.user)
+  const loggedIn = useAppSelector(selectLoggedIn)
+  const administrator = useAppSelector(selectAdministrator)
 
   const [open, setOpen] = useState(false)
 
@@ -57,7 +59,7 @@ export default function Command() {
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
-        {!user.id && (
+        {loggedIn || (
           <CommandGroup title="Authentication">
             <CommandItem onSelect={() => goToPage('/login')}>
               <LogIn className="mr-2 h-4 w-4" />
@@ -70,7 +72,7 @@ export default function Command() {
           </CommandGroup>
         )}
         <CommandSeparator />
-        {user.id && (
+        {loggedIn && (
           <CommandGroup title="User">
             <CommandItem onSelect={() => goToPage('/user')}>
               <CircleUser className="mr-2 h-4 w-4" />
@@ -90,7 +92,7 @@ export default function Command() {
           </CommandGroup>
         )}
         <CommandSeparator />
-        {user.administrator && (
+        {administrator && (
           <CommandGroup title="Admin">
             <CommandItem onSelect={() => goToPage('/add')}>
               <PlusSquare className="mr-2 h-4 w-4" />

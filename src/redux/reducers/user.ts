@@ -1,4 +1,4 @@
-import { type Reducer } from 'redux'
+import type { Reducer } from 'redux'
 import type { SetUser, UnsetUser } from '~typings/actions'
 import type { UserResponse } from '~typings/requests'
 

@@ -1,11 +1,11 @@
+import type { ReactNode } from 'react'
+
 // These components are most of the typography components from Shadcn UI.
 // They're all described here: https://ui.shadcn.com/docs/components/typography
 // I didn't include the table because it'd be too complicated to include.
 
 // All of these components have the same props
-type TypographyProps = Readonly<{
-  children?: JSX.Element | string | JSX.Element[] | string[]
-}>
+type TypographyProps = Readonly<{ children?: ReactNode }>
 
 /**
  * @see {@link https://ui.shadcn.com/docs/components/typography#h1 Shadcn Typography - h1}

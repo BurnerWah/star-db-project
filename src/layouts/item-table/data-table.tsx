@@ -13,7 +13,7 @@ import {
   type ColumnDef,
   type Table as TanstackTable,
 } from '@tanstack/react-table'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { DataTableViewOptions } from './column-toggle'
 import { DataTablePagination } from './pagination'
 
