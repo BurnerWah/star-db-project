@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { z } from 'zod'
-import { ItemSubmissionSchema } from '~shared/schemas.ts'
+import { ServerItemSubmissionSchema } from '~shared/schemas.ts'
 import { unparseDeclination } from '../db/normalizers.ts'
 import pool from '../db/pool.ts'
 import { rejectNonAdmin } from '../middleware/authentication.ts'
@@ -31,7 +31,7 @@ admin.delete(
 
 admin.post(
   '/add',
-  validate(z.object({ body: ItemSubmissionSchema })),
+  validate(z.object({ body: ServerItemSubmissionSchema })),
   async (req, res) => {
     try {
       const result = await pool.query(

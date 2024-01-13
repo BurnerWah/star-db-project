@@ -66,9 +66,6 @@ router.post(
     failureRedirect: '/login',
     failureMessage: true,
   }),
-  // (_req, res) => {
-  //   res.sendStatus(200)
-  // },
 )
 
 // clear all server session information about this user
@@ -78,7 +75,6 @@ router.post('/logout', (req, res, next) => {
     if (err) return next(err)
     res.redirect('/')
   })
-  // res.sendStatus(200)
 })
 
 export default router

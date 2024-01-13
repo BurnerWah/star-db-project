@@ -37,19 +37,8 @@ export const ServerDeclinatorSchemaPart = z.optional(
   }),
 )
 
-export const ItemSubmissionSchema = z.object({
+const BaseItemSubmissionSchema = z.object({
   name: z.string().min(1, { message: 'Name must be at least 1 character.' }),
-  type: z.nativeEnum(EDBObjectTypes),
-  right_ascension: z
-    .string({ invalid_type_error: 'Right ascension must be a string' })
-    .min(9, { message: 'Right ascension input is incomplete' })
-    .max(15, { message: 'Right ascension must be less than 15 characters' })
-    // Regex partially based on https://github.com/validatorjs/validator.js/blob/master/src/lib/isTime.js
-    .regex(/^([01]?\d|2[0-3]):([0-5]\d):([0-5]\d)($|\.\d{1,6}$)/, {
-      message: 'Invalid format',
-    })
-    .optional(),
-  declination: ServerDeclinatorSchemaPart,
   distance: z.optional(
     z.object({
       value: z.coerce.number().positive({
@@ -73,23 +62,41 @@ export const ItemSubmissionSchema = z.object({
   ),
 })
 
-export const ClientItemSubmissionSchema = ItemSubmissionSchema.extend({
-  type: OBJECT_TYPES,
-  right_ascension: z.optional(
-    z.object({
-      hours: z.coerce.number().nonnegative().max(23).int(),
-      min: z.coerce.number().nonnegative().max(59).int(),
-      sec: z.coerce.number().nonnegative().lt(60),
-    }),
-  ),
-  declination: z.optional(
-    z.object({
-      degrees: z.coerce.number().min(-90).max(90).int(),
-      arcmin: ArcMinuteSchemaPart,
-      arcsec: ArcSecondSchemaPart,
-    }),
-  ),
-})
+export const ServerItemSubmissionSchema = BaseItemSubmissionSchema.merge(
+  z.object({
+    type: z.nativeEnum(EDBObjectTypes),
+    right_ascension: z
+      .string({ invalid_type_error: 'Right ascension must be a string' })
+      .min(9, { message: 'Right ascension input is incomplete' })
+      .max(15, { message: 'Right ascension must be less than 15 characters' })
+      // Regex partially based on https://github.com/validatorjs/validator.js/blob/master/src/lib/isTime.js
+      .regex(/^([01]?\d|2[0-3]):([0-5]\d):([0-5]\d)($|\.\d{1,6}$)/, {
+        message: 'Invalid format',
+      })
+      .optional(),
+    declination: ServerDeclinatorSchemaPart,
+  }),
+)
+
+export const ClientItemSubmissionSchema = BaseItemSubmissionSchema.merge(
+  z.object({
+    type: OBJECT_TYPES,
+    right_ascension: z.optional(
+      z.object({
+        hours: z.coerce.number().nonnegative().max(23).int(),
+        min: z.coerce.number().nonnegative().max(59).int(),
+        sec: z.coerce.number().nonnegative().lt(60),
+      }),
+    ),
+    declination: z.optional(
+      z.object({
+        degrees: z.coerce.number().min(-90).max(90).int(),
+        arcmin: ArcMinuteSchemaPart,
+        arcsec: ArcSecondSchemaPart,
+      }),
+    ),
+  }),
+)
 
 export const TABLE_PAGE_SIZES = ['5', '10', '25', '50', '100'] as const
 
