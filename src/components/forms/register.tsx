@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useAppDispatch } from '@/hooks/redux'
+import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserPlus } from 'lucide-react'
 import { useForm } from 'react-hook-form'
@@ -28,44 +29,47 @@ export function RegisterForm() {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input required {...field} />
-                  </FormControl>
-                  <FormDescription>Enter your username.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" required {...field} />
-                  </FormControl>
-                  <FormDescription>Enter your password.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <div className="grid gap-2">
+            <div className="grid gap-1">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input required {...field} />
+                    </FormControl>
+                    <FormDescription>Enter your username.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" required {...field} />
+                    </FormControl>
+                    <FormDescription>Enter your password.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button type="submit">
+              <UserPlus className="mr-2 h-4 w-4" /> Register
+            </Button>
           </div>
-          <Button type="submit">
-            <UserPlus className="mr-2 h-4 w-4" /> Register
-          </Button>
-        </div>
-      </form>
-    </Form>
+        </form>
+      </Form>
+      {import.meta.env.DEV && <DevTool control={form.control} />}
+    </>
   )
 }

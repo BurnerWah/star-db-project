@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/select'
 import { toast } from '@/components/ui/use-toast'
 import { useAppDispatch } from '@/hooks/redux'
+import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Diff, ListRestart, Upload } from 'lucide-react'
 import { useForm, type Control } from 'react-hook-form'
@@ -53,30 +54,33 @@ export function AddItemForm() {
   }
 
   return (
-    <Form {...form}>
-      <form
-        className="flex flex-col gap-2"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <MainInputs control={form.control} />
-        <div className="flex gap-2">
-          <RightAscensionPopover control={form.control} />
-          <DeclinationPopover control={form.control} />
-          <DistancePopover control={form.control} />
-        </div>
-        <OtherInputs control={form.control} />
-        <div className="flex gap-2">
-          <Button type="submit">
-            <Upload className="mr-2 h-4 w-4" />
-            Submit
-          </Button>
-          <Button type="reset" variant="outline">
-            <ListRestart className="mr-2 h-4 w-4" />
-            Reset
-          </Button>
-        </div>
-      </form>
-    </Form>
+    <>
+      <Form {...form}>
+        <form
+          className="flex flex-col gap-2"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <MainInputs control={form.control} />
+          <div className="flex gap-2">
+            <RightAscensionPopover control={form.control} />
+            <DeclinationPopover control={form.control} />
+            <DistancePopover control={form.control} />
+          </div>
+          <OtherInputs control={form.control} />
+          <div className="flex gap-2">
+            <Button type="submit">
+              <Upload className="mr-2 h-4 w-4" />
+              Submit
+            </Button>
+            <Button type="reset" variant="outline">
+              <ListRestart className="mr-2 h-4 w-4" />
+              Reset
+            </Button>
+          </div>
+        </form>
+      </Form>
+      {import.meta.env.DEV && <DevTool control={form.control} />}
+    </>
   )
 }
 
