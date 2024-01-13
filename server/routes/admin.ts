@@ -61,9 +61,9 @@ admin.post(
           req.body.type,
           req.user!.id, // User should alwys be set anyways
           req.body.right_ascension,
-          req.body.declination
-            ? unparseDeclination(req.body.declination)
-            : null,
+          req.body.declination ?
+            unparseDeclination(req.body.declination)
+          : null,
           req.body.distance?.value,
           req.body.distance?.error,
           req.body.apparent_magnitude,

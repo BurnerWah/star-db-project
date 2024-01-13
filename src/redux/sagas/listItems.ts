@@ -11,9 +11,7 @@ function* fetchListItems({ payload }: FetchListItemsSaga): SagaIterator {
     const response: AxiosResponse<ListingResponse> = yield call(
       axios.get,
       '/api/items',
-      {
-        params: { search, page, page_size },
-      },
+      { params: { search, page, page_size } },
     )
     yield put({ type: 'listItems/set', payload: response.data })
   } catch (error) {

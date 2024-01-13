@@ -39,21 +39,19 @@ export default function Details() {
       <div className="mt-6 border-t">
         <dl className="divide-y">
           <DescriptionListItem label="Right Ascension">
-            {item.right_ascension ? (
+            {item.right_ascension ?
               <RightAscensionTeX rightAscension={item.right_ascension} />
-            ) : (
-              'N/A'
-            )}
+            : 'N/A'}
           </DescriptionListItem>
           <DescriptionListItem label="Declination">
-            {item.declination ? (
+            {item.declination ?
               <DeclinationTeX declination={item.declination} />
-            ) : (
-              'N/A'
-            )}
+            : 'N/A'}
           </DescriptionListItem>
           <DescriptionListItem label="Distance">
-            {item.distance ? <DistanceTeX distance={item.distance} /> : 'N/A'}
+            {item.distance ?
+              <DistanceTeX distance={item.distance} />
+            : 'N/A'}
           </DescriptionListItem>
           <DescriptionListItem label="Apparent Magnitude">
             {item.apparent_magnitude || 'N/A'}
@@ -62,7 +60,9 @@ export default function Details() {
             {item.absolute_magnitude || 'N/A'}
           </DescriptionListItem>
           <DescriptionListItem label="Mass">
-            {item.mass ? <MassTeX mass={item.mass} /> : 'N/A'}
+            {item.mass ?
+              <MassTeX mass={item.mass} />
+            : 'N/A'}
           </DescriptionListItem>
           <DescriptionListItem label="Redshift">
             {item.redshift || 'N/A'}
@@ -70,7 +70,7 @@ export default function Details() {
         </dl>
       </div>
       {loggedIn &&
-        (item.saved ? (
+        (item.saved ?
           <Button
             onClick={() =>
               dispatch({ type: 'api/unsaveItem', payload: item.id })
@@ -78,13 +78,11 @@ export default function Details() {
           >
             Unsave
           </Button>
-        ) : (
-          <Button
+        : <Button
             onClick={() => dispatch({ type: 'api/saveItem', payload: item.id })}
           >
             Save
-          </Button>
-        ))}
+          </Button>)}
       {administrator && (
         <Button
           variant="destructive"

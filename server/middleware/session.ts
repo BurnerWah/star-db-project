@@ -6,16 +6,13 @@ import pool from '../db/pool.ts'
 const PGStore = connectPgSimple(session)
 
 function serverSessionSecret() {
-  if (
-    !process.env['SERVER_SESSION_SECRET'] ||
-    process.env['SERVER_SESSION_SECRET'].length < 8 ||
-    process.env['SERVER_SESSION_SECRET'] === exampleBadSecret
-  ) {
+  const secret = process.env['SERVER_SESSION_SECRET']
+  if (!secret || secret.length < 8 || secret === exampleBadSecret) {
     // Warning if user doesn't have a good secret
     console.log(badSecret)
   }
 
-  return process.env['SERVER_SESSION_SECRET']
+  return secret
 }
 
 const middleware = session({

@@ -7,3 +7,4 @@ jsxSingleQuote: false
 plugins:
   - prettier-plugin-tailwindcss
 tailwindFunctions: [cn, cva, classnames, clsx, ctl]
+experimentalTernaries: true

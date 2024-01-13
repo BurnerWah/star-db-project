@@ -59,20 +59,7 @@ export default function Command() {
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
-        {loggedIn || (
-          <CommandGroup title="Authentication">
-            <CommandItem onSelect={() => goToPage('/login')}>
-              <LogIn className="mr-2 h-4 w-4" />
-              Login
-            </CommandItem>
-            <CommandItem onSelect={() => goToPage('/registration')}>
-              <UserPlus className="mr-2 h-4 w-4" />
-              Register
-            </CommandItem>
-          </CommandGroup>
-        )}
-        <CommandSeparator />
-        {loggedIn && (
+        {loggedIn ?
           <CommandGroup title="User">
             <CommandItem onSelect={() => goToPage('/user')}>
               <CircleUser className="mr-2 h-4 w-4" />
@@ -90,7 +77,17 @@ export default function Command() {
               Logout
             </CommandItem>
           </CommandGroup>
-        )}
+        : <CommandGroup title="Authentication">
+            <CommandItem onSelect={() => goToPage('/login')}>
+              <LogIn className="mr-2 h-4 w-4" />
+              Login
+            </CommandItem>
+            <CommandItem onSelect={() => goToPage('/registration')}>
+              <UserPlus className="mr-2 h-4 w-4" />
+              Register
+            </CommandItem>
+          </CommandGroup>
+        }
         <CommandSeparator />
         {administrator && (
           <CommandGroup title="Admin">

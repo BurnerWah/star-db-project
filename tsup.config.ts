@@ -10,8 +10,9 @@ export default defineConfig((options) => ({
   clean: true,
   target: 'node20',
   treeshake: !options.watch,
-  onSuccess: options.watch
-    ? 'DOTENV_CONFIG_PATH=.env.server node dist/server/server.js'
+  onSuccess:
+    options.watch ?
+      'DOTENV_CONFIG_PATH=.env.server node dist/server/server.js'
     : undefined,
   ignoreWatch: ['dist', 'src', 'documentation', 'public'],
 }))

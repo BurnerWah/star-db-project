@@ -49,7 +49,7 @@ export default function Nav({
           <NavigationMenuList className="gap-6">
             {links.map(
               ({ hide, ...props }) =>
-                hide || (
+                !hide && (
                   <NavigationMenuItem key={props.to}>
                     <StyledNavLink {...props} />
                   </NavigationMenuItem>

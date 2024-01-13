@@ -72,16 +72,15 @@ items.get(
           name: item.type_name,
         },
         right_ascension: item.right_ascension,
-        declination: item.declination
-          ? parseDeclination(item.declination)
-          : undefined,
+        declination:
+          item.declination ? parseDeclination(item.declination) : undefined,
         distance:
-          item.distance && item.distance_error
-            ? {
-                value: item.distance,
-                error: item.distance_error,
-              }
-            : undefined,
+          item.distance && item.distance_error ?
+            {
+              value: item.distance,
+              error: item.distance_error,
+            }
+          : undefined,
         apparent_magnitude: item.apparent_magnitude,
         absolute_magnitude: item.absolute_magnitude,
         mass: item.mass,
@@ -157,16 +156,15 @@ items.get(
           name: row.type_name,
         },
         right_ascension: row.right_ascension as unknown as string,
-        declination: row.declination
-          ? parseDeclination(row.declination)
-          : undefined,
+        declination:
+          row.declination ? parseDeclination(row.declination) : undefined,
         distance:
-          row.distance && row.distance_error
-            ? {
-                value: row.distance,
-                error: row.distance_error,
-              }
-            : undefined,
+          row.distance && row.distance_error ?
+            {
+              value: row.distance,
+              error: row.distance_error,
+            }
+          : undefined,
         apparent_magnitude: row.apparent_magnitude,
         absolute_magnitude: row.absolute_magnitude,
         mass: row.mass,
