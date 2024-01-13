@@ -13,6 +13,7 @@ import {
   type ColumnDef,
   type Table as TanstackTable,
 } from '@tanstack/react-table'
+import { ReactTableDevtools } from '@tanstack/react-table-devtools'
 import type { ReactNode } from 'react'
 import { DataTableViewOptions } from './column-toggle'
 import { DataTablePagination } from './pagination'
@@ -104,6 +105,7 @@ export function DirectDataTable<TData, TValue>({
         </Table>
       </div>
       {pagination && <DataTablePagination table={table} />}
+      {import.meta.env.DEV && <ReactTableDevtools table={table} />}
     </>
   )
 }
