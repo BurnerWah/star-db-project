@@ -1,14 +1,14 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig((options) => ({
-  name: 'server',
+  name: `server${options.watch ? ':build' : ''}`,
   entry: ['server/server.ts'],
   outDir: 'dist/server',
   tsconfig: 'tsconfig.server.json',
   format: 'esm',
   sourcemap: true,
   clean: true,
-  target: 'node20',
+  target: ['node20'],
   treeshake: !options.watch,
   onSuccess:
     options.watch ?
