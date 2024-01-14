@@ -1,4 +1,4 @@
-import { buttonVariants } from '@/components/ui/use-button'
+import { Button } from '@/components/ui/button'
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -15,9 +15,9 @@ export const Component = memo(() => (
         Sorry, we couldn’t find the page you’re looking for.
       </p>
       <div className="mt-10 flex items-center justify-center gap-x-6">
-        <Link to="/" className={buttonVariants({ variant: 'default' })}>
-          Go back home
-        </Link>
+        <Button asChild>
+          <Link to="/">Go back home</Link>
+        </Button>
         {/* <a href="#" className="text-sm font-semibold text-gray-900">
             Contact support <span aria-hidden="true">&rarr;</span>
           </a> */}
