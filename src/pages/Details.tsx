@@ -8,6 +8,7 @@ import { TypographyH1 } from '@/components/typography'
 import { Button } from '@/components/ui/button'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { selectAdministrator, selectLoggedIn } from '@/redux/selectors'
+import { BookmarkMinus, BookmarkPlus, Trash } from 'lucide-react'
 import { useEffect, type ReactNode } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -77,6 +78,7 @@ export default function Details() {
                 dispatch({ type: 'api/unsaveItem', payload: item.id })
               }
             >
+              <BookmarkPlus className="mr-2 h-4 w-4" />
               Unsave
             </Button>
           : <Button
@@ -84,6 +86,7 @@ export default function Details() {
                 dispatch({ type: 'api/saveItem', payload: item.id })
               }
             >
+              <BookmarkMinus className="mr-2 h-4 w-4" />
               Save
             </Button>)}
         {administrator && (
@@ -96,6 +99,7 @@ export default function Details() {
               })
             }
           >
+            <Trash className="mr-2 h-4 w-4" />
             Delete
           </Button>
         )}
