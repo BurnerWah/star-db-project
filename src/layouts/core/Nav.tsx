@@ -31,12 +31,12 @@ export default function Nav({
 
   // This lets me define the nav a bit faster
   const links: LinkInfo[] = [
-    { to: '/list', children: 'List Items' },
+    // { to: '/list', children: 'List Items' },
     { to: '/about', children: 'About' },
     { to: '/login', children: 'Login', hide: loggedIn },
     { to: '/registration', children: 'Register', hide: loggedIn },
     { to: '/user', children: 'User Info', hide: !loggedIn },
-    { to: '/info', children: 'Info Page', hide: !loggedIn },
+    // { to: '/info', children: 'Info Page', hide: !loggedIn },
     { to: '/saved', children: 'Saved', hide: !loggedIn },
     { to: '/add', children: 'Add Item', hide: !isAdmin },
   ]
@@ -58,6 +58,7 @@ export default function Nav({
             {loggedIn && (
               <NavigationMenuItem>
                 <button
+                  type="button"
                   className="text-foreground/60 transition-colors hover:text-foreground/80"
                   onClick={() => dispatch({ type: 'api/auth/logout' })}
                 >

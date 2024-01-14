@@ -12,7 +12,6 @@ import { selectAdministrator, selectLoggedIn } from '@/redux/selectors'
 import {
   BookMarked,
   CircleUser,
-  HelpCircle,
   Info,
   LayoutList,
   LogIn,
@@ -49,9 +48,9 @@ export default function Command() {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup title="Pages">
-          <CommandItem onSelect={() => goToPage('/list')}>
+          <CommandItem onSelect={() => goToPage('/home')}>
             <LayoutList className="mr-2 h-4 w-4" />
-            List
+            List Items
           </CommandItem>
           <CommandItem onSelect={() => goToPage('/about')}>
             <Info className="mr-2 h-4 w-4" />
@@ -68,11 +67,16 @@ export default function Command() {
             <CommandItem onSelect={() => goToPage('/saved')}>
               <BookMarked className="mr-2 h-4 w-4" /> Saved
             </CommandItem>
-            <CommandItem onSelect={() => goToPage('/info')}>
+            {/* <CommandItem onSelect={() => goToPage('/info')}>
               <HelpCircle className="mr-2 h-4 w-4" />
               Info Page
-            </CommandItem>
-            <CommandItem onSelect={() => dispatch({ type: 'api/auth/logout' })}>
+            </CommandItem> */}
+            <CommandItem
+              onSelect={() => {
+                dispatch({ type: 'api/auth/logout' })
+                setOpen(false)
+              }}
+            >
               <LogOut className="mr-2 h-4 w-4" />
               Logout
             </CommandItem>
