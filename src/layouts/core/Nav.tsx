@@ -36,7 +36,6 @@ export default function Nav({
     { to: '/login', children: 'Login', hide: loggedIn },
     { to: '/registration', children: 'Register', hide: loggedIn },
     { to: '/user', children: 'User Info', hide: !loggedIn },
-    // { to: '/info', children: 'Info Page', hide: !loggedIn },
     { to: '/saved', children: 'Saved', hide: !loggedIn },
     { to: '/add', children: 'Add Item', hide: !isAdmin },
   ]

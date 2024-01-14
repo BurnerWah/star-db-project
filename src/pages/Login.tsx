@@ -13,12 +13,10 @@ export default function Login() {
   )
 }
 
-export function Component() {
-  return (
-    <RequireNotAuth>
-      <Login />
-    </RequireNotAuth>
-  )
-}
+export const Component = () => (
+  <RequireNotAuth>
+    <Login />
+  </RequireNotAuth>
+)
 
 Component.displayName = 'LazyLogin'

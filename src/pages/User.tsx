@@ -18,12 +18,10 @@ export default function User() {
   )
 }
 
-export function Component() {
-  return (
-    <RequireAuth>
-      <User />
-    </RequireAuth>
-  )
-}
+export const Component = () => (
+  <RequireAuth>
+    <User />
+  </RequireAuth>
+)
 
 Component.displayName = 'LazyUser'

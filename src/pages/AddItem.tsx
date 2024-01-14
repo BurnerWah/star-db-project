@@ -12,12 +12,10 @@ export default function AddItem() {
 }
 
 // For lazy-loading
-export function Component() {
-  return (
-    <RequireAdmin>
-      <AddItem />
-    </RequireAdmin>
-  )
-}
+export const Component = () => (
+  <RequireAdmin>
+    <AddItem />
+  </RequireAdmin>
+)
 
 Component.displayName = 'LazyAddItem'

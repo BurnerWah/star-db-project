@@ -14,6 +14,12 @@ interface OtherPageInfo {
   text: string
 }
 
+type AuthLayoutProps = Readonly<{
+  otherPage: OtherPageInfo
+  title: string
+  children: ReactNode
+}>
+
 /**
  * Shared layout for login and registration pages.
  * Based on shadcn/ui's Authentication example, with some small changes like
@@ -21,15 +27,7 @@ interface OtherPageInfo {
  * @see {@link https://ui.shadcn.com/examples/authentication shadcn/ui - Authentication example}
  * @see {@link https://github.com/shadcn-ui/ui/blob/main/apps/www/app/examples/authentication/page.tsx shadcn/ui - Authentication example source code}
  */
-export function AuthLayout({
-  otherPage,
-  title,
-  children,
-}: Readonly<{
-  otherPage: OtherPageInfo
-  title: string
-  children: ReactNode
-}>) {
+export function AuthLayout({ otherPage, title, children }: AuthLayoutProps) {
   // Hide the header & footer while this layout is active, as they don't work
   // with the design
   const dispatch = useAppDispatch()

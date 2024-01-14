@@ -10,12 +10,10 @@ export default function Register() {
   )
 }
 
-export function Component() {
-  return (
-    <RequireNotAuth>
-      <Register />
-    </RequireNotAuth>
-  )
-}
+export const Component = () => (
+  <RequireNotAuth>
+    <Register />
+  </RequireNotAuth>
+)
 
 Component.displayName = 'LazyRegister'

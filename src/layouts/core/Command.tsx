@@ -67,10 +67,6 @@ export default function Command() {
             <CommandItem onSelect={() => goToPage('/saved')}>
               <BookMarked className="mr-2 h-4 w-4" /> Saved
             </CommandItem>
-            {/* <CommandItem onSelect={() => goToPage('/info')}>
-              <HelpCircle className="mr-2 h-4 w-4" />
-              Info Page
-            </CommandItem> */}
             <CommandItem
               onSelect={() => {
                 dispatch({ type: 'api/auth/logout' })

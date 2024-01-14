@@ -29,7 +29,6 @@ function App() {
         <Route index element={<Navigate to="/home" />} />
         <Route path="about" lazy={() => import('./pages/About')} />
         <Route path="user" lazy={() => import('./pages/User')} />
-        {/* <Route path="info" lazy={() => import('./pages/Info')} /  > */}
         <Route path="login" lazy={() => import('./pages/Login')} />
         <Route path="registration" lazy={() => import('./pages/Register')} />
         <Route path="home" lazy={() => import('./pages/Home')} />
