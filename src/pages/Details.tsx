@@ -69,33 +69,37 @@ export default function Details() {
           </DescriptionListItem>
         </dl>
       </div>
-      {loggedIn &&
-        (item.saved ?
+      <div className="mt-2 flex items-center space-x-2">
+        {loggedIn &&
+          (item.saved ?
+            <Button
+              onClick={() =>
+                dispatch({ type: 'api/unsaveItem', payload: item.id })
+              }
+            >
+              Unsave
+            </Button>
+          : <Button
+              onClick={() =>
+                dispatch({ type: 'api/saveItem', payload: item.id })
+              }
+            >
+              Save
+            </Button>)}
+        {administrator && (
           <Button
+            variant="destructive"
             onClick={() =>
-              dispatch({ type: 'api/unsaveItem', payload: item.id })
+              dispatch({
+                type: 'api/admin/deleteItem',
+                payload: { id: item.id },
+              })
             }
           >
-            Unsave
+            Delete
           </Button>
-        : <Button
-            onClick={() => dispatch({ type: 'api/saveItem', payload: item.id })}
-          >
-            Save
-          </Button>)}
-      {administrator && (
-        <Button
-          variant="destructive"
-          onClick={() =>
-            dispatch({
-              type: 'api/admin/deleteItem',
-              payload: { id: item.id },
-            })
-          }
-        >
-          Delete
-        </Button>
-      )}
+        )}
+      </div>
     </div>
   )
 }
