@@ -80,7 +80,7 @@ export default function Details() {
                 toast({ title: 'Removed saved item' })
               }}
             >
-              <BookmarkMinus className="mr-2 h-4 w-4" />
+              <BookmarkMinus className="mr-2 size-4" />
               Unsave
             </Button>
           : <Button
@@ -89,7 +89,7 @@ export default function Details() {
                 toast({ title: 'Saved item' })
               }}
             >
-              <BookmarkPlus className="mr-2 h-4 w-4" />
+              <BookmarkPlus className="mr-2 size-4" />
               Save
             </Button>)}
         {administrator && (
@@ -103,7 +103,7 @@ export default function Details() {
               toast({ title: 'Item deleted' })
             }}
           >
-            <Trash className="mr-2 h-4 w-4" />
+            <Trash className="mr-2 size-4" />
             Delete
           </Button>
         )}

@@ -64,7 +64,7 @@ export function RegisterForm() {
               />
             </div>
             <Button type="submit">
-              <UserPlus className="mr-2 h-4 w-4" /> Register
+              <UserPlus className="mr-2 size-4" /> Register
             </Button>
           </div>
         </form>

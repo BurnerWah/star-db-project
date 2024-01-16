@@ -49,11 +49,11 @@ export default function Command() {
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup title="Pages">
           <CommandItem onSelect={() => goToPage('/home')}>
-            <LayoutList className="mr-2 h-4 w-4" />
+            <LayoutList className="mr-2 size-4" />
             List Items
           </CommandItem>
           <CommandItem onSelect={() => goToPage('/about')}>
-            <Info className="mr-2 h-4 w-4" />
+            <Info className="mr-2 size-4" />
             About
           </CommandItem>
         </CommandGroup>
@@ -61,11 +61,11 @@ export default function Command() {
         {loggedIn ?
           <CommandGroup title="User">
             <CommandItem onSelect={() => goToPage('/user')}>
-              <CircleUser className="mr-2 h-4 w-4" />
+              <CircleUser className="mr-2 size-4" />
               User Info
             </CommandItem>
             <CommandItem onSelect={() => goToPage('/saved')}>
-              <BookMarked className="mr-2 h-4 w-4" /> Saved
+              <BookMarked className="mr-2 size-4" /> Saved
             </CommandItem>
             <CommandItem
               onSelect={() => {
@@ -73,17 +73,17 @@ export default function Command() {
                 setOpen(false)
               }}
             >
-              <LogOut className="mr-2 h-4 w-4" />
+              <LogOut className="mr-2 size-4" />
               Logout
             </CommandItem>
           </CommandGroup>
         : <CommandGroup title="Authentication">
             <CommandItem onSelect={() => goToPage('/login')}>
-              <LogIn className="mr-2 h-4 w-4" />
+              <LogIn className="mr-2 size-4" />
               Login
             </CommandItem>
             <CommandItem onSelect={() => goToPage('/registration')}>
-              <UserPlus className="mr-2 h-4 w-4" />
+              <UserPlus className="mr-2 size-4" />
               Register
             </CommandItem>
           </CommandGroup>
@@ -92,7 +92,7 @@ export default function Command() {
         {administrator && (
           <CommandGroup title="Admin">
             <CommandItem onSelect={() => goToPage('/add')}>
-              <PlusSquare className="mr-2 h-4 w-4" />
+              <PlusSquare className="mr-2 size-4" />
               Add Item
             </CommandItem>
           </CommandGroup>

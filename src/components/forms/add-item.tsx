@@ -87,11 +87,11 @@ export function AddItemForm() {
           <OtherInputs control={form.control} />
           <div className="flex gap-2">
             <Button type="submit">
-              <Upload className="mr-2 h-4 w-4" />
+              <Upload className="mr-2 size-4" />
               Submit
             </Button>
             <Button type="reset" variant="outline">
-              <ListRestart className="mr-2 h-4 w-4" />
+              <ListRestart className="mr-2 size-4" />
               Reset
             </Button>
           </div>
