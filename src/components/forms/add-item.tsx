@@ -28,6 +28,7 @@ import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Diff, ListRestart, Upload } from 'lucide-react'
 import { useForm, type Control } from 'react-hook-form'
+import { useHotkeys } from 'react-hotkeys-hook'
 import type { z } from 'zod'
 import {
   OBJECT_TYPES,
@@ -52,6 +53,23 @@ export function AddItemForm() {
     dispatch({ type: 'api/admin/addItem', payload: values })
     form.reset()
   }
+
+  useHotkeys(['meta+0', 'ctrl+0'], (e) => {
+    e.preventDefault()
+    form.setValue('name', 'Triangulum Galaxy')
+    form.setValue('type', OBJECT_TYPES.enum.Galaxy)
+    form.setValue('right_ascension.hours', 1)
+    form.setValue('right_ascension.min', 33)
+    form.setValue('right_ascension.sec', 50.02)
+    form.setValue('declination.degrees', 30)
+    form.setValue('declination.arcmin', 39)
+    form.setValue('declination.arcsec', 36.7)
+    form.setValue('distance.value', 3200000)
+    form.setValue('distance.error', 0)
+    form.setValue('apparent_magnitude', 5.72)
+    form.setValue('mass', 50000000000)
+    form.setValue('redshift', -0.000607)
+  })
 
   return (
     <>
@@ -87,7 +105,7 @@ export function AddItemForm() {
 type SectionProps = Readonly<{ control: Control<z.infer<typeof formSchema>> }>
 
 const patterns = {
-  decimal: '[\\d.,]*',
+  decimal: '[\\d.,-]*',
   numeric: '\\d*',
 } as const
 
