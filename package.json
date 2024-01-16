@@ -47,7 +47,7 @@
     "express-session": "^1.17.3",
     "helmet": "^7.1.0",
     "katex": "^0.16.9",
-    "lucide-react": "^0.310.0",
+    "lucide-react": "^0.311.0",
     "morgan": "^1.10.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
@@ -107,7 +107,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.11",
     "vite-imagetools": "^6.2.9",
-    "vite-tsconfig-paths": "^4.2.3"
+    "vite-tsconfig-paths": "^4.3.0"
   },
   "overrides": {
     "cmdk": {
