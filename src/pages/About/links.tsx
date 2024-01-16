@@ -1,6 +1,6 @@
 // Links included in the about page. With the hover classes, they're kinda
 // large in the source code, and it's preferable to keep the a bit more out ot
-// the way. The key should be the name of the text that should be displayed.
+// the way.
 
 export const Express = (
   <a href="https://expressjs.com/" className="hover:text-blue-500">
