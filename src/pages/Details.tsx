@@ -6,6 +6,7 @@ import {
 } from '@/components/formatters'
 import { TypographyH1 } from '@/components/typography'
 import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/use-toast'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { selectAdministrator, selectLoggedIn } from '@/redux/selectors'
 import { BookmarkMinus, BookmarkPlus, Trash } from 'lucide-react'
@@ -74,17 +75,19 @@ export default function Details() {
         {loggedIn &&
           (item.saved ?
             <Button
-              onClick={() =>
+              onClick={() => {
                 dispatch({ type: 'api/unsaveItem', payload: item.id })
-              }
+                toast({ title: 'Removed saved item' })
+              }}
             >
               <BookmarkPlus className="mr-2 h-4 w-4" />
               Unsave
             </Button>
           : <Button
-              onClick={() =>
+              onClick={() => {
                 dispatch({ type: 'api/saveItem', payload: item.id })
-              }
+                toast({ title: 'Saved item' })
+              }}
             >
               <BookmarkMinus className="mr-2 h-4 w-4" />
               Save
@@ -92,12 +95,13 @@ export default function Details() {
         {administrator && (
           <Button
             variant="destructive"
-            onClick={() =>
+            onClick={() => {
               dispatch({
                 type: 'api/admin/deleteItem',
                 payload: { id: item.id },
               })
-            }
+              toast({ title: 'Item deleted' })
+            }}
           >
             <Trash className="mr-2 h-4 w-4" />
             Delete
