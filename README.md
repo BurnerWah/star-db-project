@@ -57,6 +57,7 @@ How does someone use this application? Tell a user story here.
 - [Axios](https://axios-http.com/)
 - [cmdk](https://cmdk.paco.me/)
 - [Express](https://expressjs.com/)
+- [express-rate-limit](https://express-rate-limit.mintlify.app/overview)
 - [KaTeX](https://katex.org/)
 - [Lucide Icons](https://lucide.dev/)
 - [Node.js](https://nodejs.org/)
