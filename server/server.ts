@@ -3,6 +3,7 @@ import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import path from 'node:path'
+import { limiter } from './middleware/rate-limit.ts'
 import session from './middleware/session.ts'
 import admin from './routes/admin.ts'
 import items from './routes/items.ts'
@@ -26,6 +27,9 @@ app.use(session)
 // start up passport sessions
 app.use(passport.initialize())
 app.use(passport.session())
+
+// Rate-limiting
+app.use('/api', limiter)
 
 // Routes
 app.use('/api/user', user)
