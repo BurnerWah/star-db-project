@@ -47,7 +47,7 @@
     "express-rate-limit": "^7.1.5",
     "express-session": "^1.17.3",
     "helmet": "^7.1.0",
-    "katex": "^0.16.9",
+    "katex": "^0.16.10",
     "lucide-react": "^0.311.0",
     "morgan": "^1.10.0",
     "passport": "^0.7.0",
